@@ -2,6 +2,7 @@ const express = require('express'),
       bodyParser = require('body-parser'),
       EventEmitter = require('events'),
       serialPort = require('./controllers/serialPort'),
+      redis = require('./database'),
       app = express(),
       port = process.env.PORT || 3000;
 
@@ -25,8 +26,7 @@ app.all('*', (req, res) => {
     res.send(`error: route not found, global handler`);
 });
 
-app.listen(port,
-    () => {
+app.listen(port, () => {
         console.log(`listening on port ${port}`);
 });
 

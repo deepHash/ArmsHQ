@@ -5,5 +5,5 @@
            Dor Malka
            Ben Reich
 */
-require('./server');
 require('./database');
+require('./server');
