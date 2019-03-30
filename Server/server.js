@@ -1,10 +1,11 @@
 const express = require('express'),
       bodyParser = require('body-parser'),
-      EventEmitter = require('events'),
+      http = require('http'),
+      cors = require('cors'),
       serialPort = require('./controllers/serialPort'),
       redis = require('./database'),
       app = express(),
-      port = process.env.PORT || 3000;
+      port = process.env.PORT || 4000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -12,26 +13,34 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('port', port);
 
 //origin headers
-app.use(
-    (req, res, next) => {
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers",
-            "Origin, X-Requested-With, Content-Type, Accept");
-        res.set("Content-Type", "application/json");
-        next();
+app.use(cors());
+
+const server = http.createServer(app),
+      io = require('socket.io')(server);
+
+io.on('connection', socket => {
+    console.log("client connected to socket");
+    
+    universalEmitter.on('RFMessage', (data) =>{
+        console.log(data);
+        socket.emit('gps', {data: data});
     });
+
+    universalEmitter.on('Emergency', (data) =>{
+        socket.emit('emergency', {emerg: true, soldierId: data});
+    });
+    
+    socket.on('disconnect', () => {
+        console.log("client disconnected from socket");
+    })
+});
 
 //error 404 route
 app.all('*', (req, res) => {
     res.send(`error: route not found, global handler`);
 });
 
-app.listen(port, () => {
+
+server.listen(port, () => {
         console.log(`listening on port ${port}`);
 });
-
-//RFCommunication
-universalEmitter.on('RFMessage', (data) =>{
-    console.log(data);
-});
-

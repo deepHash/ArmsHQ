@@ -25,9 +25,12 @@
   "homepage": "https://github.com/deepHash/ArmsHQ#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
     "events": "^3.0.0",
     "express": "^4.16.4",
     "redis": "^2.8.0",
-    "serialport": "^7.1.4"
+    "serialport": "^7.1.4",
+    "socket.io": "^2.2.0",
+    "uuid": "^3.3.2"
   }
 }

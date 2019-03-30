@@ -2,7 +2,7 @@ const SerialPort = require('serialport'),
       EventEmitter = require('events'),
       portName = process.argv[2],
       Readline = require('@serialport/parser-readline'),
-      client = require('../database'),
+      redis = require('../database'),
       port = new SerialPort(portName, { baudRate: 115200 }),
       parser = port.pipe(new Readline({ delimiter: '\r\n'})); 
 
@@ -20,7 +20,7 @@ global.universalEmitter = new EventEmitter();
     //receving data from port
     parser.on('data', (data) => {
         time++;
-        //client.lpush("Sold::"+from+"::ACC","Time:"+time+"|"+data);
+        //redis.lpush("Sold::"+from+"::ACC","Time:"+time+"|"+data);
         universalEmitter.emit('RFMessage', data);
     })
 
