@@ -8,19 +8,28 @@ import soldierImage from '../assets/images/soldier.png';
 class MapView extends Component {
 
     //component state
-    state = {
-      soldiers: [{
-        id: 12,
-        lat: Number,
-        lan: Number,
-        emerg: Boolean
-      }],
-      lat: 31.771959,
-      lng: 35.217018,
-      zoom: 13,
-      //socket state vars
-      response: false,
-      endpoint: "http://127.0.0.1:4000"
+
+    constructor(props){
+      super(props);
+
+      this.state = {
+        soldier: [],
+        soldiers: [{
+          id: 12,
+          lat: Number,
+          lan: Number,
+          emerg: Boolean
+        }],
+        lat: 32.682400,
+        lng: 35.421000,
+        offsetLat: 0.02871,
+        offsetLng: 0.33078,
+        zoom: 13,
+        //socket state vars
+        response: false,
+        endpoint: "http://127.0.0.1:4000"
+      }
+  
     }
 
     //icon vars
@@ -30,15 +39,20 @@ class MapView extends Component {
       iconAnchor: [22, 94],
       popupAnchor: [12, -85]
   });
-    
+    pushSoldier(_soldier){
+        var soldier = this.state.soldier;
+        soldier.set(_soldier.soldierId,{_soldier});
+        this.setState({soldier});
+        console.log(this.state.soldier);
+    }
     //mounting socket in component
     componentDidMount() {
       const { endpoint } = this.state;
       const socket = socketIoClient(endpoint);
       socket.on("gps", data => {
-        this.setState({response: data})
-      });
-        
+       // if(data !== undefined || data !== null)
+          // this.pushSoldier(data)
+      });  
     }
     
     render() {
@@ -50,7 +64,7 @@ class MapView extends Component {
         <div>
         {response
           ? <p>
-              Message from server: {response.data}
+              Message from server: {response}
             </p>
           : <p>Loading...</p>}
         </div>

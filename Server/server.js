@@ -21,13 +21,13 @@ const server = http.createServer(app),
 io.on('connection', socket => {
     console.log("client connected to socket");
     
-    universalEmitter.on('RFMessage', (data) =>{
-        console.log(data);
-        socket.emit('gps', {data: data});
+    universalEmitter.on('RFMessage', (soldier) =>{
+        console.log(soldier);
+        socket.emit('gps', {data: soldier});
     });
 
-    universalEmitter.on('Emergency', (data) =>{
-        socket.emit('emergency', {emerg: true, soldierId: data});
+    universalEmitter.on('Emergency', (soldier) =>{
+        socket.emit('emergency', {emerg: true, soldierId: soldier.data.soldierId});
     });
     
     socket.on('disconnect', () => {
