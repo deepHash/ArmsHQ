@@ -8,16 +8,17 @@ import soldierImage from '../assets/images/soldier.png';
 class MapView extends Component {
 
     //component state
-
     constructor(props){
       super(props);
 
       this.state = {
         soldier: [],
         soldiers: [{
-          id: 12,
-          lat: Number,
-          lan: Number,
+          meshID: 0,
+          gps: {
+            lat: Number,
+            lan: Number
+          },
           emerg: Boolean
         }],
         lat: 32.682400,
@@ -49,26 +50,38 @@ class MapView extends Component {
     componentDidMount() {
       const { endpoint } = this.state;
       const socket = socketIoClient(endpoint);
-      socket.on("gps", data => {
-       // if(data !== undefined || data !== null)
-          // this.pushSoldier(data)
-      });  
+
+      //init data
+      socket.on("initData", this.handleData)
+    
+    }
+
+    handleData = (initData) => {
+      console.log(initData.soldiers);
+      this.setState({soldiers: initData.soldiers, response: true})
+    }
+
+    SoldiersList(props) {
+      const soldiers = props.soldiers;
+      const markerList = soldiers.map((soldier) =>
+        <Marker 
+          position={ soldier.gps }
+          icon={ this.soldierIcon }>            
+          <Popup>
+            Soldier ID is: {soldier.meshID}
+          </Popup>
+        </Marker>
+        );
+        return (
+          {markerList}
+      );
     }
     
     render() {
       const position = [this.state.lat, this.state.lng]
-      const { response } = this.state;
       const { soldiers } = this.state;
       return (
         <div className="Wrapper">
-        <div>
-        {/* {response
-          ? <p>
-              Message from server: {response}
-            </p>
-          : <p>Loading...</p>} */}
-        {<p>            </p>}
-        </div>
           <Map className="map" center={position} zoom={this.state.zoom}>
             <TileLayer
               attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -76,10 +89,11 @@ class MapView extends Component {
             />
             <Marker 
               position={ position }
-              icon={ this.soldierIcon }>
-              <Popup>
-                Soldier ID is: {soldiers[0].id}
-              </Popup>
+              icon={ this.soldierIcon }>            
+            <Popup>
+            {/* <markerList soldiers={soldiers} /> */}
+              Soldier ID is: {soldiers[0].meshID}
+            </Popup>
             </Marker>
           </Map>
         </div>

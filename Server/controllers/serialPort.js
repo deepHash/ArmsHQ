@@ -2,7 +2,6 @@ const SerialPort = require('serialport'),
       EventEmitter = require('events'),
       portName = process.argv[2],
       Readline = require('@serialport/parser-readline'),
-      redis = require('../database'),
       port = new SerialPort(portName, { baudRate: 115200 }),
       parser = port.pipe(new Readline()); 
 
@@ -11,8 +10,12 @@ global.universalEmitter = new EventEmitter();
 
     let soldier = {
         msgID: Number,
-        soldierID: Number,
-        data: String
+        meshID: Number,
+        data: { 
+            gps: {
+                lan: Number,
+                Lat: Number
+        }}
     }
 
     //open arduino connection and receive data
@@ -27,7 +30,7 @@ global.universalEmitter = new EventEmitter();
                 if(row.includes("<MSG_ID>"))
                     soldier.msgID = parseInt(row.substring(9));
                 if(row.includes("<SRC>"))
-                    soldier.soldierID = parseInt(row.substring(6));
+                    soldier.meshID = parseInt(row.substring(6));
                 if(row.includes("<DATA>")){
                     if(row.includes("G:")){
                         soldier.data = {
@@ -35,8 +38,8 @@ global.universalEmitter = new EventEmitter();
                                 lan: parseFloat(row.split(':')[1]),
                                 lat: parseFloat(row.split(':')[2])
                             }
-                        } 
-                        redis.lpush("Sold::"+soldier.soldierID+"::GPS","Time:"+soldier.msgID+"|"+JSON.stringify(soldier.data.gps));
+                        }
+                        universalEmitter.emit('GPS', soldier);
                     }
                     if(row.includes("E:")){
                         solder.data = {
@@ -50,7 +53,7 @@ global.universalEmitter = new EventEmitter();
             });
         }
         //console.log(soldier);
-        universalEmitter.emit('RFMessage', soldier);
+        //universalEmitter.emit('RFMessage', soldier);
     })
 
     //error from port
