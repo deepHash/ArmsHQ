@@ -62,11 +62,12 @@ class MapView extends Component {
       return (
         <div className="Wrapper">
         <div>
-        {response
+        {/* {response
           ? <p>
               Message from server: {response}
             </p>
-          : <p>Loading...</p>}
+          : <p>Loading...</p>} */}
+        {<p>            </p>}
         </div>
           <Map className="map" center={position} zoom={this.state.zoom}>
             <TileLayer
