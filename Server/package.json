@@ -28,6 +28,8 @@
     "cors": "^2.8.5",
     "events": "^3.0.0",
     "express": "^4.16.4",
+    "mongoose": "^5.4.20",
+    "promise": "^8.0.3",
     "redis": "^2.8.0",
     "serialport": "^7.1.4",
     "socket.io": "^2.2.0",
