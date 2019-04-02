@@ -13,16 +13,20 @@ import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-
+import 'react-notifications/lib/notifications.css';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
     display: 'flex',
+    
   },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
+    color:'white'
+
   },
   toolbarIcon: {
     display: 'flex',
@@ -30,6 +34,11 @@ const styles = theme => ({
     justifyContent: 'flex-end',
     padding: '0 8px',
     ...theme.mixins.toolbar,
+    color:'white'
+  },
+  toolbarIconWhite: {
+   
+    color:'white'
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -37,6 +46,8 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    backgroundColor:'#2D7F70'
+
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -45,16 +56,21 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
+    
   },
   menuButton: {
     marginLeft: 12,
     marginRight: 36,
+   
   },
   menuButtonHidden: {
     display: 'none',
+
   },
   title: {
     flexGrow: 1,
+    fontFamily:'Special Elite',
+    fontSize:'-webkit-xxx-large',
   },
   drawerPaper: {
     position: 'relative',
@@ -64,6 +80,8 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
+    backgroundColor:'#2B3835'
+
   },
   drawerPaperClose: {
     overflowX: 'hidden',
@@ -75,6 +93,8 @@ const styles = theme => ({
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing.unit * 9,
     },
+    backgroundColor:'#2B3835'
+
   },
   appBarSpacer: theme.mixins.toolbar,
   content: {
@@ -82,10 +102,15 @@ const styles = theme => ({
     padding: theme.spacing.unit * 3,
     height: '100vh',
     overflow: 'auto',
+    backgroundColor:'#2B3835'
+
   },
   h5: {
     marginBottom: theme.spacing.unit * 2,
   },
+  // .Main-toolbar-2: {
+  //    fontFamily:'Special Elite',
+  // },
 });
 
 class Main extends React.Component {
@@ -148,7 +173,7 @@ class Main extends React.Component {
         >
           <div className={classes.toolbarIcon}>
             <IconButton onClick={this.handleDrawerClose}>
-              <ChevronLeftIcon />
+              <ChevronLeftIcon className={classes.toolbarIconWhite}/>
             </IconButton>
           </div>
         </Drawer>
