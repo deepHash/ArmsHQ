@@ -23,7 +23,7 @@ io.on('connection', socket => {
     console.log("client connected to socket");
 
     data.getAll().then((result) => {
-        console.log(result);
+        //console.log(result);
         socket.emit('initData',{soldiers: result});
     })
     
@@ -36,7 +36,7 @@ io.on('connection', socket => {
     });
 
     universalEmitter.on('Emergency', (soldier) =>{
-        socket.emit('emergency', {emerg: true, soldierId: soldier.data.soldierId});
+        socket.emit('emergency', {emerg: true, soldierId: soldier.meshID});
     });
     
     socket.on('disconnect', () => {

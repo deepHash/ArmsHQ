@@ -2,7 +2,7 @@ var mongoose = require('mongoose'),
     schema   = mongoose.Schema,
 
     SoldierSchema = new schema({
-        meshID: {type: Number, required: true},
+        meshID: {type: Number, required: true, unique: true},
         name: String,
         bloodType: String,
         gps: {

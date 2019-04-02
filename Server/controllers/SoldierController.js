@@ -16,6 +16,7 @@ class SoldierController{
     updateGPS(data) {
         return new Promise((resolve, reject) => {
             Soldier.findOneAndUpdate({ 'meshID': data.meshID }, {$set: { 'gps': data.data.gps }}, (err, result) =>{
+                //console.log(result);
                 if (err) reject(err);
                 else resolve(result);
             });

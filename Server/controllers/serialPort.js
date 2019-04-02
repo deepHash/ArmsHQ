@@ -29,8 +29,9 @@ global.universalEmitter = new EventEmitter();
             data.split(',').forEach((row)=>{
                 if(row.includes("<MSG_ID>"))
                     soldier.msgID = parseInt(row.substring(9));
-                if(row.includes("<SRC>"))
+                if(row.includes("<SRC>")){
                     soldier.meshID = parseInt(row.substring(6));
+                }
                 if(row.includes("<DATA>")){
                     if(row.includes("G:")){
                         soldier.data = {
@@ -39,10 +40,12 @@ global.universalEmitter = new EventEmitter();
                                 lat: parseFloat(row.split(':')[2])
                             }
                         }
+                        // console.log(soldier);
+                        console.log(`Source: ${soldier.meshID} and message is: ${soldier.msgID} `)
                         universalEmitter.emit('GPS', soldier);
                     }
-                    if(row.includes("E:")){
-                        solder.data = {
+                    if(row.includes("E:True")){
+                        soldier.data = {
                             emerg: true
                         }
                         universalEmitter.emit('Emergency', soldier);
