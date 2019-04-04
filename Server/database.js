@@ -9,11 +9,11 @@ var options = {
 
 //-----------------------------------------------Test || Production-----------------------------------------//
 var Production = false;
-if (!Production){
-    mongoose.connect('mongodb://db_user:Arms123@ds237748.mlab.com:37748/arms', options);
-}
-else
+if (Production)
     mongoose.connect('mongodb://localhost:27017/arms', options);
+
+else
+    mongoose.connect('mongodb://db_user:Arms123@ds237748.mlab.com:37748/arms', options);
 //
 
 const conn = mongoose.connection;//get default connection
@@ -26,8 +26,11 @@ conn.on('open', function() {
     console.log('Mongoose: Connection established');
 });
 conn.on('disconnected', function() {
-    console.log('Mongoose: Connection stopped, recconect');
-    mongoose.connect('mongodb://localhost:27017/main', options);
+    console.log('Mongoose: Connection stopped, reconnect');
+    if (Production)
+        mongoose.connect('mongodb://localhost:27017/arms', options);
+    else
+        mongoose.connect('mongodb://db_user:Arms123@ds237748.mlab.com:37748/arms', options);
 });
 conn.on('reconnected', function () {
     console.info('Mongoose reconnected!');

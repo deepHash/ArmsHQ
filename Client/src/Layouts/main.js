@@ -13,8 +13,8 @@ import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import 'react-notifications/lib/notifications.css';
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+//import 'react-notifications/lib/notifications.css';
+//import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 const drawerWidth = 240;
 

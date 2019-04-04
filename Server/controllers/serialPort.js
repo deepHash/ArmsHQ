@@ -34,6 +34,9 @@ global.universalEmitter = new EventEmitter();
                 }
                 if(row.includes("<DATA>")){
                     if(row.includes("G:")){
+                        console.log(row);
+                        //var lan = row.split(':')[2].split('Y')[0];
+                        //console.log(lan);
                         soldier.data = {
                             gps:{
                                 lan: parseFloat(row.split(':')[1]),

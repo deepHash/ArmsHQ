@@ -62,7 +62,7 @@ class MapView extends Component {
     }
 
     handleData = (initData) => {
-      //console.log(initData.soldiers);
+      console.log(initData.soldiers);
       this.setState({soldiers: initData.soldiers, response: true})
     }
     updateGPSData = (gps) => {
@@ -88,15 +88,24 @@ class MapView extends Component {
       if(soldiers){
         soldierJsx = soldiers.map((soldier) =>
           {
-            let position = [soldier.gps.lat, soldier.gps.lan];
+            let position; 
+            if(soldier.gps){
+              position = [soldier.gps.lat, soldier.gps.lan];
+            }
+            else{
+              //no gps for soldier
+              position = [0, 0];
+            }
+            
+
             //console.log(position);
             return (<Marker 
             key={i++}
             position={ position}
             icon={ this.soldierIcon }>            
             <Popup>
-              Soldier: {soldier.name}
-              ID: {soldier.meshID}
+              ID: {soldier.meshID}<br></br>
+              Name: {soldier.name}
             </Popup>
         </Marker>)}
           );  
