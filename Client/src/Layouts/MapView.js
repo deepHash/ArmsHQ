@@ -80,7 +80,7 @@ class MapView extends Component {
     }
     notifications(_name){
         NotificationManager.warning( _name & ' Push emergency button','Notification',5000);  
-        this.flagNotification = false;
+        // this.flagNotification = false;
     }
 
     updateEmergency = (emergency) => {
