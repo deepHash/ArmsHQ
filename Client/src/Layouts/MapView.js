@@ -5,9 +5,10 @@ import L from 'leaflet';
 import '../assets/css/Map.css';
 import soldierImage from '../assets/images/soldier.png';
 import soldierEmerg from '../assets/images/soldierEmerg.png';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 class MapView extends Component {
-
+  
     //component state
     constructor(props){
       super(props);
@@ -41,6 +42,7 @@ class MapView extends Component {
       iconAnchor: [22, 94],
       popupAnchor: [12, -85]
   });
+  
     pushSoldier(_soldier){
         var soldier = this.state.soldier;
         soldier.set(_soldier.soldierId,{_soldier});
@@ -60,7 +62,7 @@ class MapView extends Component {
       socket.on("emergency", this.updateEmergency)
     
     }
-
+    
     handleData = (initData) => {
       console.log(initData.soldiers);
       this.setState({soldiers: initData.soldiers, response: true})
@@ -76,9 +78,14 @@ class MapView extends Component {
       //console.log(soldiers);  
       this.setState({soldiers});
     }
+    notifications(_name){
+        NotificationManager.warning( _name & ' Push emergency button','Notification',5000);  
+        this.flagNotification = false;
+    }
 
     updateEmergency = (emergency) => {
       console.log(emergency)
+      this.notifications(emergency.soldierId)
     }
 
     SoldiersList() {
@@ -118,6 +125,7 @@ class MapView extends Component {
       const position = [ this.state.lat, this.state.lan];
       return (
         <div className="Wrapper">
+          <NotificationContainer/>
           <Map className="map" center={position} zoom={this.state.zoom}>
             <TileLayer
               attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
