@@ -8,6 +8,9 @@ const express     = require('express'),
       app         = express(),
       port        = process.env.PORT || 4000;
 
+//TEST VARS
+var   test        = false;
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -21,11 +24,22 @@ const server = http.createServer(app),
 
 io.on('connection', socket => {
     console.log("client connected to socket");
-
+    
     data.getAll().then((result) => {
         //console.log(result);
         socket.emit('initData',{soldiers: result});
     })
+
+    //---------------------------------------TEST-----------------------------------------------//
+    if (test) {
+        setTimeout(function () {
+            console.log('boo')
+            socket.emit('emergency', {emerg: true, soldierName: "Tal", meshID: 10});
+          }, 100)
+          var end = Date.now() + 3000
+          while (Date.now() < end);
+    }
+    //---------------------------------------------------------------------------------------------
     
     universalEmitter.on('GPS', (soldier) =>{
         data.updateGPS(soldier).then((result) => {

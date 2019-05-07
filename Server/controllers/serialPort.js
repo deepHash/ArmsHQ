@@ -27,46 +27,40 @@ global.universalEmitter = new EventEmitter();
     //receving data from port
     parser.on('data', (data) => {
         //console.log(data);
-        soldier.meshID++;
-        soldier.name = "Tal";
 
-        universalEmitter.emit('Emergency', soldier);
-
+        if(data.includes("<NEW_MSG>")){
+            data.split(',').forEach((row)=>{
+                if(row.includes("<MSG_ID>"))
+                    soldier.msgID = parseInt(row.substring(9));
+                if(row.includes("<SRC>")){
+                    soldier.meshID = parseInt(row.substring(6));
+                }
+                if(row.includes("<DATA>")){
+                    if(row.includes("G:")){
+                        console.log(row);
+                        //var lan = row.split(':')[2].split('Y')[0];
+                        //console.log(lan);
+                        soldier.data = {
+                            gps:{
+                                lan: parseFloat(row.split(':')[1]),
+                                lat: parseFloat(row.split(':')[2])
+                            }
+                        }
+                        // console.log(soldier);
+                        console.log(`Source: ${soldier.meshID} and message is: ${soldier.msgID} `)
+                        universalEmitter.emit('GPS', soldier);
+                    }
+                    if(row.includes("E:True")){
+                        soldier.data = {
+                            emerg: true
+                        }
+                        universalEmitter.emit('Emergency', soldier);
+                    }
+                    //ToDo add all switch cases
+                }
         
-
-        // if(data.includes("<NEW_MSG>")){
-        //     data.split(',').forEach((row)=>{
-        //         if(row.includes("<MSG_ID>"))
-        //             soldier.msgID = parseInt(row.substring(9));
-        //         if(row.includes("<SRC>")){
-        //             soldier.meshID = parseInt(row.substring(6));
-        //         }
-        //         if(row.includes("<DATA>")){
-        //             if(row.includes("G:")){
-        //                 console.log(row);
-        //                 //var lan = row.split(':')[2].split('Y')[0];
-        //                 //console.log(lan);
-        //                 soldier.data = {
-        //                     gps:{
-        //                         lan: parseFloat(row.split(':')[1]),
-        //                         lat: parseFloat(row.split(':')[2])
-        //                     }
-        //                 }
-        //                 // console.log(soldier);
-        //                 console.log(`Source: ${soldier.meshID} and message is: ${soldier.msgID} `)
-        //                 universalEmitter.emit('GPS', soldier);
-        //             }
-        //             if(row.includes("E:True")){
-        //                 soldier.data = {
-        //                     emerg: true
-        //                 }
-        //                 universalEmitter.emit('Emergency', soldier);
-        //             }
-        //             //ToDo add all switch cases
-        //         }
-        
-        //     });
-        // }
+            });
+        }
         //console.log(soldier);
         //universalEmitter.emit('RFMessage', soldier);
     })
