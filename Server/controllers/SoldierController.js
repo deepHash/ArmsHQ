@@ -23,6 +23,15 @@ class SoldierController{
         });
     }
 
+    updatePulse(data) {
+        return new Promise((resolve, reject) => {
+            Soldier.findOneAndUpdate({ 'meshID': data.meshID }, {$set: { 'pulse': data.data.pulse}}, (err, result) =>{
+                if (err) reject(err);
+                else resolve(result);
+            })
+        })
+    }
+
     getAll() {
         return new Promise((resolve, reject) => {
             Soldier.find({}, '-messages', (err, result) => {
