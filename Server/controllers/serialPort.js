@@ -2,15 +2,21 @@ const SerialPort = require('serialport'),
       EventEmitter = require('events'),
       portName = process.argv[2],
       Readline = require('@serialport/parser-readline'),
-      client = require('../database'),
       port = new SerialPort(portName, { baudRate: 115200 }),
-      parser = port.pipe(new Readline({ delimiter: '\r\n'})); 
+      parser = port.pipe(new Readline()); 
 
 //global shared event emitter
 global.universalEmitter = new EventEmitter();
 
-    var from ="6",
-        time ="210100";
+    let soldier = {
+        msgID: Number,
+        meshID: Number,
+        data: { 
+            gps: {
+                lan: Number,
+                Lat: Number
+        }}
+    }
 
     //open arduino connection and receive data
     port.on('open', () => {
@@ -19,9 +25,41 @@ global.universalEmitter = new EventEmitter();
 
     //receving data from port
     parser.on('data', (data) => {
-        time++;
-        //client.lpush("Sold::"+from+"::ACC","Time:"+time+"|"+data)
-        universalEmitter.emit('RFMessage', data);
+        if(data.includes("<NEW_MSG>")){
+            data.split(',').forEach((row)=>{
+                if(row.includes("<MSG_ID>"))
+                    soldier.msgID = parseInt(row.substring(9));
+                if(row.includes("<SRC>")){
+                    soldier.meshID = parseInt(row.substring(6));
+                }
+                if(row.includes("<DATA>")){
+                    if(row.includes("G:")){
+                        console.log(row);
+                        //var lan = row.split(':')[2].split('Y')[0];
+                        //console.log(lan);
+                        soldier.data = {
+                            gps:{
+                                lan: parseFloat(row.split(':')[1]),
+                                lat: parseFloat(row.split(':')[2])
+                            }
+                        }
+                        // console.log(soldier);
+                        console.log(`Source: ${soldier.meshID} and message is: ${soldier.msgID} `)
+                        universalEmitter.emit('GPS', soldier);
+                    }
+                    if(row.includes("E:True")){
+                        soldier.data = {
+                            emerg: true
+                        }
+                        universalEmitter.emit('Emergency', soldier);
+                    }
+                    //ToDo add all switch cases
+                }
+        
+            });
+        }
+        //console.log(soldier);
+        //universalEmitter.emit('RFMessage', soldier);
     })
 
     //error from port
