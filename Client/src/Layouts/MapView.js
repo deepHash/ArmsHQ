@@ -78,7 +78,10 @@ class MapView extends Component {
     }
 
     updateEmergency = (emergency) => {
-      console.log(emergency)
+      var emerg = emergency.soldierId;
+      console.log("got emerg");
+      console.log(emerg);
+      
     }
 
     SoldiersList() {

@@ -36,7 +36,8 @@ io.on('connection', socket => {
     });
 
     universalEmitter.on('Emergency', (soldier) =>{
-        socket.emit('emergency', {emerg: true, soldierId: soldier.meshID});
+        console.log("here ", soldier.meshID);
+        socket.emit('emergency', {emerg: true, soldierId: soldier.meshID, soldierName: soldier.name});
     });
     
     socket.on('disconnect', () => {
