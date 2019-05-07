@@ -6,6 +6,7 @@ import '../assets/css/Map.css';
 import soldierImage from '../assets/images/soldier.png';
 import soldierEmerg from '../assets/images/soldierEmerg.png';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
 
 class MapView extends Component {
   
@@ -79,13 +80,13 @@ class MapView extends Component {
       this.setState({soldiers});
     }
     notifications(_name){
-        NotificationManager.warning( _name & ' Push emergency button','Notification',5000);  
+        NotificationManager.warning( _name + ' sent help ','Notification',2000);  
         this.flagNotification = false;
     }
 
     updateEmergency = (emergency) => {
       console.log(emergency)
-      this.notifications(emergency.soldierId)
+      this.notifications(emergency.soldierName)
     }
 
     SoldiersList() {
