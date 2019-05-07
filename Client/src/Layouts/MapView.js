@@ -15,7 +15,6 @@ class MapView extends Component {
       super(props);
 
       this.state = {
-        soldier: [], //delete?
         soldiers: [],
         lat: 32.682400,
         lan: 35.421000,
