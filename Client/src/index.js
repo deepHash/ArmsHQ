@@ -8,8 +8,8 @@ import WebFont from 'webfontloader';
 
 WebFont.load({
   google: {
-    families: ['Special Elite']
-    }
+    families: ['Special Elite','Source Sans Pro']    
+  }
 });
 
 ReactDOM.render(<App />, document.getElementById('root'));
