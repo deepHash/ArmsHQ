@@ -75,12 +75,10 @@ class MapView extends Component {
           soldier.gps = mySoldier.gps;
         return soldier;
       });
-      //console.log(soldiers);  
       this.setState({soldiers});
     }
     notifications(_name){
         NotificationManager.warning( _name + ' sent help ','Notification',2000);  
-        this.flagNotification = false;
     }
 
     updateEmergency = (emergency) => {
