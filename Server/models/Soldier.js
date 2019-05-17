@@ -5,6 +5,9 @@ var mongoose = require('mongoose'),
         meshID: {type: Number, required: true, unique: true},
         name: String,
         bloodType: String,
+        photo: String,
+        isCommander: Boolean,
+        role: String,
         gps: {
              lan: Number, 
              lat: Number

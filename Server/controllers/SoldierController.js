@@ -1,6 +1,5 @@
 'use strict'
-var mongoose = require('mongoose'),
-    Soldier  = require('../models/Soldier'),
+var Soldier  = require('../models/Soldier'),
     Promise  = require('promise');
 
 class SoldierController{
@@ -32,9 +31,18 @@ class SoldierController{
         })
     }
 
-    getAll() {
+    getAllSoldiers() {
         return new Promise((resolve, reject) => {
             Soldier.find({}, '-messages', (err, result) => {
+                if (err) reject(err);
+                else resolve(result);
+            })
+        })
+    }
+
+    getSoldierByID(id) {
+        return new Promise((resolve, reject) => {
+            Soldier.find({'meshID': id}, (err, result) => {
                 if (err) reject(err);
                 else resolve(result);
             })
