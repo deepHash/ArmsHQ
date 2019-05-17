@@ -14,9 +14,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 
-//import 'react-notifications/lib/notifications.css';
-//import {NotificationContainer, NotificationManager} from 'react-notifications';
-
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -109,9 +106,7 @@ const styles = theme => ({
   h5: {
     marginBottom: theme.spacing.unit * 2,
   },
-  // .Main-toolbar-2: {
-  //    fontFamily:'Special Elite',
-  // },
+ 
 });
 
 class Main extends React.Component {

@@ -6,10 +6,11 @@ import '../assets/css/Map.css';
 import soldierImage from '../assets/images/soldier.png';
 import soldierEmerg from '../assets/images/soldierEmerg.png';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
-import 'react-notifications/lib/notifications.css';
+import '../assets/css/notifications.css';
+
 
 class MapView extends Component {
-  
+
     //component state
     constructor(props){
       super(props);
@@ -25,7 +26,7 @@ class MapView extends Component {
         response: false,
         endpoint: "http://127.0.0.1:4000"
       }
-  
+
     }
 
     //icon vars
@@ -42,7 +43,7 @@ class MapView extends Component {
       iconAnchor: [22, 94],
       popupAnchor: [12, -85]
   });
-  
+
     pushSoldier(_soldier){
         var soldier = this.state.soldier;
         soldier.set(_soldier.soldierId,{_soldier});
@@ -60,9 +61,9 @@ class MapView extends Component {
       socket.on("gps", this.updateGPSData)
       //emergency data
       socket.on("emergency", this.updateEmergency)
-    
+
     }
-    
+
     handleData = (initData) => {
       console.log(initData.soldiers);
       this.setState({soldiers: initData.soldiers, response: true})
@@ -78,7 +79,7 @@ class MapView extends Component {
       this.setState({soldiers});
     }
     notifications(_name){
-        NotificationManager.warning( _name + ' sent help ','Notification',2000);  
+        NotificationManager.warning( _name + ' sent help ','Notification',2000);
     }
 
     updateEmergency = (emergency) => {
@@ -93,7 +94,7 @@ class MapView extends Component {
       if(soldiers){
         soldierJsx = soldiers.map((soldier) =>
           {
-            let position; 
+            let position;
             if(soldier.gps){
               position = [soldier.gps.lat, soldier.gps.lan];
             }
@@ -101,23 +102,23 @@ class MapView extends Component {
               //no gps for soldier
               position = [0, 0];
             }
-            
+
 
             //console.log(position);
-            return (<Marker 
+            return (<Marker
             key={i++}
             position={ position}
-            icon={ this.soldierIcon }>            
+            icon={ this.soldierIcon }>
             <Popup>
               ID: {soldier.meshID}<br></br>
               Name: {soldier.name}
             </Popup>
         </Marker>)}
-          );  
+          );
       }
       return soldierJsx;
     }
-    
+
     render() {
       const { soldiers } = this.state;
       const position = [ this.state.lat, this.state.lan];
@@ -135,5 +136,5 @@ class MapView extends Component {
       );
     }
   }
-  
+
   export default MapView;
