@@ -65,7 +65,7 @@ io.on('connection', socket => {
 
     //---------------------------------------TEST-----------------------------------------------//
     if (test) {
-        console.log('test is on')
+        console.log('test is turned on')
         setTimeout(function () {
             socket.emit('emergency', {emerg: true, soldierName: "Tal", meshID: 10});
           }, 100)
