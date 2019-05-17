@@ -153,7 +153,9 @@ class Main extends React.Component {
               className={classes.title}
             >
               ARMS
+            <i class="fas fa-exclamation" height="100%"></i>
             </Typography>
+
             <IconButton color="inherit">
               <Badge badgeContent={0} color="secondary">
                 <NotificationsIcon />

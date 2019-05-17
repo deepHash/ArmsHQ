@@ -79,7 +79,7 @@ class MapView extends Component {
       this.setState({soldiers});
     }
     notifications(_name){
-        NotificationManager.warning( _name + ' sent help ','Notification',2000);
+        NotificationManager.warning( _name + ' sent help ','Notification',1000000);
     }
 
     updateEmergency = (emergency) => {
