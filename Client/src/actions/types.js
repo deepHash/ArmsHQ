@@ -1,0 +1,2 @@
+export const FETCH_SOLDIERS = 'FETCH_SOLDIERS';
+export const CONNECT_SOCKET = 'CONNECT_SOCKET';

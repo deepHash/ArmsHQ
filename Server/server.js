@@ -16,7 +16,6 @@ var   test        = false;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
 app.set('port', port);
 
 //origin headers
@@ -51,6 +50,17 @@ app.get('/getAllAlerts', (req, res, next) => {
       next();
     });
 });
+/**              TESTING         */
+app.get('/sendhelp/:id', (req, res) => {
+    let soldier = {emerg: true, name: "Tal", meshID: req.params.id};
+    universalEmitter.emit('Emergency', soldier);
+    res.status(200).json([]);
+});
+
+//error 404 route
+app.all('*', (req, res) => {
+    res.send(`error: route not found, global handler`);
+});
 
 const server = http.createServer(app),
       io = require('socket.io')(server);
@@ -58,24 +68,8 @@ const server = http.createServer(app),
 io.on('connection', socket => {
     console.log("client connected to socket");
     
-    data.getAll().then((result) => {
-        //console.log(result);
-        socket.emit('initData',{soldiers: result});
-    })
-
-    //---------------------------------------TEST-----------------------------------------------//
-    if (test) {
-        setTimeout(function () {
-            console.log('boo')
-            socket.emit('emergency', {emerg: true, soldierName: "Tal", meshID: 10});
-          }, 100)
-          var end = Date.now() + 3000
-          while (Date.now() < end);
-    }
-    //---------------------------------------------------------------------------------------------
-    
     universalEmitter.on('GPS', (soldier) =>{
-        data.updateGPS(soldier).then((result) => {
+        soldierData.updateGPS(soldier).then((result) => {
             socket.emit('gps', {data: result});
         }, (error) => {
             console.log(error);
