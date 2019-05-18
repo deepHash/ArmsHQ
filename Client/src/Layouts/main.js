@@ -1,5 +1,5 @@
 import React from 'react';
-import Map from './MapView';
+import Map from './Map/MapView';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';

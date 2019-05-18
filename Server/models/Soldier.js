@@ -18,7 +18,7 @@ var mongoose = require('mongoose'),
              z: Number
         },
         pulse: Number,
-        emerg: Boolean,
+        emerg: {type: Boolean, default: false},
         messages: [{
             messageID: Number,
             data: {type: String,
