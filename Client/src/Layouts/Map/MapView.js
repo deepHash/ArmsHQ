@@ -9,10 +9,11 @@ import '../../assets/css/Map.css';
 import soldierImage from '../../assets/images/soldier.png';
 import soldierEmerg from '../../assets/images/soldierEmerg.png';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
-import 'react-notifications/lib/notifications.css';
+import '../assets/css/notifications.css';
+
 
 class MapView extends Component {
-  
+
     //component state
     constructor(props){
       super(props);
@@ -26,7 +27,7 @@ class MapView extends Component {
         //socket state vars
         endpoint: "http://127.0.0.1:4000"
       }
-  
+
     }
 
     //icon vars
@@ -56,7 +57,7 @@ class MapView extends Component {
       socket.on("gps", this.updateGPSData)
       //emergency data
       socket.on("emergency", this.updateEmergency)
-    
+
     }
     
     updateGPSData = (gps) => {
@@ -70,7 +71,7 @@ class MapView extends Component {
       this.setState({soldiers});
     }
     notifications(_name){
-        NotificationManager.warning( _name + ' sent help ','Notification',2000);  
+        NotificationManager.warning( _name + ' sent help ','Notification',1000000);
     }
 
     updateEmergency = (emergency) => {
@@ -112,11 +113,11 @@ class MapView extends Component {
               Name: {soldier.name}
             </Popup>
         </Marker>)}
-          );  
+          );
       }
       return soldierJsx;
     }
-    
+
     render() {
       const soldiers  = this.props.soldiers;
       console.log(soldiers);
