@@ -9,7 +9,7 @@ import '../../assets/css/Map.css';
 import soldierImage from '../../assets/images/soldier.png';
 import soldierEmerg from '../../assets/images/soldierEmerg.png';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
-import '../assets/css/notifications.css';
+import '../../assets/css/notifications.css';
 
 
 class MapView extends Component {
