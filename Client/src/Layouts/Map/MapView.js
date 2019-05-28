@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchSoldiers } from '../../actions/soldierActions';
-import { connectSocket } from '../../actions/socketActions';
-import socketIoClient from 'socket.io-client';
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
-import L from 'leaflet';
-import '../../assets/css/Map.css';
-import soldierImage from '../../assets/images/soldier.png';
-import soldierEmerg from '../../assets/images/soldierEmerg.png';
+// import { connectSocket } from '../../actions/socketActions';
+import { Map, TileLayer } from 'react-leaflet';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
-import '../assets/css/notifications.css';
+import socketIoClient from 'socket.io-client';
+import '../../assets/css/Map.css';
+import '../../assets/css/notifications.css';
+import MapMarker from './mapMarker';
 
 
 class MapView extends Component {
@@ -19,32 +17,18 @@ class MapView extends Component {
       super(props);
       
       this.state = {
+        firstPos: true,
         lat: 32.682400,
         lan: 35.421000,
-        offsetLat: 0.02871,
-        offsetLng: 0.33078,
+        offsetLat: 0.0365,
+        offsetLan: 0.3304,
         zoom: 13,
         //socket state vars
         endpoint: "http://127.0.0.1:4000"
       }
 
     }
-
-    //icon vars
-     soldierIcon = L.icon({
-      iconUrl: soldierImage,
-      iconSize: [70, 70],
-      iconAnchor: [22, 94],
-      popupAnchor: [12, -85]
-     });
-
-     soldierEmergIcon = L.icon({
-      iconUrl: soldierEmerg,
-      iconSize: [70, 70],
-      iconAnchor: [22, 94],
-      popupAnchor: [12, -85]
-  });
-  
+    
     componentDidMount() {
       //mounting socket in component
       // this.props.connectSocket();
@@ -52,12 +36,21 @@ class MapView extends Component {
       const socket = socketIoClient(endpoint);
 
       this.props.fetchSoldiers();
+      // var soldiers = this.state.soldiers;
+      //   soldiers.map((soldier) => {
+      //     if(soldier.isCommander == true)
+      //       this.centerPosition(soldier.gps.lat, soldier.gps.lan);
+      //   });
 
       //gps data
       socket.on("gps", this.updateGPSData)
       //emergency data
       socket.on("emergency", this.updateEmergency)
 
+    }
+
+    centerPosition(lat, lan) {
+      this.setState({lat: lat+this.state.offsetLat, lan: lan+this.state.offsetLan, firstPos: false});
     }
     
     updateGPSData = (gps) => {
@@ -71,57 +64,30 @@ class MapView extends Component {
       this.setState({soldiers});
     }
     notifications(_name){
-        NotificationManager.warning( _name + ' sent help ','Notification',1000000);
+        NotificationManager.warning( _name + ' sent help ','Notification',10000);
     }
 
+    //calling notification and running on soldier 
+    //to change state to emerg: true with positioning 
     updateEmergency = (emergency) => {
-      console.log(emergency)
       this.notifications(emergency.soldierName);
       var soldiers = this.props.soldiers;
-      soldiers.map((soldier) => {
-        if(soldier.meshID === emergency.meshID){
+      soldiers.forEach((soldier) => {
+        if(soldier.meshID == emergency.soldierId){
           soldier.emerg = true;
+          this.centerPosition(soldier.gps.lat, soldier.gps.lan);
         }
       });
-      this.SoldiersList(soldiers);
-    }
-
-    SoldiersList(_soldiers) {
-      var soldierJsx = (<div></div>)
-      var soldiers = _soldiers;
-      if(soldiers){
-        soldierJsx = soldiers.map((soldier) =>
-          {
-            let position,
-                icon = this.soldierIcon; 
-            if(soldier.gps){
-              position = [soldier.gps.lat, soldier.gps.lan];
-            }
-            else{
-              //no gps for soldier
-              position = [0, 0];
-            }
-            if(soldier.emerg){
-              icon = this.soldierEmergIcon;
-            }
-            return (<Marker 
-            key={soldier.meshID}
-            position={position}
-            icon={ icon }>            
-            <Popup>
-              ID: {soldier.meshID}<br></br>
-              Name: {soldier.name}
-            </Popup>
-        </Marker>)}
-          );
-      }
-      return soldierJsx;
     }
 
     render() {
       const soldiers  = this.props.soldiers;
       console.log(soldiers);
-      const position = [ this.state.lat, this.state.lan];
+      var position = [ this.state.lat, this.state.lan ];
+      soldiers.forEach((soldier) => {
+        if(soldier.isCommander === true && this.state.firstPos)
+          position = [soldier.gps.lat+this.state.offsetLat, soldier.gps.lan+this.state.offsetLan];
+      });
       return (
         <div className="Wrapper">
           <NotificationContainer/>
@@ -130,7 +96,7 @@ class MapView extends Component {
               attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            {this.SoldiersList(soldiers)}
+            <MapMarker soldiers={soldiers} offsetLan={this.state.offsetLan} offsetLat={this.state.offsetLat}/>
           </Map>
         </div>
       );

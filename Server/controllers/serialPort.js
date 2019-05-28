@@ -26,7 +26,7 @@ global.universalEmitter = new EventEmitter();
 
     //receving data from port
     parser.on('data', (data) => {
-        //console.log(data);
+        console.log(data);
 
         if(data.includes("<NEW_MSG>")){
             data.split(',').forEach((row)=>{
@@ -61,13 +61,12 @@ global.universalEmitter = new EventEmitter();
         
             });
         }
-        //console.log(soldier);
         //universalEmitter.emit('RFMessage', soldier);
     })
 
     //error from port
     port.on('error', (err) =>{
-        console.log("ERROR:" + err);
+        console.log("Serial Error: " + err);
     })
 
 

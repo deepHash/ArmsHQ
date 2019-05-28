@@ -1,9 +1,10 @@
 {
-  "name": "arms",
+  "name": "server",
   "version": "1.0.0",
   "description": "ARMS project - server for user interface",
   "main": "index.js",
   "scripts": {
+    "start": "node index COM3",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
