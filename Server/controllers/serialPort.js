@@ -38,23 +38,38 @@ global.universalEmitter = new EventEmitter();
                 if(row.includes("<DATA>")){
                     if(row.includes("G:")){
                         console.log(row);
-                        //var lan = row.split(':')[2].split('Y')[0];
-                        //console.log(lan);
                         soldier.data = {
                             gps:{
                                 lan: parseFloat(row.split(':')[1]),
                                 lat: parseFloat(row.split(':')[2])
                             }
                         }
-                        // console.log(soldier);
-                        console.log(`Source: ${soldier.meshID} and message is: ${soldier.msgID} `)
-                        universalEmitter.emit('GPS', soldier);
+                        // console.log(`Source: ${soldier.meshID} and message is: ${soldier.msgID} and gps is: ${soldier.data.gps.lan} `)
+                        if(soldier.data.gps.lan != 0 && soldier.data.gps.lan != 0)
+                            universalEmitter.emit('GPS', soldier);
                     }
                     if(row.includes("E:True")){
                         soldier.data = {
                             emerg: true
                         }
                         universalEmitter.emit('Emergency', soldier);
+                    }
+                    if(row.includes("P:")){
+                        soldier.data = {
+                            pulse: (row.split(':')[1])
+                        }
+                        universalEmitter.emit('Pulse', soldier);
+                    }
+                    if(row.includes("A:")){
+                        console.log(`ACC IS : ${row.split(':')[2]}`);
+
+                        soldier.data = {
+                            acc:{
+                                x: parseFloat(row.split(':')[1].split(',')[0]),
+                                y: parseFloat(row.split(':')[1].split(',')[1]),
+                                z: parseFloat(row.split(':')[1].split(',')[2])
+                            }
+                        }
                     }
                     //ToDo add all switch cases
                 }

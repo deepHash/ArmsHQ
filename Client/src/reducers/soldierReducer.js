@@ -1,4 +1,4 @@
-import { FETCH_SOLDIERS, SET_POSITION} from '../actions/types';
+import { FETCH_SOLDIERS, SET_POSITION, ADD_SOLDIER} from '../actions/types';
 
 const initialState = {
   items: [],
@@ -11,6 +11,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         items: action.payload
+      };
+    case ADD_SOLDIER:
+      return{
+        ...state,
+        item: action.payload
       };
     case SET_POSITION:
       return {

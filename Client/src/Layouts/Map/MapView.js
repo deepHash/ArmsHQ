@@ -53,9 +53,16 @@ class MapView extends Component {
       this.setState({lat: lat+this.state.offsetLat, lan: lan+this.state.offsetLan, firstPos: false});
     }
     
+    notifications(__soldier){
+      NotificationManager.warning( __soldier.name + ' sent help ','Notification',5000, () => {
+          this.centerPosition(__soldier.gps.lat, __soldier.gps.lan);
+        });
+
+    }
+
     updateGPSData = (gps) => {
       var mySoldier = gps.data;
-      var soldiers = this.state.soldiers;
+      var soldiers = this.props.soldiers;
       soldiers = soldiers.map((soldier) => {
         if (soldier.meshID === mySoldier.meshID)
           soldier.gps = mySoldier.gps;
@@ -63,19 +70,16 @@ class MapView extends Component {
       });
       this.setState({soldiers});
     }
-    notifications(_name){
-        NotificationManager.warning( _name + ' sent help ','Notification',10000);
-    }
 
     //calling notification and running on soldier 
     //to change state to emerg: true with positioning 
     updateEmergency = (emergency) => {
-      this.notifications(emergency.soldierName);
       var soldiers = this.props.soldiers;
       soldiers.forEach((soldier) => {
         if(soldier.meshID == emergency.soldierId){
           soldier.emerg = true;
-          this.centerPosition(soldier.gps.lat, soldier.gps.lan);
+          this.notifications(soldier);
+          //this.setState({state: this.state});
         }
       });
     }
@@ -85,7 +89,7 @@ class MapView extends Component {
       console.log(soldiers);
       var position = [ this.state.lat, this.state.lan ];
       soldiers.forEach((soldier) => {
-        if(soldier.isCommander === true && this.state.firstPos)
+        if(soldier.isCommander == true && this.state.firstPos)
           position = [soldier.gps.lat+this.state.offsetLat, soldier.gps.lan+this.state.offsetLan];
       });
       return (
