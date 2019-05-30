@@ -57,6 +57,11 @@ app.get('/sendhelp/:id', (req, res) => {
     res.status(200).json([]);
 });
 
+app.post('/addSoldier/', (req, res, next) => {
+    console.log(req.body.soldier);
+    res.status(200).json('added soldier: ' + [req.body.soldier]);
+})
+
 //error 404 route
 app.all('*', (req, res) => {
     res.send(`error: route not found, global handler`);
