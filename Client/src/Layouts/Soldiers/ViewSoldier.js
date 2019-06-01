@@ -2,6 +2,7 @@ import React from 'react'
 import { fetchSoldiers } from '../../actions/soldierActions';
 import { connect } from 'react-redux';
 import SoldiersList from '../soldiersList';
+import '../../assets/css/MainNew.css';
 
 class ViewSoldier extends React.Component{
     constructor(props){
@@ -17,37 +18,8 @@ class ViewSoldier extends React.Component{
     render(){
         return(
             <div>
-                {/* {this.state.name} */}
-                <div className="root">
-                <div className="search">
-                {/* <div className="searchIcon">
-                <SearchIcon className="searchIcon"/>
-                </div> */}
-                {/* <InputBase
-                placeholder="Search…"
-                classes={{
-                    root: "inputRoot",
-                    input: "inputInput",
-                }}
-                onChange={this.handleChange}
-                /> */}
-            
-                <div className="toolbar" />
-                <div className="content">
-                    <div className="container">
-                    <section className="section">
-                    <SoldiersList items={this.props.soldiers}/>
-                        {/* <ul>
-                        {this.state.list.map(item => (
-                            <li key={item}>{item}</li>
-                        ))}
-                        </ul> */}
-                    </section>
-                    </div>
-                </div> 
+                <SoldiersList items={this.props.soldiers}/>
             </div>
-            </div>
-        </div>
         )
     }
 }

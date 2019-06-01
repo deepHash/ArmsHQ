@@ -245,4 +245,4 @@ const mapStateToProps = state => ({
   //socket: state.socket
 });
 
-export default connect(mapStateToProps,{changePage})(withStyles(styles)(Main))
+{/* export default connect(mapStateToProps,{changePage})(withStyles(styles)(Main)) */}

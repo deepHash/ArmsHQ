@@ -1,6 +1,7 @@
 import React from 'react'
 import {addNewSoldier} from '../../actions/soldierActions';
 import { connect } from 'react-redux';
+import '../../assets/css/MainNew.css';
 
 class EditSolider extends React.Component{
     constructor(props){
@@ -23,7 +24,7 @@ class EditSolider extends React.Component{
             default:
                 title = 'Edit Soldier'
         }
-        return <h2 style={{color:'white'}}>{title}</h2>
+        return <h2>{title}</h2>
     }
 
     renderButtonText(){
@@ -111,7 +112,6 @@ const styles = {
     },
     inputContainerStyle:{
         display: 'flex',
-        color: 'white',
         justifyContent: 'flex-start',
         margin: '5px 0px'
     },

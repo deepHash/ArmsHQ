@@ -57,7 +57,6 @@ export default class SoldiersList extends Component {
 
       handleChange = (event) => {
         const { target: { name, value } } = event;
-        console.log("blaa")
             // Variable to hold the original version of the list
         let currentList = [];
             // Variable to hold the filtered list before putting into state
