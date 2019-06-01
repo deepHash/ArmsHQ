@@ -1,0 +1,28 @@
+.searchIcon{
+    width: 15px;
+    position: 'absolute';
+    pointer-events: 'none';
+    display: 'flex';
+    align-Items: 'center';
+    justify-Content: 'center';
+  }
+  .inputRoot{
+    color: 'inherit';
+    width: '100%';
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  li {
+    font: 200 20px/1.5 'Source Sans Pro';
+    border-bottom: 1px solid #ccc;
+  }
+  
+  li:last-child {
+    border: none;
+  }
+  
