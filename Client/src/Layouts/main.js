@@ -255,9 +255,9 @@ class Main extends React.Component {
 Main.propTypes = {
   classes: PropTypes.object.isRequired,
 };
+
 const mapStateToProps = state => ({
   currPage: state.pages.curr
-  //socket: state.socket
 });
 
-export default connect(mapStateToProps,{changePage})(withStyles(styles)(Main))
+export default connect(mapStateToProps,{changePage})(main)

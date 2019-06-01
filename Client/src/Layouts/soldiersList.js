@@ -37,15 +37,7 @@ export default class SoldiersList extends Component {
         super(props);
         this.state = {
             filtered: [],
-            // list: [
-            //     "Go to the store",
-            //     "Wash the dishes",
-            //     "Learn some code"
-            //   ]
-            
         }
-        this.componentDidMount = this.componentDidMount.bind(this);
-        this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
         this.handleChange = this.handleChange.bind(this);
         
     }
@@ -73,20 +65,11 @@ export default class SoldiersList extends Component {
 
             // If the search bar isn't empty
         if (event.target.value !== "") {
-                // Assign the original list to currentList
         currentList = this.props.items;
-
-                // Use .filter() to determine which items should be displayed
-                // based on the search terms
         if (!currentList) return newList;
         newList = currentList.filter(item => {
-                    // change current item to lowercase
-            const lc = item.toLowerCase();
-                    // change search term to lowercase
+            const lc = item.name.toLowerCase();
             const filter = event.target.value.toLowerCase();
-                    // check to see if the current list item includes the search term
-                    // If it does, it will be added to newList. Using lowercase eliminates
-                    // issues with capitalization in search terms and search content
             return lc.includes(filter);
         });
         } else {
@@ -118,7 +101,7 @@ export default class SoldiersList extends Component {
                 />
                 <ul>
                     {this.state.filtered.map(item => (
-                        <li className="list-group-item" data-category={item} key={item}>{item}</li>
+                        <li className="list-group-item" data-category={item} key={item.mashId}>{item.name}</li>
                     ))}
                 </ul>
              
