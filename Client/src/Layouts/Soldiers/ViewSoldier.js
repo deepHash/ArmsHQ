@@ -18,7 +18,11 @@ class ViewSoldier extends React.Component{
     render(){
         return(
             <div>
-                <SoldiersList items={this.props.soldiers}/>
+                <ul>
+                    {this.props.soldiers.map(item => (
+                        <li className="list-group-item" data-category={item} key={item.mashId}>{item.name}</li>
+                    ))}
+                </ul>
             </div>
         )
     }
