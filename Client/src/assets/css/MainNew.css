@@ -8,8 +8,8 @@ div.nav-item, Nav.Link{
 li.list-group-item{
     background-color: inherit;
     border-top :0;
-border-right: 0;
-border-left: 0;
+    border-right: 0;
+    border-left: 0;
 }
 #FloatingCard{
     width: '18rem';
@@ -20,4 +20,19 @@ border-left: 0;
     background-color: Gainsboro;
     color:black;
     padding: 2%;
+}
+
+form.formStyle{
+    padding: '10px 25px' ;
+}
+div.inputContainerStyle{
+    display: 'flex';
+    justify-Content: 'flex-start';
+    margin: '5px 0px';
+}
+input.inputStyle{
+    margin-Left: '7px';
+    border:'0px';
+    border-Radius: '2px';       
+    padding: '3px 5px';
 }

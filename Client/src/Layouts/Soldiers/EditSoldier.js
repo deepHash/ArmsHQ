@@ -76,27 +76,26 @@ class EditSolider extends React.Component{
         this.setState({name:'',meshId:'-1',bloodType:'',role:''})
     }
     render(){
-        const {formStyle,inputContainerStyle,inputStyle} = styles;
         return(
-            <form style={formStyle}>
+            <form className="formStyle">
                 {this.renderTitle()}
-                <div style={inputContainerStyle}>
+                <div className="inputContainerStyle">
                     <label>Name: </label>
-                    <input style={{...inputStyle,...{width:'65%'}}} type="text" value={this.state.name} onChange={this.onNameChange.bind(this)}/>
+                    <input class="inputStyle" type="text" value={this.state.name} onChange={this.onNameChange.bind(this)}/>
                 </div>
-                <div style={inputContainerStyle}>
+                <div className="inputContainerStyle">
                     <label>Mesh Id: </label>
-                    <input style={{...inputStyle,...{width:'30%'}}} type="number" value={this.state.meshId} onChange={this.onMeshIdChange.bind(this)}/>
+                    <input class="inputStyle" type="number" value={this.state.meshId} onChange={this.onMeshIdChange.bind(this)}/>
                 </div>
 
-                <div style={inputContainerStyle}>
+                <div className="inputContainerStyle">
                     <label>Blood Type: </label>
-                    <input style={{...inputStyle,...{width:'40%'}}} type="text" value={this.state.bloodType} onChange={this.onBloodTypeChange.bind(this)}/>
+                    <input class="inputStyle" type="text" value={this.state.bloodType} onChange={this.onBloodTypeChange.bind(this)}/>
                 </div>
 
-                <div style={inputContainerStyle}>
+                <div className="inputContainerStyle">
                     <label>Role: </label>
-                    <input style={{...inputStyle,...{width:'65%'}}} type="text" value={this.state.role} onChange={this.onRoleChange.bind(this)}/>
+                    <input class="inputStyle" type="text" value={this.state.role} onChange={this.onRoleChange.bind(this)}/>
                 </div>
 
                 <button type="button" onClick={this.onSubmitForm.bind(this)}>{this.renderButtonText()}</button>
@@ -105,21 +104,4 @@ class EditSolider extends React.Component{
     }
 }
 
-
-const styles = {
-    formStyle:{
-        padding: '10px 25px' 
-    },
-    inputContainerStyle:{
-        display: 'flex',
-        justifyContent: 'flex-start',
-        margin: '5px 0px'
-    },
-    inputStyle:{
-        marginLeft: '7px',
-        border:'0px',
-        borderRadius: '2px',        
-        padding: '3px 5px'
-    }
-}
 export default connect(null,{addNewSoldier})(EditSolider);
