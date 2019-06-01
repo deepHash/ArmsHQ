@@ -11,20 +11,18 @@
     width: '100%';
   }
 
-  ul{
-      
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
   }
-  /* .inputInput{
-    padding-Top: 2px;
-    padding-Right: 2px;
-    padding-Bottom: 2px;
-    padding-Left: 100px; */
-    /* transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: 120,
-      '&:focus': {
-        width: 200,
-      },
-    }, */
-  /* } */
+  
+  li {
+    font: 200 20px/1.5 'Source Sans Pro';
+    border-bottom: 1px solid #ccc;
+  }
+  
+  li:last-child {
+    border: none;
+  }
+  
