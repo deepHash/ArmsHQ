@@ -12,6 +12,34 @@ class AlertController{
             })
         })
     }
+
+    addNewAlert(soldier){
+        return new Promise((resolve, reject) => {
+            let alertType;
+
+            //setting type of emergency
+            if(soldier.emerg === true)
+                alertType = "Emergency";
+            else
+                alertType = "Other";
+
+            let alert = new Alert({
+                meshID: soldier.meshID,
+                MessageID: soldier.msgID,
+                type: alertType
+            })
+            //save new emergency alert
+            alert.save(
+                (err) => {
+                    if( err )
+                        console.log(err);
+                    else {
+                        resolve(JSON.stringify(soldier)); 
+                    }
+                }
+            )
+        })
+    }
 }
 
 module.exports = () => {

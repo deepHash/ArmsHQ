@@ -29,8 +29,7 @@ class SoldierController{
     
     updateGPS(data) {
         return new Promise((resolve, reject) => {
-            Soldier.findOneAndUpdate({ 'meshID': data.meshID }, {$set: { 'gps': data.data.gps }}, (err, result) =>{
-                //console.log(result);
+            Soldier.findOneAndUpdate({ 'meshID': data.meshID }, {$set: { 'gps': data.gps }}, (err, result) =>{
                 if (err) reject(err);
                 else resolve(result);
             });
@@ -39,7 +38,16 @@ class SoldierController{
 
     updatePulse(data) {
         return new Promise((resolve, reject) => {
-            Soldier.findOneAndUpdate({ 'meshID': data.meshID }, {$set: { 'pulse': data.data.pulse}}, (err, result) =>{
+            Soldier.findOneAndUpdate({ 'meshID': data.meshID }, {$set: { 'pulse': data.pulse}}, (err, result) =>{
+                if (err) reject(err);
+                else resolve(result);
+            })
+        })
+    }
+
+    updateAcc(data) {
+        return new Promise((resolve, reject) => {
+            Soldier.findOneAndUpdate({ 'meshID': data.meshID }, {$set: { 'acc': data.acc}}, (err, result) =>{
                 if (err) reject(err);
                 else resolve(result);
             })

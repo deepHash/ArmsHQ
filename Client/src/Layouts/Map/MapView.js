@@ -31,21 +31,19 @@ class MapView extends Component {
     
     componentDidMount() {
       //mounting socket in component
-      // this.props.connectSocket();
       const endpoint = this.state.endpoint;
       const socket = socketIoClient(endpoint);
 
       this.props.fetchSoldiers();
-      // var soldiers = this.state.soldiers;
-      //   soldiers.map((soldier) => {
-      //     if(soldier.isCommander == true)
-      //       this.centerPosition(soldier.gps.lat, soldier.gps.lan);
-      //   });
 
       //gps data
       socket.on("gps", this.updateGPSData)
       //emergency data
       socket.on("emergency", this.updateEmergency)
+      //acc data
+      socket.on("acc", this.updateAcc)
+      //pulse data
+      socket.on("pulse", this.updatePulse)
 
     }
 
@@ -65,11 +63,11 @@ class MapView extends Component {
     }
 
     updateGPSData = (gps) => {
-      var mySoldier = gps.data;
+      var newData = gps.data;
       var soldiers = this.props.soldiers;
       soldiers = soldiers.map((soldier) => {
-        if (soldier.meshID === mySoldier.meshID)
-          soldier.gps = mySoldier.gps;
+        if (soldier.meshID === newData.meshID)
+          soldier.gps = newData.gps;
         return soldier;
       });
       this.setState({soldiers});
@@ -80,12 +78,36 @@ class MapView extends Component {
     updateEmergency = (emergency) => {
       var soldiers = this.props.soldiers;
       soldiers.forEach((soldier) => {
-        if(soldier.meshID == emergency.soldierId){
+        if(soldier.meshID == emergency.meshID){
           soldier.emerg = true;
           this.notifications(soldier);
           //this.setState({state: this.state});
         }
       });
+    }
+
+    updatePulse = (pulse) => {
+      var newData = pulse.data;
+      var soldiers = this.props.soldiers;
+      soldiers.forEach((soldier) => {
+        if(soldier.meshID == newData.meshID){
+          soldier.pulse = newData.pulse;
+        return soldier
+        }
+      });
+      this.setState({soldiers});
+    }
+
+    updateAcc = (acc) => {
+      var newData = acc.data;
+      var soldiers = this.props.soldiers;
+      soldiers.forEach((soldier) => {
+        if(soldier.meshID == newData.meshID){
+          soldier.acc = newData.acc;
+        return soldier
+        }
+      });
+      this.setState({soldiers});
     }
 
     render() {
@@ -101,7 +123,7 @@ class MapView extends Component {
         <div className="Wrapper">
           <NotificationContainer/>
           <Map className="map" center={position} zoom={this.state.zoom}>
-            <TileLayer
+            <TileLayer 
               attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
@@ -114,7 +136,6 @@ class MapView extends Component {
 
   const mapStateToProps = state => ({
     soldiers: state.soldiers.items
-    //socket: state.socket
   });
   
   export default connect(mapStateToProps, {fetchSoldiers})(MapView);

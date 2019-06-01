@@ -46,16 +46,18 @@ export default class mapMarker extends Component {
           soldierJsx = soldiers.map((soldier) =>
             {
               let position = this.setGPS(soldier.gps),
-                  icon = this.setIcon(soldier);
-
+                  icon = this.setIcon(soldier),
+                  resolveButton = this.setButton(soldier);
+                  
               return (
                 <Marker 
                     key={ soldier.meshID }
                     position={ position }
                     icon={ icon }>            
                     <Popup>
-                        ID: { soldier.meshID }<br></br>
-                        Name: { soldier.name }
+                        ID: { soldier.meshID }<br/>
+                        Name: { soldier.name }<br/>
+                        {resolveButton}
                     </Popup>
                 </Marker>
               )}
@@ -87,6 +89,15 @@ export default class mapMarker extends Component {
             else
                 icon = this.soldierIcon;
         return icon;    
+      }
+
+      setButton(soldier){
+          let button
+          if (soldier.emerg == true)
+            button = <div> <button onClick={this.handlePopUpClick}>Resolve Emergency</button></div>
+          else
+            button = <div></div>;
+        return button
       }
     
     render() {

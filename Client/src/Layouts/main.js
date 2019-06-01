@@ -234,7 +234,6 @@ class Main extends React.Component {
         <List>
           {Pages.map(({text,MeterialUi}, index) => (
             <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> 
               <ListItemIcon>{MeterialUi}</ListItemIcon>
               <ListItemText primary={text} onClick={this.props.changePage.bind(this,text)}/>
             </ListItem>

@@ -10,9 +10,6 @@ const express     = require('express'),
       app         = express(),
       port        = process.env.PORT || 4000;
 
-//TEST VARS
-var   test        = false;
-//
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -62,7 +59,7 @@ app.post('/addSoldier/', (req, res, next) => {
 
 /**              TESTING         */
 app.get('/sendhelp/:id', (req, res) => {
-    let soldier = {emerg: true, name: "Tal", meshID: req.params.id};
+    let soldier = {emerg: true, meshID: req.params.id};
     universalEmitter.emit('Emergency', soldier);
     res.status(200).json([]);
 });
@@ -79,17 +76,57 @@ const server = http.createServer(app),
 io.on('connection', socket => {
     console.log("client connected to socket");
     
+    //socket emit and DB save for gps
     universalEmitter.on('GPS', (soldier) =>{
         soldierData.updateGPS(soldier).then((result) => {
-            socket.emit('gps', {data: result});
+            if(result){
+                socket.emit('gps', {data: result});
+            }
+            // else
+            //     //no such MeshID in DB
+            //     console.log(`Error updating gps for ID: ${soldier.meshID}`);
         }, (error) => {
             console.log(error);
         })
     });
 
     universalEmitter.on('Emergency', (soldier) =>{
-        console.log("here ", soldier.meshID);
-        socket.emit('emergency', {emerg: true, soldierId: soldier.meshID, soldierName: soldier.name});
+        alertData.addNewAlert(soldier).then((error) => {
+            console.log(error);
+        })
+        socket.emit('emergency', {emerg: true, meshID: soldier.meshID, soldierName: soldier.name});
+    });
+    
+    
+    universalEmitter.on('ACC', (soldier) =>{
+        soldierData.updateAcc(soldier).then((result) => {
+            if(result){
+                socket.emit('acc', {data: result});
+            }
+            // else
+            // //no such MeshID in DB
+            // console.log(`Error updating acc for ID: ${soldier.meshID}`);
+        }, (error) => {
+            console.log(error);
+        })
+    });
+    
+    universalEmitter.on('PULSE', (soldier) =>{
+        soldierData.updatePulse(soldier).then((result) => {
+            if(result){
+                socket.emit('pulse', {data: result});
+            }
+            // else
+            //     //no such MeshID in DB
+            //     console.log(`Error updating pulse for ID: ${soldier.meshID}`);
+            }, (error) => {
+                console.log(error);
+            })
+        });
+    
+    //emits if soldier has not sent a message for more than 60 seconds
+    universalEmitter.on('Disconnect', (soldier) => {
+        socket.emit('disconnect', {data: soldier})
     });
     
     socket.on('disconnect', () => {

@@ -18,11 +18,7 @@ var mongoose = require('mongoose'),
              z: Number
         },
         pulse: Number,
-        emerg: {type: Boolean, default: false},
-        messages: [{
-            messageID: Number,
-            data: {type: String,
-                   value: schema.Types.Mixed}}]
+        emerg: {type: Boolean, default: false}
     }, {collection: 'Soldier'});
 
     var Soldier = mongoose.model('Soldier', SoldierSchema);

@@ -4,7 +4,8 @@ var mongoose    = require('mongoose'),
     now         = new Date();
 
     AlertSchema = new schema({
-        meshID: {type: Number, required: true, unique: true},
+        meshID: {type: Number, required: true},
+        messageID: String,
         type: String,
         date: {type: String, required: true, default: dateFormat(now, "isoUtcDateTime")}
     }, {collection: 'Alert'});
