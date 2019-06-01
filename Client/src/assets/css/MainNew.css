@@ -5,6 +5,12 @@ div.nav-item, Nav.Link{
     padding-right: 10px;
     padding-left:10px;
 }
+li.list-group-item{
+    background-color: inherit;
+    border-top :0;
+border-right: 0;
+border-left: 0;
+}
 #FloatingCard{
     width: '18rem';
     position: absolute;
@@ -13,5 +19,5 @@ div.nav-item, Nav.Link{
     z-index: 1000;
     background-color: Gainsboro;
     color:black;
-    padding: 5%;
+    padding: 2%;
 }
