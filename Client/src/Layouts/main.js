@@ -191,7 +191,7 @@ class Main extends React.Component {
           </div>
        */}
         <div className={classes.toolbar} />
-        <SoldiersSearchContainer></SoldiersSearchContainer>
+        {/* <SoldiersSearchContainer></SoldiersSearchContainer> */}
         {this.renderLeftPage()}
 
         </Drawer>
