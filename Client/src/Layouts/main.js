@@ -1,8 +1,5 @@
 import React from 'react';
 import Map from './Map/MapView';
-import SoldierInfo from './soldierInfo';
-import SoldiersSearchContainer from './soldiersSearchContainer';
-
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -13,7 +10,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -260,4 +256,5 @@ const mapStateToProps = state => ({
   currPage: state.pages.curr
 });
 
-export default connect(mapStateToProps,{changePage})(main)
+
+{/* export default connect(mapStateToProps,{changePage})(withStyles(styles)(Main)) */}

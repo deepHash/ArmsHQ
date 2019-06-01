@@ -1,25 +1,16 @@
 import React from 'react';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import { MDBIcon } from "mdbreact";
+import { MDBBtn } from "mdbreact";
 
 const Pages = [
     {
-        text:'All mail',
-        MeterialUi: <InboxIcon />
-    },
-    {
-        text:'Trash',
-        MeterialUi: <MailIcon />
-    },
-    {
-        text:'Manage Force',
-        MeterialUi: <InboxIcon />
+        text:'View All Soldiers',
+        // Icon: <MDBBtn floating alt="View All Soldiers" size="lg" gradient="purple"><MDBIcon far icon="list-alt" /></MDBBtn>
     },
     {
         text:'Edit Force',
-        MeterialUi: <MailIcon />
+        // Icon:  <MDBBtn floating alt="Edit Force" size="lg" gradient="purple"><MDBIcon far icon="address-card" /></MDBBtn>
     },
 ]
-
 
 export default Pages;
