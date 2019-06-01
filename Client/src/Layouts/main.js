@@ -105,18 +105,6 @@ const styles = theme => ({
       marginLeft: theme.spacing.unit,
       width: 'auto',
     },
-    // searchIcon: {
-    //   width: theme.spacing.unit * 9,
-    //   position: 'absolute',
-    //   pointerEvents: 'none',
-    //   display: 'flex',
-    //   alignItems: 'center',
-    //   justifyContent: 'center',
-    // },
-    // inputRoot: {
-    //   color: 'inherit',
-    //   width: '100%',
-    // },
     inputInput: {
       paddingTop: theme.spacing.unit,
       paddingRight: theme.spacing.unit,
@@ -195,7 +183,7 @@ class Main extends React.Component {
           </div>
        */}
         <div className={classes.toolbar} />
-        <SoldiersSearchContainer></SoldiersSearchContainer>
+        {/* <SoldiersSearchContainer></SoldiersSearchContainer> */}
         {this.renderLeftPage()}
 
         </Drawer>
@@ -234,7 +222,7 @@ class Main extends React.Component {
         <List>
           {Pages.map(({text,MeterialUi}, index) => (
             <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> 
+              {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>  */}
               <ListItemIcon>{MeterialUi}</ListItemIcon>
               <ListItemText primary={text} onClick={this.props.changePage.bind(this,text)}/>
             </ListItem>
