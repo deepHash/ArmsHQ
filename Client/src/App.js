@@ -5,6 +5,7 @@ import store from './store';
 
 import Main from './Layouts/main';
 import NavBar from './Layouts/navbar';
+import MainNew from './Layouts/MainNew';
 
 
 class App extends Component {
@@ -13,8 +14,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div className="App">
-          {/* <NavBar /> */}
-          <Main />
+          <MainNew />
         </div>
       </Provider>
     );
