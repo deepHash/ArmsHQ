@@ -11,7 +11,8 @@ export const fetchSoldiers = () => dispatch => {
     );
 };
 
-export const createSoldier = soldierData => dispatch => {
+export const addNewSoldier = soldierData => dispatch => {
+  console.log(soldierData);
   fetch('http://localhost:4000/addSoldier', {
     method: 'POST',
     headers: {
@@ -25,6 +26,6 @@ export const createSoldier = soldierData => dispatch => {
       dispatch({
         type: ADD_SOLDIER,
         payload: soldier
-      })
+      }),
     );
 };

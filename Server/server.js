@@ -46,10 +46,20 @@ app.get('/getAllAlerts', (req, res, next) => {
     alertData.getAllAlerts().then((result) => {
         res.status(200).json(result);
     }, (error) => {
-      console.log(error);
-      next();
+        console.log(error);
+        next();
     });
 });
+
+app.post('/addSoldier/', (req, res, next) => {
+    soldierData.addSoldier(req.body).then((result) => {
+        result.length === 0 ? next() : res.status(200).json(result);
+    }, (error) => {
+        console.log(error);
+        next();
+    })
+});
+
 /**              TESTING         */
 app.get('/sendhelp/:id', (req, res) => {
     let soldier = {emerg: true, name: "Tal", meshID: req.params.id};
@@ -57,10 +67,6 @@ app.get('/sendhelp/:id', (req, res) => {
     res.status(200).json([]);
 });
 
-app.post('/addSoldier/', (req, res, next) => {
-    console.log(req.body.soldier);
-    res.status(200).json('added soldier: ' + [req.body.soldier]);
-})
 
 //error 404 route
 app.all('*', (req, res) => {

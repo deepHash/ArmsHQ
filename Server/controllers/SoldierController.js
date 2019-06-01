@@ -7,8 +7,23 @@ class SoldierController{
     addSoldier(data){
         return new Promise((resolve, reject) => {
             let soldier = new Soldier({
-
+                meshID: data.meshId,
+                name: data.name,
+                bloodType: data.bloodType,
+                isCommander: false,
+                role: data.role,
+                emerg: false
             })
+            
+            soldier.save(
+                (err) => {
+                    if( err )
+                        console.log(err);
+                    else {
+                        resolve(JSON.stringify(soldier)); 
+                    }
+                }
+            )
         });
     }
     

@@ -19,11 +19,17 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import SearchIcon from '@material-ui/icons/Search';
 import MenuIcon from '@material-ui/icons/Menu';
+import Pages from './helper/pages';
 
+import EditSoldier from './Soldiers/EditSoldier';
 
 import '../assets/css/main.css';
-
+import { connect } from 'react-redux';
+import { changePage } from '../actions/pagesActions';
 const drawerWidth = 240;
+
+
+
 
 const styles = theme => ({
   root: {
@@ -129,6 +135,11 @@ const styles = theme => ({
 
 class Main extends React.Component {
 
+  renderLeftPage(){
+    if(this.props.currPage === 'Manage Force')
+        return (<EditSoldier/>)
+  }
+  
   render() {
     const { classes } = this.props;
 
@@ -136,7 +147,6 @@ class Main extends React.Component {
       <div className={classes.root}>
         <CssBaseline />
         <AppBar position="fixed" className={classes.appBar}>
-
           <Toolbar className={classes.toolbar}>
             {/* <IconButton
               color="inherit"
@@ -176,8 +186,8 @@ class Main extends React.Component {
           </div>
       
         <div className={classes.toolbar} />
+        {this.renderLeftPage()}
         </Drawer>
-        
           <Drawer
             className={classes.drawer}
             variant="permanent"
@@ -198,7 +208,7 @@ class Main extends React.Component {
       
         <div className={classes.toolbar} />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          {['Inbox','Starred','Send Mail', 'Draft'].map((text, index) => (
             <ListItem button key={text} >
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text}/>
@@ -207,10 +217,11 @@ class Main extends React.Component {
         </List>
         <Divider />
         <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
+          {Pages.map(({text,MeterialUi}, index) => (
             <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
+              {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
+              <ListItemIcon>{MeterialUi}</ListItemIcon>
+              <ListItemText primary={text} onClick={this.props.changePage.bind(this,text)}/>
             </ListItem>
           ))}
         </List>
@@ -218,7 +229,7 @@ class Main extends React.Component {
         <main className={classes.content}>
           <div className='appBarSpacer' />
           <Typography variant="h4" gutterBottom component="h2">
-            <Map />
+            <Map/>
           </Typography>
         </main>
       </div>
@@ -229,5 +240,9 @@ class Main extends React.Component {
 Main.propTypes = {
   classes: PropTypes.object.isRequired,
 };
+const mapStateToProps = state => ({
+  currPage: state.pages.curr
+  //socket: state.socket
+});
 
-export default withStyles(styles)(Main);
+export default connect(mapStateToProps,{changePage})(withStyles(styles)(Main))
