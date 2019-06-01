@@ -1,5 +1,9 @@
 import React from 'react';
 import Map from './Map/MapView';
+import SoldierInfo from './soldierInfo';
+import SoldiersSearchContainer from './soldiersSearchContainer';
+
+
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,9 +19,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
-import SearchIcon from '@material-ui/icons/Search';
 import MenuIcon from '@material-ui/icons/Menu';
 
 
@@ -82,7 +84,7 @@ const styles = theme => ({
   h5: {
     marginBottom: theme.spacing.unit * 2,
   },
-  search: {
+  Icons: {
     paddingTop:'3px',
     position: 'absolute',
     borderRadius: theme.shape.borderRadius,
@@ -96,18 +98,18 @@ const styles = theme => ({
       marginLeft: theme.spacing.unit,
       width: 'auto',
     },
-    searchIcon: {
-      width: theme.spacing.unit * 9,
-      position: 'absolute',
-      pointerEvents: 'none',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    inputRoot: {
-      color: 'inherit',
-      width: '100%',
-    },
+    // searchIcon: {
+    //   width: theme.spacing.unit * 9,
+    //   position: 'absolute',
+    //   pointerEvents: 'none',
+    //   display: 'flex',
+    //   alignItems: 'center',
+    //   justifyContent: 'center',
+    // },
+    // inputRoot: {
+    //   color: 'inherit',
+    //   width: '100%',
+    // },
     inputInput: {
       paddingTop: theme.spacing.unit,
       paddingRight: theme.spacing.unit,
@@ -162,20 +164,10 @@ class Main extends React.Component {
             }}
             anchor="right" 
           >
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon className="searchIcon"/>
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-            />
-          </div>
-      
-        <div className={classes.toolbar} />
+          
+        <div className={classes.toolbar} /> 
+        <SoldiersSearchContainer></SoldiersSearchContainer>
+
         </Drawer>
         
           <Drawer
@@ -197,14 +189,17 @@ class Main extends React.Component {
             </Typography >
       
         <div className={classes.toolbar} />
-        <List>
+        {/* <SoldierInfo></SoldierInfo> */}
+
+        {/* <List>
           {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
             <ListItem button key={text} >
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text}/>
             </ListItem>
           ))}
-        </List>
+        </List> 
+        
         <Divider />
         <List>
           {['All mail', 'Trash', 'Spam'].map((text, index) => (
@@ -213,7 +208,7 @@ class Main extends React.Component {
               <ListItemText primary={text} />
             </ListItem>
           ))}
-        </List>
+        </List>*/}
       </Drawer>
         <main className={classes.content}>
           <div className='appBarSpacer' />

@@ -1,0 +1,30 @@
+.searchIcon{
+    width: 15px;
+    position: 'absolute';
+    pointer-events: 'none';
+    display: 'flex';
+    align-Items: 'center';
+    justify-Content: 'center';
+  }
+  .inputRoot{
+    color: 'inherit';
+    width: '100%';
+  }
+
+  ul{
+      
+  }
+  /* .inputInput{
+    padding-Top: 2px;
+    padding-Right: 2px;
+    padding-Bottom: 2px;
+    padding-Left: 100px; */
+    /* transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: 120,
+      '&:focus': {
+        width: 200,
+      },
+    }, */
+  /* } */
