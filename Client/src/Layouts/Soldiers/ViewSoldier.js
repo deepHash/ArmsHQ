@@ -1,6 +1,8 @@
 import React from 'react'
+import { fetchSoldiers } from '../../actions/soldierActions';
+import { connect } from 'react-redux';
 
-class ViewSolider extends React.Component{
+class ViewSoldier extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -20,4 +22,8 @@ class ViewSolider extends React.Component{
     }
 }
 
-export default ViewSolider;
+const mapStateToProps = state => ({
+    soldiers: state.soldiers.items
+  });
+  
+  export default connect(mapStateToProps, {fetchSoldiers})(ViewSoldier);

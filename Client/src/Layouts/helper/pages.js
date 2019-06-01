@@ -12,11 +12,11 @@ const Pages = [
         MeterialUi: <MailIcon />
     },
     {
-        text:'Spam',
+        text:'Manage Force',
         MeterialUi: <InboxIcon />
     },
     {
-        text:'Manage Force',
+        text:'Edit Force',
         MeterialUi: <MailIcon />
     },
 ]

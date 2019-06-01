@@ -71,7 +71,7 @@ export default class mapMarker extends Component {
             return [gps.lat + this.props.offsetLat, gps.lan + this.props.offsetLan];
         else
             //no gps for soldier
-            return [0, 0];
+            return [-1, -1];
       }
 
       setIcon(soldier){

@@ -26,6 +26,7 @@ import EditSoldier from './Soldiers/EditSoldier';
 import '../assets/css/main.css';
 import { connect } from 'react-redux';
 import { changePage } from '../actions/pagesActions';
+import ViewSoldier from './Soldiers/ViewSoldier';
 const drawerWidth = 240;
 
 
@@ -136,8 +137,14 @@ const styles = theme => ({
 class Main extends React.Component {
 
   renderLeftPage(){
-    if(this.props.currPage === 'Manage Force')
-        return (<EditSoldier/>)
+    switch(this.props.currPage){
+      case 'Edit Force':
+        return(<EditSoldier />);
+        break;
+      case 'Manage Force':
+        return(<ViewSoldier />);
+        break;
+    }
   }
   
   render() {

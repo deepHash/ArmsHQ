@@ -53,9 +53,13 @@ class MapView extends Component {
       this.setState({lat: lat+this.state.offsetLat, lan: lan+this.state.offsetLan, firstPos: false});
     }
     
-    notifications(__soldier){
-      NotificationManager.warning( __soldier.name + ' sent help ','Notification',5000, () => {
-          this.centerPosition(__soldier.gps.lat, __soldier.gps.lan);
+    notifications(soldier){
+      NotificationManager.warning( soldier.name + ' sent help ','Notification',5000, () => {
+          if(soldier.gps)
+            this.centerPosition(soldier.gps.lat, soldier.gps.lan);
+          else
+            //add no gps validation message 
+            ;
         });
 
     }
@@ -89,6 +93,7 @@ class MapView extends Component {
       console.log(soldiers);
       var position = [ this.state.lat, this.state.lan ];
       soldiers.forEach((soldier) => {
+        //set initial view to the commanders position
         if(soldier.isCommander == true && this.state.firstPos)
           position = [soldier.gps.lat+this.state.offsetLat, soldier.gps.lan+this.state.offsetLan];
       });
