@@ -8,7 +8,7 @@ const Pages = [
         // Icon: <MDBBtn floating alt="View All Soldiers" size="lg" gradient="purple"><MDBIcon far icon="list-alt" /></MDBBtn>
     },
     {
-        text:'Edit Force',
+        text:'Add Force',
         // Icon:  <MDBBtn floating alt="Edit Force" size="lg" gradient="purple"><MDBIcon far icon="address-card" /></MDBBtn>
     },
 ]

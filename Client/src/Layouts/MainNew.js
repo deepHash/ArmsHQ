@@ -25,9 +25,6 @@ class MainNew extends React.Component{
             role: this.props.role || '',
         }
         this.RemoveFloatingCard = this.RemoveFloatingCard.bind();
-        this.renderFloatingCard = this.renderFloatingCard.bind();
-
-        
     }
 
     RemoveFloatingCard(){
@@ -44,8 +41,8 @@ class MainNew extends React.Component{
           case 'View All Soldiers':
             return(<ViewSoldier />);
             break;
-          case 'Edit Force':
-            return(< EditSoldier/>);
+          case 'Add Force':
+            return(<EditSoldier/>);
             break;
         }
       }
