@@ -1,3 +1,6 @@
+*{
+    font-family:'Roboto', sans-serif;
+}
 .searchIcon{
     width: 15px;
     position: 'absolute';
@@ -15,6 +18,13 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
+    position: absolute;
+    z-index: 1000;
+    background-color: white;
+    /* width: 20%; */
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    display: none;
   }
   
   li {
@@ -25,4 +35,15 @@
   li:last-child {
     border: none;
   }
-  
+
+  #hideSearch{
+    border: 0;
+    margin-right: 0px;
+    /* position:relative; */
+  }
+/* 
+  MDBBtn{
+    top: 0;
+    right:0; 
+    position:absolute;
+  } */

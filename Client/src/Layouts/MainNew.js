@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import Map from './Map/MapView';
 import { fetchSoldiers } from '../actions/soldierActions';
-import PropTypes from 'prop-types';
 import Pages from './helper/pages';
 import EditSoldier from './Soldiers/EditSoldier';
 import { connect } from 'react-redux';
@@ -10,14 +9,10 @@ import { changePage } from '../actions/pagesActions';
 import ViewSoldier from './Soldiers/ViewSoldier';
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
-import NavDropdown from 'react-bootstrap/NavDropdown'
-import Form from 'react-bootstrap/Form'
-import FormControl from 'react-bootstrap/FormControl'
-import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 
 import '../assets/css/MainNew.css';
-import { NavItem } from 'react-bootstrap';
+import SoldiersList from './soldiersList';
 
 class MainNew extends React.Component{
     constructor(props){
@@ -28,16 +23,17 @@ class MainNew extends React.Component{
             mashId: this.props.name || -1,
             bloodType: this.props.bloodType || '',
             role: this.props.role || '',
-            multiple: false,
-            setNewPos: false 
+            setNewPos: false,
         }
-        this.RemoveFloatingCard = this.RemoveFloatingCard.bind()
+        this.RemoveFloatingCard = this.RemoveFloatingCard.bind();
     }
+
     RemoveFloatingCard(){
         this.setState({
             currPage:undefined
        })   
     }
+
     renderFloatingCard(){
         switch(this.props.currPage){
             case undefined:
@@ -55,33 +51,8 @@ class MainNew extends React.Component{
           this.setState({setNewPos: soldier.gps})
       }
 
-      handleChange = (event) => {
-        const { target: { name, value } } = event;
-            // Variable to hold the original version of the list
-        let currentList = [];
-            // Variable to hold the filtered list before putting into state
-        let newList = [];
-
-            // If the search bar isn't empty
-        if (event.target.value !== "") {
-        currentList = this.props.items;
-        if (!currentList) return newList;
-        newList = currentList.filter(item => {
-            const lc = item.name.toLowerCase();
-            const filter = event.target.value.toLowerCase();
-            return lc.includes(filter);
-        });
-        } else {
-                // If the search bar is empty, set newList to original task list
-        newList = this.props.items;
-        }
-            // Set the filtered state based on what our rules added to newList
-        this.setState({
-        filtered: newList
-        });
-    }
+     
   render() {
-    const {multiple} = this.state;
     return (
         <div>
             <Navbar bg="light" expand="lg">
@@ -95,17 +66,9 @@ class MainNew extends React.Component{
                                 {text}
                             </Nav.Link>
                         ))}
-                        {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                        </NavDropdown> */}
                     </Nav>
-                    <Form inline>
-                        <FormControl type="text" placeholder="Search Soldier.." className="mr-sm-2" onChange={this.handleChange}/>
-                    </Form>
+                    {/* search bar */}
+                    <SoldiersList items={this.props.soldiers}/>
                 </Navbar.Collapse>
             </Navbar>
            <div>
