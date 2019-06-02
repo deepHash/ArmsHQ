@@ -1,42 +1,18 @@
 
 import React, { Component } from 'react';
-import SearchIcon from '@material-ui/icons/Search';
-import InputBase from '@material-ui/core/InputBase';
-import '../assets/css/Search.css';
-const styles = theme => ({
-    searchIcon: {
-        width: theme.spacing.unit * 9,
-        position: 'absolute',
-        pointerEvents: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-      inputRoot: {
-        color: 'inherit',
-        width: '100%',
-      },
-    inputInput: {
-        paddingTop: theme.spacing.unit,
-        paddingRight: theme.spacing.unit,
-        paddingBottom: theme.spacing.unit,
-        paddingLeft: theme.spacing.unit * 10,
-        transition: theme.transitions.create('width'),
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-          width: 120,
-          '&:focus': {
-            width: 200,
-          },
-        },
-      },
 
-});
+import '../assets/css/Search.css';
+import Form from 'react-bootstrap/Form'
+import FormControl from 'react-bootstrap/FormControl'
+import { MDBBtn } from "mdbreact";
+import { MDBIcon } from "mdbreact";
+
 export default class SoldiersList extends Component {
     constructor(props) {
         super(props);
         this.state = {
             filtered: [],
+            isFocus:false,
         }
         this.handleChange = this.handleChange.bind(this);
         
@@ -81,24 +57,21 @@ export default class SoldiersList extends Component {
         });
     }
 
+    handleClick = (event) => {
+        this.setState({ isFocus:this.state.isFocus===true?false:true });
+    }
 
       render() {
         const { classes } = this.props;
 
         return (
-            <div className="root">
-            <div className="searchIcon">
-                <SearchIcon className="searchIcon"/>
-            </div>
-            <InputBase
-                placeholder="Search…"
-                styles={{
-                    root: styles.inputRoot,
-                    input: styles.inputInput,
-                }}
-                onChange={this.handleChange}
-                />
-                <ul>
+            <div>
+            <Form inline></Form>
+                <FormControl type="text" placeholder="Search Soldier.." className="mr-sm-2" onChange={this.handleChange} onClick={this.handleClick}/>
+                <ul style={{display: this.state.isFocus ? 'block' : 'none' }}>
+                    <li id="hideSearch" onClick={this.handleClick}>
+                        <MDBBtn floating size="sm" gradient="purple" className="md-toolbar"><MDBIcon  icon="times" /></MDBBtn>
+                    </li>
                     {this.state.filtered.map(item => (
                         <li className="list-group-item" data-category={item} key={item.mashId}>{item.name}</li>
                     ))}
@@ -108,3 +81,4 @@ export default class SoldiersList extends Component {
         )
     }
 }
+
