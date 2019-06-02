@@ -29,7 +29,7 @@ class MainNew extends React.Component{
             bloodType: this.props.bloodType || '',
             role: this.props.role || '',
             multiple: false,
-
+            setNewPos: false 
         }
         this.RemoveFloatingCard = this.RemoveFloatingCard.bind()
     }
@@ -42,15 +42,19 @@ class MainNew extends React.Component{
         switch(this.props.currPage){
             case undefined:
                 return(null);
-                break;
-          case 'View All Soldiers':
-            return(<ViewSoldier />);
-            break;
-          case 'Edit Force':
-            return(< EditSoldier/>);
-            break;
+                
+            case 'View All Soldiers':
+                return(<ViewSoldier onSelectSoldier={this.handleSelectSoldier}/>);
+            
+            case 'Edit Force':
+                return(< EditSoldier />);    
         }
       }
+
+      handleSelectSoldier = (soldier) => {
+          this.setState({setNewPos: soldier.gps})
+      }
+
       handleChange = (event) => {
         const { target: { name, value } } = event;
             // Variable to hold the original version of the list
@@ -78,7 +82,6 @@ class MainNew extends React.Component{
     }
   render() {
     const {multiple} = this.state;
-
     return (
         <div>
             <Navbar bg="light" expand="lg">
@@ -109,7 +112,7 @@ class MainNew extends React.Component{
                 <Card id="FloatingCard" style={{display:this.props.currPage === undefined ? "none" : "block"}}>
                         {this.renderFloatingCard()}
                 </Card>
-                <Map/>              
+                <Map pos={this.state.setNewPos}/>              
          </div>
                 
         </div>
@@ -119,7 +122,8 @@ class MainNew extends React.Component{
 
 
   const mapStateToProps = state => ({
-    currPage: state.pages.curr
+    currPage: state.pages.curr,
+    soldiers: state.soldiers.items
   });
   
   export default connect(mapStateToProps,{changePage,fetchSoldiers})(MainNew)

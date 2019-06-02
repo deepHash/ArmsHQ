@@ -1,6 +1,7 @@
 import React from 'react'
 import { fetchSoldiers } from '../../actions/soldierActions';
 import { connect } from 'react-redux';
+import { ListGroupItem, ListGroup } from 'react-bootstrap';
 import SoldiersList from '../soldiersList';
 import '../../assets/css/MainNew.css';
 
@@ -15,14 +16,21 @@ class ViewSoldier extends React.Component{
             role: this.props.role || ''
         }
     }
+    SelectSoldier = (soldier) => {
+        this.props.onSelectSoldier(soldier);
+    }
     render(){
+        let k = 0;
         return(
             <div>
-                <ul>
-                    {this.props.soldiers.map(item => (
-                        <li className="list-group-item" data-category={item} key={item.mashId}>{item.name}</li>
+                <ListGroup>
+                    {this.props.soldiers.map(( item ) => (
+                    <ListGroupItem className="list-group-item" key={k++}
+                        onClick={(e) => this.SelectSoldier(item)}>
+                        <h5>{item.name}</h5>
+                    </ListGroupItem>
                     ))}
-                </ul>
+                </ListGroup>
             </div>
         )
     }

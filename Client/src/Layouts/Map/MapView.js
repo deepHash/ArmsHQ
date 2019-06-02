@@ -112,13 +112,17 @@ class MapView extends Component {
 
     render() {
       const soldiers  = this.props.soldiers;
+      const pos       = this.props.pos;
       console.log(soldiers);
       var position = [ this.state.lat, this.state.lan ];
       soldiers.forEach((soldier) => {
         //set initial view to the commanders position
         if(soldier.isCommander == true && this.state.firstPos)
-          position = [soldier.gps.lat+this.state.offsetLat, soldier.gps.lan+this.state.offsetLan];
+        position = [soldier.gps.lat+this.state.offsetLat, soldier.gps.lan+this.state.offsetLan];
       });
+      if(pos){
+        position = [pos.lat+this.state.offsetLat, pos.lan+this.state.offsetLan];
+      }
       return (
         <div className="Wrapper">
           <NotificationContainer/>
