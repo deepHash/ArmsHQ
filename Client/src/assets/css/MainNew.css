@@ -21,7 +21,19 @@ div.nav-item, Nav.Link{
     background-color: Gainsboro;
     color:black;
     padding: 2%;
-    opacity: 0.85
+    opacity: 0.85;
+}
+
+#FloatingCardSoldier{
+    width: '18rem';
+    position: absolute;
+    top: 15%;
+    right: 5%;
+    z-index: 1000;
+    background-color: Gainsboro;
+    color:black;
+    padding: 2%;
+    opacity: 0.85;
 }
 
 form.formStyle{

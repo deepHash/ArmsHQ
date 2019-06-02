@@ -7,6 +7,8 @@ import EditSoldier from './Soldiers/EditSoldier';
 import { connect } from 'react-redux';
 import { changePage } from '../actions/pagesActions';
 import ViewSoldier from './Soldiers/ViewSoldier';
+import SoldierCard from './Soldiers/SoldierCard';
+
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Card from 'react-bootstrap/Card'
@@ -24,6 +26,13 @@ class MainNew extends React.Component{
             bloodType: this.props.bloodType || '',
             role: this.props.role || '',
             setNewPos: false,
+            openSoldierCard:undefined,
+            soldierCardName:undefined,
+            soldierCardMeshID:undefined,
+            soldierCardRole:undefined,
+            soldierCardBlood:undefined,
+            soldierCardPulse:undefined,
+            soldierCardAcc:undefined,
         }
         this.RemoveFloatingCard = this.RemoveFloatingCard.bind();
     }
@@ -49,6 +58,13 @@ class MainNew extends React.Component{
 
       handleSelectSoldier = (soldier) => {
           this.setState({setNewPos: soldier.gps})
+          this.setState({openSoldierCard: true})
+          this.setState({soldierCardName:soldier.name})
+          this.setState({soldierCardMeshID: soldier.meshID})
+          this.setState({soldierCardRole: soldier.role})
+          this.setState({soldierCardBlood: soldier.blood})
+          this.setState({soldierCardPulse: soldier.pulse})
+          this.setState({soldierCardAcc: soldier.acc})
       }
 
      
@@ -75,7 +91,11 @@ class MainNew extends React.Component{
                 <Card id="FloatingCard" style={{display:this.props.currPage === undefined ? "none" : "block"}}>
                         {this.renderFloatingCard()}
                 </Card>
-                <Map pos={this.state.setNewPos}/>              
+                <Map pos={this.state.setNewPos}/>
+                {console.log("--------------"+this.state.openSoldierCard)}
+                <Card id="FloatingCardSoldier" style={{display:this.state.openSoldierCard === undefined ? "none" : "block"}}>
+                    < SoldierCard name={this.state.soldierCardName} meshID={this.state.soldierCardMeshID} role={this.state.soldierCardRole} blood={this.state.soldierCardBlood} pulse={this.state.soldierCardPulse} acc={this.state.soldierCardAcc}/>
+                </Card>
          </div>
                 
         </div>

@@ -22,7 +22,6 @@ export default class SoldiersList extends Component {
         this.setState({
           filtered: this.props.items
         });
-        console.log(this.state.list)
       }
       
       componentWillReceiveProps(nextProps) {
@@ -55,7 +54,6 @@ export default class SoldiersList extends Component {
         this.setState({
         filtered: newList
         });
-        console.log( this.state.filtered.length)
         if (this.state.filtered.length!=this.props.items.length) this.setState({isFocus:true})
     }
 
