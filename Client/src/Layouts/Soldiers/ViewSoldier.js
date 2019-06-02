@@ -1,7 +1,6 @@
 import React from 'react'
 import { fetchSoldiers } from '../../actions/soldierActions';
 import { connect } from 'react-redux';
-import SoldiersList from '../soldiersList';
 import '../../assets/css/MainNew.css';
 
 class ViewSoldier extends React.Component{
