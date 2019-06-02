@@ -42,7 +42,7 @@ class MainNew extends React.Component{
             case 'View All Soldiers':
                 return(<ViewSoldier onSelectSoldier={this.handleSelectSoldier}/>);
             
-            case 'Edit Force':
+            case 'Add Force':
                 return(< EditSoldier />);    
         }
       }
