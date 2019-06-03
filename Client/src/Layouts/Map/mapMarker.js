@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Marker, Popup } from 'react-leaflet';
 import icons from './mapIcons';
 import Leaflet from 'leaflet';
+import { Button } from 'react-bootstrap';
 
 export default class mapMarker extends Component {
     
@@ -94,7 +95,7 @@ export default class mapMarker extends Component {
       setButton(soldier){
           let button
           if (soldier.emerg == true)
-            button = <div> <button onClick={this.handlePopUpClick}>Resolve Emergency</button></div>
+            button = <div> <Button variant="outline-danger" size="sm" onClick={this.handlePopUpClick}>Resolve Emergency</Button></div>
           else
             button = <div></div>;
         return button

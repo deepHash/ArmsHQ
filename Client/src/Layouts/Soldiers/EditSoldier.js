@@ -2,6 +2,7 @@ import React from 'react'
 import {addNewSoldier} from '../../actions/soldierActions';
 import { connect } from 'react-redux';
 import '../../assets/css/MainNew.css';
+import { Form, Button } from 'react-bootstrap';
 
 class EditSolider extends React.Component{
     constructor(props){
@@ -77,29 +78,29 @@ class EditSolider extends React.Component{
     }
     render(){
         return(
-            <form className="formStyle">
+            <Form>
                 {this.renderTitle()}
-                <div className="inputContainerStyle">
-                    <label>Name: </label>
-                    <input class="inputStyle" type="text" value={this.state.name} onChange={this.onNameChange.bind(this)}/>
-                </div>
-                <div className="inputContainerStyle">
-                    <label>Mesh Id: </label>
-                    <input class="inputStyle" type="number" value={this.state.meshId} onChange={this.onMeshIdChange.bind(this)}/>
-                </div>
+                <Form.Group controlId="formGridName">
+                    <Form.Label>Name: </Form.Label>
+                    <Form.Control type="text" value={this.state.name} onChange={this.onNameChange.bind(this)}/>
+                </Form.Group>
+                <Form.Group controlId="formGridMeshID">
+                    <Form.Label>Mesh ID: </Form.Label>
+                    <Form.Control type="number" value={this.state.meshId} onChange={this.onMeshIdChange.bind(this)}/>
+                </Form.Group>
 
-                <div className="inputContainerStyle">
-                    <label>Blood Type: </label>
-                    <input class="inputStyle" type="text" value={this.state.bloodType} onChange={this.onBloodTypeChange.bind(this)}/>
-                </div>
+                <Form.Group controlId="formGridBloodType">
+                    <Form.Label>Blood Type: </Form.Label>
+                    <Form.Control type="text" value={this.state.bloodType} onChange={this.onBloodTypeChange.bind(this)}/>
+                </Form.Group>
 
-                <div className="inputContainerStyle">
-                    <label>Role: </label>
-                    <input class="inputStyle" type="text" value={this.state.role} onChange={this.onRoleChange.bind(this)}/>
-                </div>
+                <Form.Group controlId="formGridRole">
+                    <Form.Label>Role: </Form.Label>
+                    <Form.Control type="text" value={this.state.role} onChange={this.onRoleChange.bind(this)}/>
+                </Form.Group>
 
-                <button type="button" onClick={this.onSubmitForm.bind(this)}>{this.renderButtonText()}</button>
-            </form>
+                <Button variant="outline-secondary" block type="button" onClick={this.onSubmitForm.bind(this)}>{this.renderButtonText()}</Button>
+            </Form>
         )
     }
 }

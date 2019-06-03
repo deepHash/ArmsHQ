@@ -47,6 +47,17 @@ class MapView extends Component {
 
     }
 
+    componentDidUpdate(){
+      var map = this.refs.map.leafletElement;
+      map.invalidateSize()
+  }
+
+    invalidateMap() {
+      if (this.refs.map) {
+        this.refs.map.leafletElement.invalidateSize();
+      }
+    }
+
     centerPosition(lat, lan) {
       this.setState({lat: lat+this.state.offsetLat, lan: lan+this.state.offsetLan, firstPos: false});
     }
@@ -124,9 +135,9 @@ class MapView extends Component {
         position = [pos.lat+this.state.offsetLat, pos.lan+this.state.offsetLan];
       }
       return (
-        <div className="Wrapper">
+        <div className="Wrapper" >
           <NotificationContainer/>
-          <Map className="map" center={position} zoom={this.state.zoom}>
+          <Map className="map" center={position} zoom={this.state.zoom} ref="map">
             <TileLayer 
               attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
