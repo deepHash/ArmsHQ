@@ -26,7 +26,8 @@ class MainNew extends React.Component{
             bloodType: this.props.bloodType || '',
             role: this.props.role || '',
             setNewPos: false,
-            openSoldierCard:undefined,
+            openSoldierCard:false,
+            openLeftCard:false,
             soldierCardName:undefined,
             soldierCardMeshID:undefined,
             soldierCardRole:undefined,
@@ -44,15 +45,17 @@ class MainNew extends React.Component{
     }
 
     renderFloatingCard(){
+        console.log("2222222222222")
+        console.log(this.props.currPage)
         switch(this.props.currPage){
             case undefined:
                 return(null);
                 
             case 'View All Soldiers':
-                return(<ViewSoldier onSelectSoldier={this.handleSelectSoldier}/>);
+                return(<ViewSoldier onSelectSoldier={this.handleSelectSoldier} onExitLeftCard={this.handleExitLeftCard} />)
             
-            case 'Edit Force':
-                return(< EditSoldier />);    
+            case 'Add Force':
+                return(< EditSoldier onExitLeftCard={this.handleExitLeftCard}/>);    
         }
       }
 
@@ -66,8 +69,20 @@ class MainNew extends React.Component{
           this.setState({soldierCardPulse: soldier.pulse})
           this.setState({soldierCardAcc: soldier.acc})
       }
+      handleExitSoldierCard = () => {
+        this.setState({openSoldierCard: false})
+    }
+    handleExitLeftCard = () => {
+        this.setState({openLeftCard: true})
 
-     
+    }
+    // handleCheckBeforeChangePage = () => {
+    //     if(this.props.currPage)
+    //         if (this.state.openLeftCard)
+    //         return "block" 
+    //     return "none" ;
+    // }
+
   render() {
     return (
         <div>
@@ -78,23 +93,22 @@ class MainNew extends React.Component{
                     <Nav className="mr-auto">
                         <Nav.Link onClick={this.props.changePage.bind(this,undefined)}>Home</Nav.Link>
                         {Pages.map(({text,Icon}, index) => (
-                            <Nav.Link onClick={this.props.changePage.bind(this,text)}>
+                            <Nav.Link onClick={()=>{ this.handleExitLeftCard();this.props.changePage.bind(this,text)}}>
                                 {text}
                             </Nav.Link>
                         ))}
                     </Nav>
                     {/* search bar */}
-                    <SoldiersList items={this.props.soldiers}/>
+                    <SoldiersList onSelectSoldier={this.handleSelectSoldier} items={this.props.soldiers}/>
                 </Navbar.Collapse>
             </Navbar>
            <div>
-                <Card id="FloatingCard" style={{display:this.props.currPage === undefined ? "none" : "block"}}>
+                <Card id="FloatingCard" style={{display: this.props.currPage!=false? this.state.openLeftCard ?"block": "none": "none"}}>
                         {this.renderFloatingCard()}
                 </Card>
                 <Map pos={this.state.setNewPos}/>
-                {console.log("--------------"+this.state.openSoldierCard)}
-                <Card id="FloatingCardSoldier" style={{display:this.state.openSoldierCard === undefined ? "none" : "block"}}>
-                    < SoldierCard name={this.state.soldierCardName} meshID={this.state.soldierCardMeshID} role={this.state.soldierCardRole} blood={this.state.soldierCardBlood} pulse={this.state.soldierCardPulse} acc={this.state.soldierCardAcc}/>
+                <Card id="FloatingCardSoldier" style={{display:this.state.openSoldierCard === undefined ? "none" : this.state.openSoldierCard === false ?"none":"block"}}>
+                    < SoldierCard onExitSoldierCard={this.handleExitSoldierCard} name={this.state.soldierCardName} meshID={this.state.soldierCardMeshID} role={this.state.soldierCardRole} blood={this.state.soldierCardBlood} pulse={this.state.soldierCardPulse} acc={this.state.soldierCardAcc}/>
                 </Card>
          </div>
                 

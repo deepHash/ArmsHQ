@@ -35,7 +35,9 @@ div.nav-item, Nav.Link{
     padding: 2%;
     opacity: 0.85;
 }
-
+#FloatingCardSoldier .startCard{
+    margin-top: 10px;
+}
 form.formStyle{
     padding: '10px 25px' ;
 }
@@ -49,4 +51,15 @@ input.inputStyle{
     border:'0px';
     border-Radius: '2px';       
     padding: '3px 5px';
+}
+
+#hideSearch{
+    border: 0;
+    margin-right: 0px;
+  }
+#exitBtn{
+    background-color: inherit;
+    position: absolute;
+    top: 3px;
+    right: 3px;
 }
