@@ -21,14 +21,14 @@ class ViewSoldier extends React.Component{
     SelectSoldier = (soldier) => {
         this.props.onSelectSoldier(soldier);
     }
-    CloseLeftCard = () => {
-        this.props.onExitLeftCard();
-    }   
+    // CloseLeftCard = () => {
+    //     this.props.onExitLeftCard();
+    // }   
     render(){
         let k = 0;
         return(
             <div>
-                <MDBBtn id="exitBtn" onClick={() => this.CloseLeftCard()} floating size="sm" gradient="purple" className="md-toolbar"><MDBIcon  icon="times" /></MDBBtn>
+                {/* <MDBBtn id="exitBtn" onClick={() => this.CloseLeftCard()} floating size="sm" gradient="purple" className="md-toolbar"><MDBIcon  icon="times" /></MDBBtn> */}
                 <ListGroup>
                     {this.props.soldiers.map(( item ) => (
                     <ListGroupItem className="list-group-item" key={k++}
