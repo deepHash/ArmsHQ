@@ -76,12 +76,12 @@ class MainNew extends React.Component{
         this.setState({openLeftCard: true})
 
     }
-    // handleCheckBeforeChangePage = () => {
-    //     if(this.props.currPage)
-    //         if (this.state.openLeftCard)
-    //         return "block" 
-    //     return "none" ;
-    // }
+    handleCheckBeforeChangePage = () => {
+        if(this.props.currPage)
+            if (this.state.openLeftCard)
+            return "block" 
+        return "none" ;
+    }
 
   render() {
     return (
@@ -92,8 +92,8 @@ class MainNew extends React.Component{
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
                         <Nav.Link onClick={this.props.changePage.bind(this,undefined)}>Home</Nav.Link>
-                        {Pages.map(({text,Icon}, index) => (
-                            <Nav.Link onClick={()=>{ this.handleExitLeftCard();this.props.changePage.bind(this,text)}}>
+                        {Pages.map(({text}, index) => (
+                            <Nav.Link onClick={this.props.changePage.bind(this,text)}>
                                 {text}
                             </Nav.Link>
                         ))}
@@ -103,11 +103,11 @@ class MainNew extends React.Component{
                 </Navbar.Collapse>
             </Navbar>
            <div>
-                <Card id="FloatingCard" style={{display: this.props.currPage!=false? this.state.openLeftCard ?"block": "none": "none"}}>
+                <Card id="FloatingCard" style={{display: this.props.currPage!=false? this.state.openLeftCard!=undefined ?"block": "none": "none"}}>
                         {this.renderFloatingCard()}
                 </Card>
                 <Map pos={this.state.setNewPos}/>
-                <Card id="FloatingCardSoldier" style={{display:this.state.openSoldierCard === undefined ? "none" : this.state.openSoldierCard === false ?"none":"block"}}>
+                <Card id="FloatingCardSoldier" style={{display:this.handleCheckBeforeChangePage()}}>
                     < SoldierCard onExitSoldierCard={this.handleExitSoldierCard} name={this.state.soldierCardName} meshID={this.state.soldierCardMeshID} role={this.state.soldierCardRole} blood={this.state.soldierCardBlood} pulse={this.state.soldierCardPulse} acc={this.state.soldierCardAcc}/>
                 </Card>
          </div>

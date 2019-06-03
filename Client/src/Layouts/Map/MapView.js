@@ -47,10 +47,11 @@ class MapView extends Component {
 
     }
 
+    //fix invalid tiles sizes
     componentDidUpdate(){
       var map = this.refs.map.leafletElement;
       map.invalidateSize()
-  }
+    }
 
     invalidateMap() {
       if (this.refs.map) {
