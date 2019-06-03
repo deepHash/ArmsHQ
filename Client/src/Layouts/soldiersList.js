@@ -60,7 +60,10 @@ export default class SoldiersList extends Component {
     handleClick = (event) => {
         this.setState({ isFocus:this.state.isFocus===true?false:true });
     }
-
+    SelectSoldier = (soldier) => {
+        this.props.onSelectSoldier(soldier);
+        this.setState({ isFocus:false });
+    }
       render() {
         const { classes } = this.props;
 
@@ -69,12 +72,10 @@ export default class SoldiersList extends Component {
             <Form inline></Form>
                 <FormControl type="text" placeholder="Search Soldier.." className="mr-sm-2" onChange={this.handleChange} onClick={this.handleClick}/>
                 <ul style={{display: this.state.isFocus ? 'block' : 'none' }}>
-                    <li id="hideSearch" onClick={this.handleClick}>
-                        <MDBBtn floating size="sm" gradient="purple" className="md-toolbar"><MDBIcon  icon="times" /></MDBBtn>
-                    </li>
-                    {this.state.filtered.map(item => (
-                        <li className="list-group-item" data-category={item} key={item.mashId}>{item.name}</li>
-                    ))}
+                        <MDBBtn id="exitBtn" onClick={this.handleClick} floating size="sm" gradient="purple" className="md-toolbar"><MDBIcon  icon="times" /></MDBBtn>
+                        {this.state.filtered.map(item => (
+                            <li className="list-group-item" data-category={item} key={item.mashId} onClick={(e) => this.SelectSoldier(item)}>{item.name}</li>
+                        ))}
                 </ul>
              
             </div>
