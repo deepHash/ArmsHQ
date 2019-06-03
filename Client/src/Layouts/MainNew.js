@@ -33,7 +33,10 @@ class MainNew extends React.Component{
             soldierCardRole:undefined,
             soldierCardBlood:undefined,
             soldierCardPulse:undefined,
-            soldierCardAcc:undefined,
+            soldierCardAccX:undefined,
+            soldierCardAccY:undefined,
+            soldierCardAccZ:undefined,
+
         }
         this.RemoveFloatingCard = this.RemoveFloatingCard.bind();
     }
@@ -45,8 +48,6 @@ class MainNew extends React.Component{
     }
 
     renderFloatingCard(){
-        console.log("2222222222222")
-        console.log(this.props.currPage)
         switch(this.props.currPage){
             case undefined:
                 return(null);
@@ -57,19 +58,25 @@ class MainNew extends React.Component{
             case 'Add Force':
                 return(< EditSoldier />);    
         }
-      }
+    }
 
-      handleSelectSoldier = (soldier) => {
-          this.setState({setNewPos: soldier.gps})
-          this.setState({openSoldierCard: true})
-          this.setState({soldierCardName:soldier.name})
-          this.setState({soldierCardMeshID: soldier.meshID})
-          this.setState({soldierCardRole: soldier.role})
-          this.setState({soldierCardBlood: soldier.blood})
-          this.setState({soldierCardPulse: soldier.pulse})
-          this.setState({soldierCardAcc: soldier.acc})
-      }
-      handleExitSoldierCard = () => {
+    handleSelectSoldier = (soldier) => {
+        this.setState({setNewPos: soldier.gps})
+        this.setState({openSoldierCard: true})
+        this.setState({soldierCardName:soldier.name})
+        this.setState({soldierCardMeshID: soldier.meshID})
+        this.setState({soldierCardRole: soldier.role})
+        this.setState({soldierCardBlood: soldier.bloodType})
+        this.setState({soldierCardPulse: soldier.pulse})
+        // if(this.state.soldier){
+        //     if (this.state.soldier.acc){
+        //         this.setState({soldierCardAccX: soldier.acc.x})
+        //         this.setState({soldierCardAccY: soldier.acc.y})
+        //         this.setState({soldierCardAccZ: soldier.acc.z})
+        //     }
+        // }
+    }
+    handleExitSoldierCard = () => {
         this.setState({openSoldierCard: false})
     }
     handleExitLeftCard = () => {
@@ -108,7 +115,16 @@ class MainNew extends React.Component{
                 </Card>
                 <Map pos={this.state.setNewPos}/>
                 <Card id="FloatingCardSoldier" style={{display:this.state.openSoldierCard === undefined ? "none" : this.state.openSoldierCard === false ?"none":"block"}}>
-                    < SoldierCard onExitSoldierCard={this.handleExitSoldierCard} name={this.state.soldierCardName} meshID={this.state.soldierCardMeshID} role={this.state.soldierCardRole} blood={this.state.soldierCardBlood} pulse={this.state.soldierCardPulse} acc={this.state.soldierCardAcc}/>
+                    < SoldierCard onExitSoldierCard={this.handleExitSoldierCard} 
+                        name={this.state.soldierCardName} 
+                        meshID={this.state.soldierCardMeshID} 
+                        role={this.state.soldierCardRole} 
+                        blood={this.state.soldierCardBlood} 
+                        pulse={this.state.soldierCardPulse} />
+                        {/* accX={this.state.soldierCardAccX}
+                        accY={this.state.soldierCardAccY}
+                        accZ={this.state.soldierCardAccZ} */}
+                        
                 </Card>
          </div>
                 

@@ -23,7 +23,10 @@ export default class SoldierCard extends Component {
                 <div style={{ borderBottom :"1px solid black", marginBottom:"10px", paddingBottom:"10px"}}><b>Role: </b>{this.props.role}</div>
                 <div ><b>Blood: </b>{this.props.blood}</div>
                 <div ><b>Pulse: </b>{this.props.pulse}</div>
-                <div ><b>Acc: </b>{this.props.acc}</div>
+                {/* <div ><b>Acc X: </b>{this.props.accX}</div>
+                <div ><b>Acc Y: </b>{this.props.accY}</div>
+                <div ><b>Acc Z: </b>{this.props.accZ}</div> */}
+
             </div>
         )
     }
