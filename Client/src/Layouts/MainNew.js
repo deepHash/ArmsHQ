@@ -55,7 +55,7 @@ class MainNew extends React.Component{
                 return(<ViewSoldier onSelectSoldier={this.handleSelectSoldier} onExitLeftCard={this.handleExitLeftCard} />)
             
             case 'Add Force':
-                return(< EditSoldier onExitLeftCard={this.handleExitLeftCard}/>);    
+                return(< EditSoldier />);    
         }
       }
 
