@@ -2,10 +2,7 @@ import React from 'react'
 import { fetchSoldiers } from '../../actions/soldierActions';
 import { connect } from 'react-redux';
 import { ListGroupItem, ListGroup } from 'react-bootstrap';
-import SoldiersList from '../soldiersList';
-import '../../assets/css/MainNew.css';
-import { MDBIcon } from "mdbreact";
-import { MDBBtn } from "mdbreact";
+import '../../assets/css/main.css';
 
 class ViewSoldier extends React.Component{
     constructor(props){

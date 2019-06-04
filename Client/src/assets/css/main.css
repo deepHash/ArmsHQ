@@ -1,69 +1,65 @@
-span.MuiTypography-subheading-115{
-    color:white;
+*{
+    font-family:'Roboto', sans-serif;
 }
-span.MuiTypography-subheading-78{
-    color:white
+div.nav-item, Nav.Link{
+    padding-right: 10px;
+    padding-left:10px;
 }
-span.MuiTypography-subheading-99{
-    color:white;
-    font-family: 'Source Sans Pro';
-    font-size: 100%;
+.list-group-item{
+    background-color: inherit;
+    border-top :0;
+    border-right: 0;
+    border-left: 0;
+    cursor: pointer;
 }
-svg.MuiSvgIcon-root-92 path:first-child{
-    fill:white
+#FloatingCard{
+    width: '18rem';
+    position: absolute;
+    top: 15%;
+    left: 5%;
+    z-index: 1000;
+    background-color: Gainsboro;
+    color:black;
+    padding: 2%;
+    opacity: 0.85;
 }
 
-hr.MuiDivider-root-154{
-    background:white;
+#FloatingCardSoldier{
+    width: '18rem';
+    position: absolute;
+    top: 15%;
+    right: 5%;
+    z-index: 1000;
+    background-color: Gainsboro;
+    color:black;
+    padding: 2%;
+    opacity: 0.85;
 }
-header.MuiAppBar-colorPrimary-20{
-    background-color:rgb(45,127, 112)
+#FloatingCardSoldier .startCard{
+    margin-top: 10px;
 }
-div.Main-toolbar-7{
-    background-color:rgb(45,127, 112);
-    height : 70px;
-    border-bottom: white 1px solid;
+form.formStyle{
+    padding: '10px 25px' ;
 }
-Input.MuiInputBase-input-85{
-    font-family: 'Source Sans Pro';
-    font-size: 100%;
-    padding: 0;
+div.inputContainerStyle{
+    display: 'flex';
+    justify-Content: 'flex-start';
+    margin: '5px 0px';
 }
-main.Main-content-8{
-height: 100%;
+input.inputStyle{
+    margin-Left: '7px';
+    border:'0px';
+    border-Radius: '2px';       
+    padding: '3px 5px';
+}
 
-}
-.appBarSpacer{
-    flex-Grow: 1;
-    padding:30px;
-    height: '100vh';
-    overflow: 'auto';
-}
-div.MuiDrawer-paperAnchorDockedLeft-61{
-    border-right: white 1px solid;
-}
-div.MuiDrawer-paperAnchorDockedRight-63{
-    border-left: white 1px solid;
-}
-.Main-menuButton-9{
-    visibility: hidden;
-}
-.Main-search-13>div:first-child{
-    display:inline-block
-}
-.Main-search-13{
-    margin-top: 10%;
-}
-Input.MuiInputBase-input-101{
-    margin: 0;
-}
-svg.MuiSvgIcon-root-66{
-    color: white
-}
-svg.MuiSvgIcon-root-66.searchIcon{
-    color:white;
-    height: 15px;
-}
-div.Main-search-13{
-    padding:5px;
+#hideSearch{
+    border: 0;
+    margin-right: 0px;
+  }
+#exitBtn{
+    background-color: inherit;
+    position: absolute;
+    top: 3px;
+    right: 3px;
 }

@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import './App.css';
 import { Provider } from 'react-redux';
 import store from './store';
+import './App.css';
 
-import Main from './Layouts/main';
-import NavBar from './Layouts/navbar';
-import MainNew from './Layouts/MainNew';
 
+import Main from './Layouts/Main';
 
 class App extends Component {
 
@@ -14,7 +12,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div className="App">
-          <MainNew />
+          <Main />
         </div>
       </Provider>
     );

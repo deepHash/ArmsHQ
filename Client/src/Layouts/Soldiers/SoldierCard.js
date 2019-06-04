@@ -1,9 +1,9 @@
 
 import React, { Component } from 'react';
-import '../../assets/css/MainNew.css';
 import { MDBBtn } from "mdbreact";
 import { MDBIcon } from "mdbreact";
-import '../../assets/css/MainNew.css';
+
+import '../../assets/css/main.css';
 
 export default class SoldierCard extends Component {
     constructor(props) {
@@ -23,9 +23,9 @@ export default class SoldierCard extends Component {
                 <div style={{ borderBottom :"1px solid black", marginBottom:"10px", paddingBottom:"10px"}}><b>Role: </b>{this.props.role}</div>
                 <div ><b>Blood: </b>{this.props.blood}</div>
                 <div ><b>Pulse: </b>{this.props.pulse}</div>
-                {/* <div ><b>Acc X: </b>{this.props.accX}</div>
-                <div ><b>Acc Y: </b>{this.props.accY}</div>
-                <div ><b>Acc Z: </b>{this.props.accZ}</div> */}
+                {/* <div ><b>Acc X: </b>{this.props.acc.x}</div>
+                <div ><b>Acc Y: </b>{this.props.acc.y}</div>
+                <div ><b>Acc Z: </b>{this.props.acc.z}</div> */}
 
             </div>
         )

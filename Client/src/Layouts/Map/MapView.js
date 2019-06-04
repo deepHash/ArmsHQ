@@ -4,10 +4,10 @@ import { fetchSoldiers } from '../../actions/soldierActions';
 // import { connectSocket } from '../../actions/socketActions';
 import { Map, TileLayer } from 'react-leaflet';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
-import socketIoClient from 'socket.io-client';
-import '../../assets/css/Map.css';
-import '../../assets/css/notifications.css';
 import MapMarker from './mapMarker';
+import socketIoClient from 'socket.io-client';
+import '../../assets/css/map.css';
+import '../../assets/css/notifications.css';
 
 
 class MapView extends Component {
@@ -65,8 +65,9 @@ class MapView extends Component {
     
     notifications(soldier){
       NotificationManager.warning( soldier.name + ' sent help ','Notification',5000, () => {
-          if(soldier.gps)
-            this.centerPosition(soldier.gps.lat, soldier.gps.lan);
+        if(soldier.gps){
+          this.centerPosition(soldier.gps.lat, soldier.gps.lan);
+          }
           else
             //add no gps validation message 
             ;
@@ -100,6 +101,7 @@ class MapView extends Component {
 
     updatePulse = (pulse) => {
       var newData = pulse.data;
+      // console.log(newData);
       var soldiers = this.props.soldiers;
       soldiers.forEach((soldier) => {
         if(soldier.meshID == newData.meshID){

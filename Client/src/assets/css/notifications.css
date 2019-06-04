@@ -9,7 +9,7 @@
   z-index: 999999;
   width: 320px;
   padding: 0px 15px;
-  max-height: calc(100% - 30px);
+  max-height: calc(100% - 10px);
   overflow-x: hidden;
   overflow-y: auto;
 }

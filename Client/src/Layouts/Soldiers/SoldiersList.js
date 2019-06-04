@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 
-import '../assets/css/Search.css';
+import '../../assets/css/search.css';
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import { MDBBtn } from "mdbreact";
@@ -37,20 +37,20 @@ export default class SoldiersList extends Component {
             // Variable to hold the filtered list before putting into state
         let newList = [];
 
-            // If the search bar isn't empty
+        // If the search bar isn't empty
         if (event.target.value !== "") {
-        currentList = this.props.items;
-        if (!currentList) return newList;
-        newList = currentList.filter(item => {
-            const lc = item.name.toLowerCase();
-            const filter = event.target.value.toLowerCase();
-            return lc.includes(filter);
-        });
+            currentList = this.props.items;
+            if (!currentList) return newList;
+                newList = currentList.filter(item => {
+                    const lc = item.name.toLowerCase();
+                    const filter = event.target.value.toLowerCase();
+                    return lc.includes(filter);
+                });
         } else {
-                // If the search bar is empty, set newList to original task list
-        newList = this.props.items;
+            // If the search bar is empty, set newList to original task list
+            newList = this.props.items;
         }
-            // Set the filtered state based on what our rules added to newList
+        // Set the filtered state based on what our rules added to newList
         this.setState({
         filtered: newList
         });
@@ -60,13 +60,12 @@ export default class SoldiersList extends Component {
     handleClick = (event) => {
         this.setState({ isFocus:this.state.isFocus===true?false:true });
     }
+
     SelectSoldier = (soldier) => {
         this.props.onSelectSoldier(soldier);
         this.setState({ isFocus:false });
     }
       render() {
-        const { classes } = this.props;
-
         return (
             <div>
             <Form inline></Form>

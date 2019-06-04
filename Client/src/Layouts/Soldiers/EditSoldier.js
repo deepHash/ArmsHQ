@@ -1,7 +1,7 @@
 import React from 'react'
 import {addNewSoldier} from '../../actions/soldierActions';
 import { connect } from 'react-redux';
-import '../../assets/css/MainNew.css';
+import '../../assets/css/main.css';
 import { Form, Button } from 'react-bootstrap';
 
 class EditSolider extends React.Component{
