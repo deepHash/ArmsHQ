@@ -4,6 +4,7 @@ import socketIoClient from 'socket.io-client';
 export const connectSocket = () => dispatch => {
     const endpoint = "http://127.0.0.1:4000";
     const socket = socketIoClient(endpoint);
+    console.log(socket);
         dispatch({
           type: CONNECT_SOCKET,
           payload: socket

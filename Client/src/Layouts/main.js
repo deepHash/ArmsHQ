@@ -20,11 +20,6 @@ class MainNew extends Component{
     constructor(props){
         super(props);
         this.state = {
-            type: this.props.type || 'new',
-            name: this.props.name || '',
-            mashId: this.props.name || -1,
-            bloodType: this.props.bloodType || '',
-            role: this.props.role || '',
             setNewPos: false,
             openSoldierCard:false,
             openLeftCard:false,
@@ -39,6 +34,10 @@ class MainNew extends Component{
 
         }
         this.RemoveFloatingCard = this.RemoveFloatingCard.bind();
+    }
+
+    componentDidMount(){
+        this.props.fetchSoldiers();
     }
 
     RemoveFloatingCard(){
@@ -56,8 +55,13 @@ class MainNew extends Component{
                 return(<ViewSoldier onSelectSoldier={this.handleSelectSoldier} />)
             
             case 'Add Force':
-                return(< EditSoldier />);    
+                return(< EditSoldier onAddSoldier={this.handleAddSoldier} />);    
         }
+    }
+
+    handleAddSoldier = () => {
+        //@Todo update the soldiers array after a new soldier was added
+        this.props.fetchSoldiers();
     }
 
     handleSelectSoldier = (soldier) => {
@@ -76,9 +80,11 @@ class MainNew extends Component{
         //     }
         // }
     }
+
     handleExitSoldierCard = () => {
         this.setState({openSoldierCard: false})
     }
+
     handleExitLeftCard = () => {
         this.setState({openLeftCard: true})
 
@@ -100,7 +106,7 @@ class MainNew extends Component{
                     <Nav className="mr-auto">
                         <Nav.Link onClick={this.props.changePage.bind(this,undefined)}>Home</Nav.Link>
                         {Pages.map(({text}, index) => (
-                            <Nav.Link onClick={this.props.changePage.bind(this,text)}>
+                            <Nav.Link onClick={this.props.changePage.bind(this,text)} key={index}>
                                 {text}
                             </Nav.Link>
                         ))}
@@ -113,7 +119,7 @@ class MainNew extends Component{
                 <Card id="FloatingCard" style={{display: this.props.currPage===undefined? "none":this.state.currPage===false ? "none": "block"}}>
                         {this.renderFloatingCard()}
                 </Card>
-                <Map pos={this.state.setNewPos}/>
+                <Map pos={this.state.setNewPos} soldiers={this.props.soldiers} />
                 <Card id="FloatingCardSoldier" style={{display:this.state.openSoldierCard === undefined ? "none" : this.state.openSoldierCard === false ?"none":"block"}}>
                     < SoldierCard onExitSoldierCard={this.handleExitSoldierCard} 
                         name={this.state.soldierCardName} 

@@ -66,6 +66,7 @@ export default class SoldiersList extends Component {
         this.setState({ isFocus:false });
     }
       render() {
+          var k = 0;
         return (
             <div>
             <Form inline></Form>
@@ -73,7 +74,7 @@ export default class SoldiersList extends Component {
                 <ul style={{display: this.state.isFocus ? 'block' : 'none' }}>
                         <MDBBtn id="exitBtn" onClick={this.handleClick} floating size="sm" gradient="purple" className="md-toolbar"><MDBIcon  icon="times" /></MDBBtn>
                         {this.state.filtered.map(item => (
-                            <li className="list-group-item" data-category={item} key={item.mashId} onClick={(e) => this.SelectSoldier(item)}>{item.name}</li>
+                            <li className="list-group-item" data-category={item} key={k++} onClick={(e) => this.SelectSoldier(item)}>{item.name}</li>
                         ))}
                 </ul>
              

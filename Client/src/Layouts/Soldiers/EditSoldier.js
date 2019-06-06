@@ -73,8 +73,9 @@ class EditSolider extends React.Component{
     }
 
     onCreate({name,meshId,bloodType,role}){
-        this.props.addNewSoldier({name,meshId,bloodType,role})
-        this.setState({name:'',meshId:'-1',bloodType:'',role:''})
+        this.props.addNewSoldier({name,meshId,bloodType,role});
+        this.setState({name:'',meshId:'-1',bloodType:'',role:''});
+        this.props.onAddSoldier();
     }
     render(){
         return(

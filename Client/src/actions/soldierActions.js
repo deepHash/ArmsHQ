@@ -12,7 +12,6 @@ export const fetchSoldiers = () => dispatch => {
 };
 
 export const addNewSoldier = soldierData => dispatch => {
-  console.log(soldierData);
   fetch('http://localhost:4000/addSoldier', {
     method: 'POST',
     headers: {

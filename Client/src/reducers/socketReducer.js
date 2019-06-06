@@ -1,11 +1,10 @@
 import { CONNECT_SOCKET} from '../actions/types';
 
 const initialState = {
-    socket: {}
+    socket: undefined
 };
 
 export default function(state = initialState, action) {
-  // console.log(action.payload);
   switch (action.type) {
     case CONNECT_SOCKET:
       return {
