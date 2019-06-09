@@ -40,6 +40,10 @@ export default class mapMarker extends Component {
         popupAnchor: this.popupAnchor
     });
 
+    handlePopUpClick(soldier) {
+        this.props.onPopUpClick(soldier);
+    }
+
     SoldiersList(_soldiers) {
         var soldierJsx = <div></div>,
             soldiers = _soldiers;
@@ -95,7 +99,7 @@ export default class mapMarker extends Component {
       setButton(soldier){
           let button
           if (soldier.emerg == true)
-            button = <div> <Button variant="outline-danger" size="sm" onClick={this.handlePopUpClick}>Resolve Emergency</Button></div>
+            button = <div><br/> <Button variant="outline-danger" size="sm" onClick={(e) => this.handlePopUpClick(soldier)}>Resolve Emergency</Button></div>
           else
             button = <div></div>;
         return button
