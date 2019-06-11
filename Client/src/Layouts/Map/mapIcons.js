@@ -15,8 +15,7 @@ export default function mapIcons(__icon) {
         case "commanderEmerg":
             image = commanderEmerg;
             break;
-        default:
-            image = soldierImage;
+        
     }
     return (
         {image}
