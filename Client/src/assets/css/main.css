@@ -63,3 +63,10 @@ input.inputStyle{
     top: 3px;
     right: 3px;
 }
+#soldierImage{
+    border-radius: 50%;
+    height:100px;
+    width: 100px;
+    display: block;
+    margin: 0 auto;
+}
