@@ -1,0 +1,136 @@
+/*
+  Icon Font: mlab-icons
+*/
+
+@font-face {
+  font-family: "mlab-icons";
+  src: url("../fonts/mlab-icons_7a263e4116fe4d20e43f8240a7cf7ddc.eot");
+  src: url("../fonts/mlab-icons_7a263e4116fe4d20e43f8240a7cf7ddc.eot?#iefix") format("embedded-opentype"),
+       url("../fonts/mlab-icons_7a263e4116fe4d20e43f8240a7cf7ddc.woff2") format("woff2"),
+       url("../fonts/mlab-icons_7a263e4116fe4d20e43f8240a7cf7ddc.woff") format("woff"),
+       url("../fonts/mlab-icons_7a263e4116fe4d20e43f8240a7cf7ddc.ttf") format("truetype"),
+       url("../fonts/mlab-icons_7a263e4116fe4d20e43f8240a7cf7ddc.svg#mlab-icons") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "mlab-icons";
+    src: url("../fonts/mlab-icons_7a263e4116fe4d20e43f8240a7cf7ddc.svg#mlab-icons") format("svg");
+  }
+}
+
+[data-icon]:before { content: attr(data-icon); }
+
+[data-icon]:before,
+.icon--add-card:before,
+.icon--add-person:before,
+.icon--book:before,
+.icon--caps:before,
+.icon--card:before,
+.icon--check:before,
+.icon--check-circle:before,
+.icon--chevron-down:before,
+.icon--chevron-left:before,
+.icon--chevron-right:before,
+.icon--chevron-up:before,
+.icon--clock:before,
+.icon--clone:before,
+.icon--database:before,
+.icon--download:before,
+.icon--edit:before,
+.icon--error:before,
+.icon--gear:before,
+.icon--hammer:before,
+.icon--help:before,
+.icon--info:before,
+.icon--key:before,
+.icon--loading:before,
+.icon--location:before,
+.icon--lock:before,
+.icon--log:before,
+.icon--magnifying-glass:before,
+.icon--mail:before,
+.icon--menu:before,
+.icon--monitor:before,
+.icon--open:before,
+.icon--pencil:before,
+.icon--people:before,
+.icon--person:before,
+.icon--plus:before,
+.icon--plus-circle:before,
+.icon--refresh:before,
+.icon--restore-backup:before,
+.icon--select:before,
+.icon--share:before,
+.icon--star:before,
+.icon--switch:before,
+.icon--trash:before,
+.icon--upload:before,
+.icon--warning:before,
+.icon--wrench:before,
+.icon--x:before,
+.icon--x-circle:before {
+  display: inline-block;
+  font-family: "mlab-icons";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+
+.icon--add-card:before { content: "\f100"; }
+.icon--add-person:before { content: "\f101"; }
+.icon--book:before { content: "\f102"; }
+.icon--caps:before { content: "\f103"; }
+.icon--card:before { content: "\f104"; }
+.icon--check:before { content: "\f105"; }
+.icon--check-circle:before { content: "\f106"; }
+.icon--chevron-down:before { content: "\f107"; }
+.icon--chevron-left:before { content: "\f108"; }
+.icon--chevron-right:before { content: "\f109"; }
+.icon--chevron-up:before { content: "\f10a"; }
+.icon--clock:before { content: "\f10b"; }
+.icon--clone:before { content: "\f10c"; }
+.icon--database:before { content: "\f10d"; }
+.icon--download:before { content: "\f10e"; }
+.icon--edit:before { content: "\f10f"; }
+.icon--error:before { content: "\f110"; }
+.icon--gear:before { content: "\f111"; }
+.icon--hammer:before { content: "\f112"; }
+.icon--help:before { content: "\f113"; }
+.icon--info:before { content: "\f114"; }
+.icon--key:before { content: "\f115"; }
+.icon--loading:before { content: "\f116"; }
+.icon--location:before { content: "\f117"; }
+.icon--lock:before { content: "\f118"; }
+.icon--log:before { content: "\f119"; }
+.icon--magnifying-glass:before { content: "\f11a"; }
+.icon--mail:before { content: "\f11b"; }
+.icon--menu:before { content: "\f11c"; }
+.icon--monitor:before { content: "\f11d"; }
+.icon--open:before { content: "\f11e"; }
+.icon--pencil:before { content: "\f11f"; }
+.icon--people:before { content: "\f120"; }
+.icon--person:before { content: "\f121"; }
+.icon--plus:before { content: "\f122"; }
+.icon--plus-circle:before { content: "\f123"; }
+.icon--refresh:before { content: "\f124"; }
+.icon--restore-backup:before { content: "\f125"; }
+.icon--select:before { content: "\f126"; }
+.icon--share:before { content: "\f127"; }
+.icon--star:before { content: "\f128"; }
+.icon--switch:before { content: "\f129"; }
+.icon--trash:before { content: "\f12a"; }
+.icon--upload:before { content: "\f12b"; }
+.icon--warning:before { content: "\f12c"; }
+.icon--wrench:before { content: "\f12d"; }
+.icon--x:before { content: "\f12e"; }
+.icon--x-circle:before { content: "\f12f"; }

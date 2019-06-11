@@ -10,18 +10,19 @@ export default class SoldierCard extends Component {
         super(props);
     
     }
-    componentDidMount(){
-        if(this.props.image!=""){Image=this.props.image}
-    }
+   
     handleClick = (event) => {
         this.props.onExitSoldierCard();
     }   
+     
+      
     render() {
 
         return (
             <div style={{textAlign:"left"}}>
                 <MDBBtn floating id="exitBtn" size="sm" gradient="purple" className="md-toolbar" onClick={this.handleClick}><MDBIcon icon="times" /></MDBBtn>
-                <div ><img id="soldierImage" src={Image} alt={this.props.name} /></div>
+                {console.log("------------- "+ this.props.image)}
+                <div ><img id="soldierImage" src={this.props.image!=undefined ? this.props.image : Image} alt={this.props.name} /></div>
                 <div className="startCard"><b>Name: </b>{this.props.name}</div>
                 <div ><b>Mesh ID:</b> {this.props.meshID}</div>
                 <div style={{ borderBottom :"1px solid black", marginBottom:"10px", paddingBottom:"10px"}}><b>Role: </b>{this.props.role}</div>

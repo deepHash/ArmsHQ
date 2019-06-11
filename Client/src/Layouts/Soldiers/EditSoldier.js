@@ -59,6 +59,10 @@ class EditSolider extends React.Component{
         const role = event.target.value;
         this.setState({role})
     }
+    onImgChange(event){
+        const image = event.target.value;
+        this.setState({image})
+    }
     onSubmitForm(){
         switch(this.state.type){
             case 'new':
@@ -72,8 +76,8 @@ class EditSolider extends React.Component{
         console.log('edit');
     }
 
-    onCreate({name,meshId,bloodType,role}){
-        this.props.addNewSoldier({name,meshId,bloodType,role});
+    onCreate({name,meshId,bloodType,role,image}){
+        this.props.addNewSoldier({name,meshId,bloodType,role,image});
         this.setState({name:'',meshId:'-1',bloodType:'',role:''});
         this.props.onAddSoldier();
     }

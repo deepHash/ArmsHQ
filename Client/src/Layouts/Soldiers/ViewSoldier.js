@@ -12,7 +12,8 @@ class ViewSoldier extends React.Component{
             name: this.props.name || '',
             mashId: this.props.name || -1,
             bloodType: this.props.bloodType || '',
-            role: this.props.role || ''
+            role: this.props.role || '',
+            image:this.props.image||''
         }
     }
     SelectSoldier = (soldier) => {

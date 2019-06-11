@@ -28,6 +28,8 @@ class MainNew extends Component{
             soldierCardRole:undefined,
             soldierCardBlood:undefined,
             soldierCardPulse:undefined,
+            soldierCardImg:undefined,
+
             // soldierCardAccX:undefined,
             // soldierCardAccY:undefined,
             // soldierCardAccZ:undefined,
@@ -72,6 +74,8 @@ class MainNew extends Component{
         this.setState({soldierCardRole: soldier.role})
         this.setState({soldierCardBlood: soldier.bloodType})
         this.setState({soldierCardPulse: soldier.pulse})
+        this.setState({soldierCardImg: soldier.image})
+        
         // if(this.state.soldier){
         //     if (this.state.soldier.acc){
         //         this.setState({soldierCardAccX: soldier.acc.x})
@@ -119,6 +123,7 @@ class MainNew extends Component{
                 <Card id="FloatingCard" style={{display: this.props.currPage===undefined? "none":this.state.currPage===false ? "none": "block"}}>
                         {this.renderFloatingCard()}
                 </Card>
+
                 <Map pos={this.state.setNewPos} soldiers={this.props.soldiers} />
                 <Card id="FloatingCardSoldier" style={{display:this.state.openSoldierCard === undefined ? "none" : this.state.openSoldierCard === false ?"none":"block"}}>
                     < SoldierCard onExitSoldierCard={this.handleExitSoldierCard} 
@@ -126,7 +131,8 @@ class MainNew extends Component{
                         meshID={this.state.soldierCardMeshID} 
                         role={this.state.soldierCardRole} 
                         blood={this.state.soldierCardBlood} 
-                        pulse={this.state.soldierCardPulse} />
+                        pulse={this.state.soldierCardPulse} 
+                        image={this.state.image}/>
                         {/* accX={this.state.soldierCardAccX}
                         accY={this.state.soldierCardAccY}
                         accZ={this.state.soldierCardAccZ} */}

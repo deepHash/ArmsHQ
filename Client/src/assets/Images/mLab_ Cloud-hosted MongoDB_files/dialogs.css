@@ -1,0 +1,640 @@
+/*****************************************************************************
+ * jQuery UI Dialog formatting adjustments
+ *****************************************************************************/
+.ui-dialog {
+    color: #555;
+}
+
+.ui-widget-header.ui-dialog-titlebar {
+  color: inherit;
+  border-bottom-color: #aaa;
+}
+.ui-widget-content.ui-dialog-buttonpane {
+    border-top-color: #aaa;
+}
+
+.ui-dialog a.link {
+    color: #3a9ecd; /* md. powder blue */
+}
+
+.ui-dialog tr,
+.ui-dialog tr:nth-of-type(odd),
+.ui-dialog tr:nth-of-type(odd).nolink:hover,
+.ui-dialog tr:nth-of-type(even),
+.ui-dialog tr:nth-of-type(even).nolink:hover {
+    color: #c9cccd;
+    background-color: #b7bec5;
+}
+
+.ui-dialog thead tr,
+.ui-dialog thead tr:nth-of-type(odd),
+.ui-dialog thead tr:nth-of-type(odd).nolink:hover,
+.ui-dialog thead tr:nth-of-type(even),
+.ui-dialog thead tr:nth-of-type(even).nolink:hover {
+    background-color: transparent;
+}
+
+.dialog .ui-dialog-content table td.actionBtns {
+    width: auto;
+    max-width: 150px;
+}
+
+.ui-dialog h2 {
+    font-size: 16px;
+    padding-top: 5px;
+    border-top: 1px solid #ccc;
+    text-transform: capitalize;
+}
+
+.ui-dialog h2.first {
+    margin-top: 0;
+    border-top: none;
+}
+
+.ui-dialog h2:after {
+    content: ":"
+}
+
+.ui-dialog .ui-dialog-content p.intro {
+    font-size: 108%;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.ui-dialog .ui-dialog-content p.body {
+    font-size: 108%;
+}
+
+.ui-dialog fieldset {
+    width: 90%;
+    color: inherit;
+}
+
+.ui-dialog fieldset label {
+    color: inherit;
+}
+
+.ui-dialog .ui-button {
+    border: 1px solid #d3d3d3;
+}
+
+.ui-dialog .noSubmitOnEnter {
+    background: none;
+}
+
+/* jquery ui dialog modifiers end */
+
+.dialog {
+    background: #d3d7da;
+    border-radius: 6px;
+    -webkit-box-shadow: -7px 12px 14px 0rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: -7px 12px 14px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: -7px 12px 14px 0 rgba(0, 0, 0, 0.3);
+    color: #1b1f21;
+    font: 300 15px Roboto, sans-serif;
+    margin: 0 auto;
+    padding: 24px;
+    /*position: relative;*/
+    position: absolute
+    /*Must use jquery ui to set width*/
+    /*width: 540px;*/
+}
+.dialog .message.error.list {
+  border: solid 1px gray;
+  box-shadow: none;
+  background: none;
+}
+.dialog a {
+    color: #007bbd;
+    text-decoration: underline;
+    cursor:pointer;
+    outline-style: none;
+}
+.dialog label {
+    font-weight: 400;
+}
+.dialog .ui-dialog-titlebar-close {
+  top: 17px;
+}
+.dialog .ui-dialog-titlebar-close > span,
+.dialog .ui-dialog-titlebar-close:hover > span,
+.dialog .ui-dialog-titlebar-close:active > span{
+    background: url(./images/dialogs/icon-dialog-close.png) no-repeat;
+    /* svg fallback */
+
+    background: url(./images/dialogs/icon-dialog-close.svg) no-repeat;
+    background-size: 11px 11px;
+    cursor: pointer;
+    /*display: block;*/
+
+    height: 11px;
+    width: 11px;
+}
+.dialog-content {
+    border-top: 1px solid #a9acae;
+    border-bottom: 1px solid #a9acae;
+    padding: 17px 0 20px;
+}
+
+/* FOOTER BGN */
+
+.dialog .ui-dialog-buttonpane {
+  padding: 13px 0 0 0;
+  margin: 0;
+  background: none;
+}
+
+.dialog .ui-button+.ui-button {
+  margin-left: 8px;
+}
+
+.dialog .ui-dialog-buttonpane button {
+  margin: 0;
+  border: 0;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font: 500 13px/13px Museo-Sans;
+  height: 32px;
+  padding: .5em 1em .4em 1em;
+  text-decoration: none;
+  text-shadow: -1px 1px 0 rgba(0, 0, 0, 0.12);
+  text-transform: uppercase;
+}
+
+/* SUBMIT BUTTON */
+.dialog .ui-dialog-buttonpane button:last-child {
+    background: #31abed;
+}
+.dialog .ui-dialog-buttonpane button:last-child:hover {
+    background: #5ec6ff;
+    /* Old browsers */
+
+    background: -moz-linear-gradient(top, #5ec6ff 0%, #2ba4e5 100%);
+    /* FF3.6-15 */
+
+    background: -webkit-linear-gradient(top, #5ec6ff 0%, #2ba4e5 100%);
+    /* Chrome10-25,Safari5.1-6 */
+
+    background: linear-gradient(to bottom, #5ec6ff 0%, #2ba4e5 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+.dialog .ui-dialog-buttonpane button:last-child:active {
+    background: #26a1e2;
+}
+
+.dialog .ui-dialog-buttonpane button:first-child,
+.dialog.error .ui-dialog-buttonpane button {
+    background: #959ca2;
+}
+.dialog .ui-dialog-buttonpane button:first-child:hover,
+.dialog.error .ui-dialog-buttonpane button:hover {
+    background: #a4abb0;
+    /* Old browsers */
+
+    background: -moz-linear-gradient(top, #a4abb0 0%, #8d9398 100%);
+    /* FF3.6-15 */
+
+    background: -webkit-linear-gradient(top, #a4abb0 0%, #8d9398 100%);
+    /* Chrome10-25,Safari5.1-6 */
+
+    background: linear-gradient(to bottom, #a4abb0 0%, #8d9398 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+.dialog .ui-dialog-buttonpane button:first-child:active,
+.dialog.error .ui-dialog-buttonpane button:active {
+    background: #868c91;
+}
+
+.dialog.destroy .ui-dialog-buttonpane button:last-child {
+    background: #ef5a46;
+}
+.dialog.destroy .ui-dialog-buttonpane button:last-child:hover {
+    background: #ff7461;
+    /* Old browsers */
+
+    background: -moz-linear-gradient(top, #ff7461 0%, #ea4e39 100%);
+    /* FF3.6-15 */
+
+    background: -webkit-linear-gradient(top, #ff7461 0%, #ea4e39 100%);
+    /* Chrome10-25,Safari5.1-6 */
+
+    background: linear-gradient(to bottom, #ff7461 0%, #ea4e39 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+.dialog.destroy .ui-dialog-buttonpane button:last-child:active {
+    background: #dc4632;
+}
+/* FOOTER END */
+
+/**** HEADER BGN ****/
+
+/* ORIGINAL */
+.dialog-header p {
+    margin-bottom: 8px;
+}
+.dialog-header p:last-child {
+    margin-bottom: 0;
+}
+
+/* JQUERY UI */
+.dialog .ui-dialog-title {
+  margin: 0;
+}
+.dialog .ui-dialog-titlebar {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+  background: none;
+  padding: 0 0 20px 0;
+}
+
+.dialog .ui-dialog-title {
+  color: inherit;
+  font: 500 21px/23px Museo-Sans;
+}
+.dialog .ui-dialog-titlebar-close:hover {
+  background: none;
+}
+
+.dialog .ui-dialog-titlebar-close.ui-state-hover {
+  background: none;
+  border: 1px solid #d3d7da;
+}
+/**** HEADER END ****/
+.dialog.destroy .ui-dialog-title,
+.dialog.error .ui-dialog-title {
+    background: url(./images/dialogs/icon-dialog-info.png) left center no-repeat;
+    /* svg fallback */
+
+    background: url(./images/dialogs/icon-dialog-info.svg) left center no-repeat;
+    background-size: 20px 20px;
+    padding-left: 25px;
+}
+.dialog--subtitle {
+    font: 300 16px Roboto;
+}
+.dialog-table li {
+    display: table;
+    margin-bottom: 8px;
+    width: 100%;
+}
+.dialog-table li:last-child {
+    margin-bottom: 0;
+}
+.dialog-table li span {
+    font: 300 15px/18px Roboto;
+}
+.dialog-table li strong {
+    display: table-cell;
+    font: 400 15px/18px Roboto;
+    margin-right: 30px;
+    width: 110px;
+}
+
+.dialog .ui-dialog-content table th,
+.dialog .ui-dialog-content table td {
+  color: #1b1f21;
+}
+
+.dialog .ui-dialog-content td.actionBtns {
+  background-color: initial;
+}
+.dialog .ui-dialog-content tr.even {
+  background-color: #adb8bf;
+}
+.dialog .ui-dialog-content tr.odd {
+  background-color: #c4cdd4;
+}
+
+.dialog .ui-dialog-content table th {
+  font: 400 15px/18px Roboto;
+  background-color: transparent;
+}
+.dialog .ui-dialog-content table td {
+  font: 300 15px/18px Roboto;
+}
+.dialog-content .dialog-text {
+    margin-bottom: 8px;
+}
+.dialog-content .dialog-text:last-child {
+    margin-bottom: 0;
+}
+.dialog-form-field {
+    margin-bottom: 17px;
+}
+.dialog-form-label {
+    margin-bottom: 3px;
+}
+.dialog-form--select,
+.dialog-form--text,
+.dialog-form--textarea {
+    font: 400 15px/140% Roboto, Arial, sans-serif;
+    width: 295px;
+}
+.dialog-form--req::after {
+    color: #dc4632;
+    content: '*';
+    display: inline-block;
+    font: 400 15px/140% Roboto, Arial, sans-serif;
+    padding-left: 3px;
+}
+/* Select Menus */
+.dialog .ui-dialog-content select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: url(./images/dialogs/bg-select.png) right center no-repeat;
+  border: 1px solid #9ea2a5;
+  border-radius: 4px;
+  color: #1b1f21;
+  padding: 5px 36px 5px 8px;
+  height: 32px;
+  -webkit-transition: box-shadow .3s;
+  transition: box-shadow .3s;
+}
+.dialog .ui-dialog-content select:hover,
+.dialog .ui-dialog-content select:focus {
+    background: #e2e5e6 url(./images/dialogs/icon-select-arrow.png) right center no-repeat;
+    border: 1px solid #0b8acf;
+    box-shadow: inset 0 0 1px 1px rgba(49, 171, 237, 0.004);
+}
+.dialog .ui-dialog-content option {
+    background: #fff;
+    padding: 5px 8px;
+}
+.dialog .ui-dialog-content p,
+.dialog .ui-dialog-content span  {
+  line-height: 175%;
+  margin-bottom: 0;
+}
+.dialog .ui-dialog-content p.bold {
+  font-weight: bold;
+}
+
+/* IE 11 */
+
+@media all and (-ms-high-contrast: none),
+(-ms-high-contrast: active) {
+    .dialog-form--select {
+        -webkit-appearance: initial;
+        -moz-appearance: initial;
+        appearance: initial;
+        padding: 5px 8px;
+    }
+}
+/* Text inputs */
+
+
+.dialog .ui-dialog-content input[type="text"],
+.dialog .ui-dialog-content input[type="password"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 4px;
+  border: 1px solid #9ea2a5;
+  box-sizing: border-box;
+  color: #1b1f21;
+  height: 32px;
+  padding: 5px 8px;
+  -webkit-transition: box-shadow .3s;
+  transition: box-shadow .3s;
+}
+
+.dialog .ui-dialog-content input[type="text"]:hover {
+    border: 1px solid #0b8acf;
+    box-shadow: inset 0 0 1px 1px rgba(49, 171, 237, 0.004);
+}
+.dialog .ui-dialog-content input[type="text"]:focus {
+    border: 1px solid #0b8acf;
+    box-shadow: inset 0 0 1px 1px rgba(49, 171, 237, 0.004);
+    outline: none;
+}
+
+.dialog-form--text {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 4px;
+    border: 1px solid #9ea2a5;
+    box-sizing: border-box;
+    color: #1b1f21;
+    height: 32px;
+    padding: 5px 8px;
+    -webkit-transition: box-shadow .3s;
+    transition: box-shadow .3s;
+}
+.dialog-form--text:hover {
+    border: 1px solid #0b8acf;
+    box-shadow: inset 0 0 1px 1px rgba(49, 171, 237, 0.004);
+}
+.dialog-form--text:focus {
+    border: 1px solid #0b8acf;
+    box-shadow: inset 0 0 1px 1px rgba(49, 171, 237, 0.004);
+    outline: none;
+}
+.dialog-form--text.error {
+    background: #ffe6e4;
+    border: 1px solid #dc4532;
+    box-shadow: none;
+}
+.dialog-form--error-text {
+    color: #1b1f21;
+    display: block;
+    font: 300 12px Roboto;
+    line-height: 17px;
+    padding-top: 5px;
+}
+.dialog-form--error-text::before {
+    background: url(./images/dialogs/icon-dialog-error.png) no-repeat;
+    /* svg fallback */
+
+    background: url(./images/dialogs/icon-dialog-error.svg) no-repeat;
+    background-size: 10px 14px;
+    content: '';
+    display: inline-block;
+    height: 14px;
+    padding-right: 5px;
+    width: 10px;
+}
+.dialog-note-text {
+    color: #1b1f21;
+    font: 300 12px Roboto;
+    line-height: 17px;
+    padding-top: 5px;
+}
+/*.dialog--section-header {*/
+.dialog .ui-dialog-content h2 {
+    display: block;
+    color: #667984;
+    font: 500 17px Museo-Sans;
+    text-transform: uppercase;
+    margin: 20px 0 5px 0 !important;
+}
+.dialog .ui-dialog-content h2.first {
+  margin-top: 0 !important;
+}
+/* Custom overrides for individual dialog boxes */
+
+.dialog-schedule-backup .dialog-form-row--schedule {
+    display: table;
+}
+.dialog-schedule-backup .dialog-form-row--schedule label,
+.dialog-schedule-backup .dialog-form-row--schedule select {
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+    width: auto;
+}
+.dialog-schedule-backup .dialog-form-row--snapshot .dialog--section-header .dialog-text {
+    color: #1b1f21;
+    font-weight: 300;
+    font-size: 15px;
+    margin-bottom: 0;
+    text-transform: none;
+    font-family: Roboto, sans-serif;
+}
+.dialog-schedule-backup .dialog-form-row {
+    display: block;
+    border-bottom: 1px solid #a9acae;
+    padding-top: 20px;
+}
+.dialog-schedule-backup .dialog-form-row:first-of-type {
+    padding-top: 0;
+}
+.dialog-schedule-backup .dialog-form-row:last-of-type {
+    border-bottom: 0;
+}
+.dialog-schedule-backup .dialog-form-row--snapshot .dialog-form-field {
+    margin-bottom: 0;
+}
+.dialog-new-collection .dialog-advanced-options .dialog-note-text {
+    margin-bottom: 10px;
+}
+.dialog-new-collection .dialog-advanced-options .dialog-form-field {
+    margin-bottom: 0;
+}
+
+
+/* fixes */
+.dialog form fieldset {
+    margin: 0;
+    padding-top: initial;
+    padding-bottom: initial;
+}
+
+.dialog .h2Section span,
+.dialog .h2Section select {
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: middle;
+  width: auto;
+}
+
+.ui-dialog .h2Section label {
+  display: inline-block;
+}
+
+.dialog .h2Section span.baseChargeInCents,
+.dialog .h2Section span.overagePerGBChargeInCents,
+.dialog .h2Section span.overagePerGBIfMongoLabStoresDiffChargeInCents {
+  margin-right: 0;
+}
+
+.dialog .ui-dialog-content {
+  padding-bottom: 20px;
+}
+
+.dialog span.tip {
+  font-size: 85%;
+  text-transform: none;
+  color: #1b1f21;
+  font-family: Roboto, sans-serif;
+  font-weight: 300;
+  margin-left: 5px;
+}
+
+.dialog .ui-dialog .h2Section {
+  padding: initial;
+}
+
+.dialog .h2Section.snapshotShareSection label {
+  display: block;
+}
+
+.dialog .ui-button-text-only .ui-button-text {
+  padding: 0;
+}
+
+.dialog .ui-dialog-content th {
+  padding-left: 0;
+}
+
+/* Special styling for recurring backup s3 bucket */
+.dialog .ui-dialog-content .backupTarget {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.dialog .ui-dialog-content .backupTarget .dialog-form-group .dialog-form-label {
+  width: 28%;
+  margin-right: 1%;
+}
+.dialog .ui-dialog-content .backupTarget .dialog-form-group .dialog-form-input {
+  width: 70%;
+}
+ .dialog .ui-dialog-content .backupTarget .dialog-form-group span.required {
+   margin-right: 0;
+   margin-left: 5px
+ }
+ /* Special case since hybrid description is very large */
+ .dialog .ui-dialog-content .h2Section.strategySection select#planStrategyType {
+   font-size: 90%;
+ }
+
+ /* schedule recurring backup dialog styling */
+ .dialog .ui-dialog-content #scheduleDaySection,
+ .dialog .ui-dialog-content #scheduleHourOffsetSection {
+   display: inline;
+ }
+
+
+ /*tooltip*/
+.dialog .ui-dialog-content .dialog-form-group .info.tooltip-container {
+  background: url(./images/icon-info.svg) center center no-repeat;
+  background-size: 15px 19px;
+  cursor: pointer;
+  display: inline-block;
+  height: 15px;
+  width: 25px;
+  position: relative;
+}
+
+.dialog .ui-dialog-content .dialog-form-group.radio-group input[type='checkbox'] {
+  width: initial;
+}
+
+.dialog .ui-dialog-content .dialog-form-group.radio-group radiogroup label {
+    padding-left: 5px;
+    padding-right: 15px;
+    display: inherit;
+}
+
+ .dialog .info.tooltip-container .tooltiptext {
+   position: absolute;
+   z-index: 1;
+   visibility: hidden;
+   padding: 0.5em 1em;
+   line-height: 120%;
+   bottom: 2em;
+   width: 12em;
+   font-size: smaller;
+   border-radius: 4px;
+   background-color: #2D2D2D;
+   color: white;
+ }
+
+.dialog .ui-dialog-content .info.tooltip-container:hover .tooltiptext {
+  visibility: visible;
+}
