@@ -34,7 +34,7 @@ class MapView extends Component {
       const endpoint = this.state.endpoint;
       const socket = socketIoClient(endpoint);
 
-      this.props.fetchSoldiers();
+      //this.props.fetchSoldiers();
 
       //gps data
       socket.on("gps", this.updateGPSData)
@@ -47,33 +47,35 @@ class MapView extends Component {
 
     }
 
-    //fix invalid tiles sizes
     componentDidUpdate(){
       var map = this.refs.map.leafletElement;
-      map.invalidateSize()
-    }
-
-    invalidateMap() {
-      if (this.refs.map) {
-        this.refs.map.leafletElement.invalidateSize();
-      }
+      map.invalidateSize() //fixes invalid tiles sizes
     }
 
     centerPosition(lat, lan) {
       this.setState({lat: lat+this.state.offsetLat, lan: lan+this.state.offsetLan, firstPos: false});
     }
     
-    notifications(soldier){
-      NotificationManager.warning( soldier.name + ' sent help ','Notification',5000, () => {
+    notifications(soldier, type){
+      switch (type) {
+        case "emergency":
+          NotificationManager.warning( soldier.name + ' sent help call','Emergency!',10000, () => {});
+          break;
+        case "disconnect":
+            NotificationManager.warning( soldier.name + ' has been disconnected from the mesh network','Network Alert!',10000, () => {});
+          break;
+        default:
+          break;
+        }          
         if(soldier.gps){
-          this.centerPosition(soldier.gps.lat, soldier.gps.lan);
-          }
-          else
-            //add no gps validation message 
-            ;
-        });
+           this.centerPosition(soldier.gps.lat, soldier.gps.lan);
+        }
+        else
+        //add no gps validation message 
+        ;
+      }
 
-    }
+    
 
     updateGPSData = (gps) => {
       var newData = gps.data;
@@ -93,7 +95,7 @@ class MapView extends Component {
       soldiers.forEach((soldier) => {
         if(soldier.meshID == emergency.meshID){
           soldier.emerg = true;
-          this.notifications(soldier);
+          this.notifications(soldier, "emergency");
           //this.setState({state: this.state});
         }
       });
