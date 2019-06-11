@@ -59,7 +59,7 @@ class MapView extends Component {
     notifications(soldier, type){
       switch (type) {
         case "emergency":
-          NotificationManager.warning( soldier.name + ' sent help call','Emergency!',10000, () => {});
+          NotificationManager.warning( soldier.name + ' sent help call','Emergency!',100000000000000, () => {});
           break;
         case "disconnect":
             NotificationManager.warning( soldier.name + ' has been disconnected from the mesh network','Network Alert!',10000, () => {});
@@ -150,7 +150,7 @@ class MapView extends Component {
       }
       return (
         <div className="Wrapper" >
-          <NotificationContainer/>
+          <NotificationContainer id="notification"/>
           <Map className="map" center={position} zoom={this.state.zoom} ref="map">
             <TileLayer 
               attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
