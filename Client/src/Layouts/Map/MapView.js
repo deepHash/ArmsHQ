@@ -6,7 +6,7 @@ import { Map, TileLayer } from 'react-leaflet';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import MapMarker from './mapMarker';
 import socketIoClient from 'socket.io-client';
-import '../../assets/css/map.css';
+import '../../assets/css/Map.css';
 import '../../assets/css/notifications.css';
 
 
@@ -160,7 +160,7 @@ class MapView extends Component {
       }
       return (
         <div className="Wrapper" >
-          <NotificationContainer/>
+          <NotificationContainer id="notification"/>
           <Map className="map" center={position} zoom={this.state.zoom} ref="map">
             <TileLayer 
               attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

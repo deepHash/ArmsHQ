@@ -64,7 +64,7 @@
   transition: all 0.4s;
 }
 
-.notification:before {
+NotificationManager.notification:before {
   position: absolute;
   top: 50%;
   left: 15px;
@@ -102,7 +102,7 @@
   font-family: 'Font Awesome 5 Free';
   font-weight: 900;
   content: "\F06A";
-
+  display: -webkit-box;
 }
 
 .notification-error {
@@ -111,4 +111,8 @@
 
 .notification-error:before {
   content: "";
+}
+.notification-message{
+  font-size: 15px;
+
 }

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { MDBBtn } from "mdbreact";
 import { MDBIcon } from "mdbreact";
-
+import Image from '../../assets/Images/default-user.png';
 import '../../assets/css/main.css';
 
 export default class SoldierCard extends Component {
@@ -10,14 +10,18 @@ export default class SoldierCard extends Component {
         super(props);
     
     }
+   
     handleClick = (event) => {
         this.props.onExitSoldierCard();
     }   
+     
+      
     render() {
 
         return (
             <div style={{textAlign:"left"}}>
-                <MDBBtn floating id="exitBtn" size="sm" gradient="purple" className="md-toolbar" onClick={this.handleClick}><MDBIcon  icon="times" /></MDBBtn>
+                <MDBBtn floating id="exitBtn" size="sm" gradient="purple" className="md-toolbar" onClick={this.handleClick}><MDBIcon icon="times" /></MDBBtn>
+                <div ><img id="soldierImage" src={this.props.image!=undefined ? this.props.image : Image} alt={this.props.name} /></div>
                 <div className="startCard"><b>Name: </b>{this.props.name}</div>
                 <div ><b>Mesh ID:</b> {this.props.meshID}</div>
                 <div style={{ borderBottom :"1px solid black", marginBottom:"10px", paddingBottom:"10px"}}><b>Role: </b>{this.props.role}</div>

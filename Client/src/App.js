@@ -4,7 +4,7 @@ import store from './store';
 import './App.css';
 
 
-import Main from './Layouts/Main';
+import Main from './Layouts/main';
 
 class App extends Component {
 
