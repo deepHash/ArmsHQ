@@ -7,9 +7,9 @@ import { Button } from 'react-bootstrap';
 export default class mapMarker extends Component {
     
     //map icons settings
-    iconSize = [70, 70];
+    iconSize = [60, 60];
     iconAnchor = [22, 94];
-    popupAnchor = [12, -85];
+    popupAnchor = [8, -85];
 
     //regular soldier icon
     soldierIcon = Leaflet.icon({

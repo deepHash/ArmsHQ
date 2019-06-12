@@ -66,22 +66,11 @@ class MainNew extends Component{
             switch(type){
                 case "pulse":
                     this.setState({soldierCardPulse: soldier.pulse});
-                case "emergency":
-                        //@ToDo fix type not getting in here.
-                        console.log("IN HERE")
-                        this.setState({setNewPos: soldier.gps,
-                            openSoldierCard: true,
-                            soldierCardName:soldier.name,
-                            soldierCardMeshID: soldier.meshID,
-                            soldierCardRole: soldier.role,
-                            soldierCardBlood: soldier.bloodType,
-                            soldierCardPulse: soldier.pulse,
-                            soldierCardImg: soldier.image
-                        })
-                        break;
-
-    
             }
+        }
+        //open soldier card that has pass emergency alert
+        if(type == "emergency"){
+            this.handleSelectSoldier(soldier);
         }
     }
 

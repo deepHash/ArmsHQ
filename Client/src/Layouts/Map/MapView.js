@@ -86,13 +86,13 @@ class MapView extends Component {
             console.log("Notification route not found")
             break;
         }          
+      this.props.onNewData(soldier, "emergency");
       if(soldier.gps){
          this.centerPosition(soldier.gps.lat, soldier.gps.lan);
       }
       else
       //add no gps validation message 
       ;
-      this.props.onNewData(soldier, "emergency");
     }
 
     updateGPSData = (gps) => {
