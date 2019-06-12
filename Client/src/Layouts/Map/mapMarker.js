@@ -99,7 +99,8 @@ export default class mapMarker extends Component {
       setButton(soldier){
           let button
           if (soldier.emerg == true)
-            button = <div><br/> <Button variant="outline-danger" size="sm" onClick={(e) => this.handlePopUpClick(soldier)}>Resolve Emergency</Button></div>
+            button = <div><br/> <Button variant="outline-danger" size="sm" 
+                                    onClick={() => this.handlePopUpClick(soldier)}>Resolve Alert</Button></div>
           else
             button = <div></div>;
         return button

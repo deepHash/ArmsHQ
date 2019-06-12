@@ -34,12 +34,12 @@ class MapView extends Component {
       const endpoint = this.state.endpoint;
       const socket = socketIoClient(endpoint);
 
-      //this.props.fetchSoldiers();
-
       //gps data
       socket.on("gps", this.updateGPSData)
       //emergency data
       socket.on("emergency", this.updateEmergency)
+      //disconnected mesh
+      socket.on("disconnected", this.updateDisconnect)
       //acc data
       socket.on("acc", this.updateAcc)
       //pulse data
@@ -59,23 +59,22 @@ class MapView extends Component {
     notifications(soldier, type){
       switch (type) {
         case "emergency":
-          NotificationManager.warning( soldier.name + ' sent help call','Emergency!',10000, () => {});
-          break;
+            NotificationManager.warning( soldier.name + ' sent help call','Emergency!',10000, () => {});
+            break;
         case "disconnect":
-            NotificationManager.warning( soldier.name + ' has been disconnected from the mesh network','Network Alert!',10000, () => {});
-          break;
+            NotificationManager.info( soldier.name + ' has been disconnected from the mesh network','Network Alert!',10000, () => {});
+            break;
         default:
-          break;
+            console.log("Notification route not found")
+            break;
         }          
-        if(soldier.gps){
-           this.centerPosition(soldier.gps.lat, soldier.gps.lan);
-        }
-        else
-        //add no gps validation message 
-        ;
+      if(soldier.gps){
+         this.centerPosition(soldier.gps.lat, soldier.gps.lan);
       }
-
-    
+      else
+      //add no gps validation message 
+      ;
+    }
 
     updateGPSData = (gps) => {
       var newData = gps.data;
@@ -101,13 +100,24 @@ class MapView extends Component {
       });
     }
 
+    updateDisconnect = (disconnect) => {
+      var soldiers = this.props.soldiers;
+      var newData = disconnect.data;
+      soldiers.forEach((soldier) => {
+        if(soldier.meshID == newData.meshID){
+          soldier.emerg = true;
+          this.notifications(soldier, "disconnect")
+        }
+      })
+    }
+
     updatePulse = (pulse) => {
       var newData = pulse.data;
-      // console.log(newData);
       var soldiers = this.props.soldiers;
       soldiers.forEach((soldier) => {
         if(soldier.meshID == newData.meshID){
           soldier.pulse = newData.pulse;
+          this.props.onNewData(soldier, "pulse");
         return soldier
         }
       });

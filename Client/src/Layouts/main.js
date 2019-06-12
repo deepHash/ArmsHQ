@@ -59,6 +59,17 @@ class MainNew extends Component{
         }
     }
 
+    handleUpdateData = (soldier, type) => {
+        if(this.state.soldierCardMeshID == soldier.meshID){
+            switch(type){
+                case "pulse":
+                    this.setState({soldierCardPulse: soldier.pulse});
+                    break;
+    
+            }
+        }
+    }
+
     handleAddSoldier = () => {
         //@Todo update the soldiers array after a new soldier was added
         this.props.fetchSoldiers();
@@ -87,7 +98,6 @@ class MainNew extends Component{
 
     handleExitLeftCard = () => {
         this.setState({openLeftCard: true})
-
     }
     // handleCheckBeforeChangePage = () => {
     //     if(this.props.currPage)
@@ -119,7 +129,7 @@ class MainNew extends Component{
                 <Card id="FloatingCard" style={{display: this.props.currPage===undefined? "none":this.state.currPage===false ? "none": "block"}}>
                         {this.renderFloatingCard()}
                 </Card>
-                <Map pos={this.state.setNewPos} soldiers={this.props.soldiers} />
+                <Map pos={this.state.setNewPos} soldiers={this.props.soldiers} onNewData={this.handleUpdateData} />
                 <Card id="FloatingCardSoldier" style={{display:this.state.openSoldierCard === undefined ? "none" : this.state.openSoldierCard === false ?"none":"block"}}>
                     < SoldierCard onExitSoldierCard={this.handleExitSoldierCard} 
                         name={this.state.soldierCardName} 

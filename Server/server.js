@@ -64,6 +64,13 @@ app.get('/sendhelp/:id', (req, res) => {
     res.status(200).json([]);
 });
 
+app.get('/sendDisconnect/:id', (req, res) => {
+    let soldier = {emerg: true, meshID: req.params.id};
+    universalEmitter.emit('DISCONNECTED', soldier);
+    res.status(200).json([]);
+});
+
+
 
 //error 404 route
 app.all('*', (req, res) => {
@@ -125,8 +132,9 @@ io.on('connection', socket => {
         });
     
     //emits if soldier has not sent a message for more than 60 seconds
-    universalEmitter.on('Disconnect', (soldier) => {
-        socket.emit('disconnect', {data: soldier})
+    universalEmitter.on('DISCONNECTED', (soldier) => {
+        console.log("going to emit a disconnect message");
+        socket.emit('disconnected', {data: soldier})
     });
     
     socket.on('disconnect', () => {
