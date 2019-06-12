@@ -66,7 +66,20 @@ class MainNew extends Component{
             switch(type){
                 case "pulse":
                     this.setState({soldierCardPulse: soldier.pulse});
-                    break;
+                case "emergency":
+                        //@ToDo fix type not getting in here.
+                        console.log("IN HERE")
+                        this.setState({setNewPos: soldier.gps,
+                            openSoldierCard: true,
+                            soldierCardName:soldier.name,
+                            soldierCardMeshID: soldier.meshID,
+                            soldierCardRole: soldier.role,
+                            soldierCardBlood: soldier.bloodType,
+                            soldierCardPulse: soldier.pulse,
+                            soldierCardImg: soldier.image
+                        })
+                        break;
+
     
             }
         }
@@ -78,16 +91,15 @@ class MainNew extends Component{
     }
 
     handleSelectSoldier = (soldier) => {
-        this.setState({setNewPos: soldier.gps})
-        this.setState({openSoldierCard: true})
-        this.setState({soldierCardName:soldier.name})
-        this.setState({soldierCardMeshID: soldier.meshID})
-        this.setState({soldierCardRole: soldier.role})
-        this.setState({soldierCardBlood: soldier.bloodType})
-        this.setState({soldierCardPulse: soldier.pulse})
-        this.setState({soldierCardImg: soldier.image})
-        console.log("-------")
-        console.log(soldier.image)
+        this.setState({setNewPos: soldier.gps,
+                       openSoldierCard: true,
+                       soldierCardName:soldier.name,
+                       soldierCardMeshID: soldier.meshID,
+                       soldierCardRole: soldier.role,
+                       soldierCardBlood: soldier.bloodType,
+                       soldierCardPulse: soldier.pulse,
+                       soldierCardImg: soldier.image
+        })
         // if(this.state.soldier){
         //     if (this.state.soldier.acc){
         //         this.setState({soldierCardAccX: soldier.acc.x})
@@ -104,12 +116,6 @@ class MainNew extends Component{
     handleExitLeftCard = () => {
         this.setState({openLeftCard: true})
     }
-    // handleCheckBeforeChangePage = () => {
-    //     if(this.props.currPage)
-    //         if (this.state.openLeftCard)
-    //         return "block" 
-    //     return "none" ;
-    // }
 
   render() {
     return (
@@ -148,8 +154,7 @@ class MainNew extends Component{
                         accZ={this.state.soldierCardAccZ} */}
                         
                 </Card>
-         </div>
-                
+         </div>       
         </div>
     );
   }

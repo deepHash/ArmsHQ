@@ -8,6 +8,7 @@ import MapMarker from './mapMarker';
 import socketIoClient from 'socket.io-client';
 import '../../assets/css/map.css';
 import '../../assets/css/notifications.css';
+import Leaflet from 'leaflet';
 
 
 class MapView extends Component {
@@ -22,7 +23,7 @@ class MapView extends Component {
         lan: 35.421000,
         offsetLat: 0.0365,
         offsetLan: 0.3304,
-        zoom: 13,
+        zoom: 15,
         //socket state vars
         endpoint: "http://127.0.0.1:4000"
       }
@@ -44,16 +45,33 @@ class MapView extends Component {
       socket.on("acc", this.updateAcc)
       //pulse data
       socket.on("pulse", this.updatePulse)
-
     }
 
     componentDidUpdate(){
       var map = this.refs.map.leafletElement;
       map.invalidateSize() //fixes invalid tiles sizes
+
+      //set marker for each soldier gps and create map bound for arrayOfMarkers => route
+      if(this.props.pos == false){
+        var route = Leaflet.featureGroup().addTo(map);
+        this.props.soldiers.forEach((soldier) => {
+          if(soldier.gps){
+            let m = Leaflet.marker([soldier.gps.lat+this.state.offsetLat, soldier.gps.lan+this.state.offsetLan])
+            route.addLayer(m);
+          }
+        })
+        map.fitBounds(route.getBounds());
+      }
     }
 
     centerPosition(lat, lan) {
-      this.setState({lat: lat+this.state.offsetLat, lan: lan+this.state.offsetLan, firstPos: false});
+      var map = this.refs.map.leafletElement;
+      map.panTo(new Leaflet.LatLng(lat+this.state.offsetLat, lan+this.state.offsetLan));
+      this.setState({state: this.state});
+    //   this.setState({zoom: this.state.zoom+1});
+    //   setTimeout(function() { //Start the timer
+    //     this.setState({zoom: this.state.zoom-1}) //After 2 second, zoom out
+    // }.bind(this), 2000)
     }
     
     notifications(soldier, type){
@@ -74,6 +92,7 @@ class MapView extends Component {
       else
       //add no gps validation message 
       ;
+      this.props.onNewData(soldier, "emergency");
     }
 
     updateGPSData = (gps) => {
@@ -95,7 +114,6 @@ class MapView extends Component {
         if(soldier.meshID == emergency.meshID){
           soldier.emerg = true;
           this.notifications(soldier, "emergency");
-          //this.setState({state: this.state});
         }
       });
     }
@@ -106,6 +124,7 @@ class MapView extends Component {
       soldiers.forEach((soldier) => {
         if(soldier.meshID == newData.meshID){
           soldier.emerg = true;
+          console.log(soldier.gps);
           this.notifications(soldier, "disconnect")
         }
       })
@@ -150,11 +169,6 @@ class MapView extends Component {
       const pos       = this.props.pos;
       console.log(soldiers);
       var position = [ this.state.lat, this.state.lan ];
-      soldiers.forEach((soldier) => {
-        //set initial view to the commanders position
-        if(soldier.isCommander == true && this.state.firstPos)
-        position = [soldier.gps.lat+this.state.offsetLat, soldier.gps.lan+this.state.offsetLan];
-      });
       if(pos){
         position = [pos.lat+this.state.offsetLat, pos.lan+this.state.offsetLan];
       }
