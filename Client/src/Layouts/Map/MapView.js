@@ -6,7 +6,7 @@ import { Map, TileLayer } from 'react-leaflet';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import MapMarker from './mapMarker';
 import socketIoClient from 'socket.io-client';
-import '../../assets/css/map.css';
+import '../../assets/css/Map.css';
 import '../../assets/css/notifications.css';
 import Leaflet from 'leaflet';
 

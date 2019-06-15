@@ -22,6 +22,36 @@ div.nav-item, Nav.Link{
     color:black;
     padding: 2%;
     opacity: 0.85;
+    overflow-y: auto;
+    max-height: 485px;
+}
+#FloatingCard::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+#FloatingCard::-webkit-scrollbar
+{
+    width: 12px;
+}
+
+#FloatingCard::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
+
+#newBtn{
+    background-color:#00ff7f;
+    color:black;
+    border:none;
+}
+#newBtn:hover{
+    background-color:#00cd66;
+    color: white
 }
 
 #FloatingCardSoldier{

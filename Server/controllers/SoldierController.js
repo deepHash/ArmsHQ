@@ -10,6 +10,7 @@ class SoldierController{
                 meshID: data.meshId,
                 name: data.name,
                 bloodType: data.bloodType,
+                forceID: data.forceID,
                 isCommander: false,
                 role: data.role,
                 emerg: false

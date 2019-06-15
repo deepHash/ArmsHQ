@@ -12,6 +12,7 @@ class ViewSoldier extends React.Component{
             name: this.props.name || '',
             mashId: this.props.name || -1,
             bloodType: this.props.bloodType || '',
+            forceID: this.props.forceID || 0,
             role: this.props.role || '',
             image:this.props.image||''
         }
