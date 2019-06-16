@@ -40,7 +40,7 @@ class MapView extends Component {
       //emergency data
       socket.on("emergency", this.updateEmergency)
       //disconnected mesh
-      socket.on("disconnected", this.updateDisconnect)
+      //socket.on("disconnected", this.updateDisconnect)
       //acc data
       socket.on("acc", this.updateAcc)
       //pulse data

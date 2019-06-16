@@ -1,4 +1,4 @@
-import soldierImage from '../../assets/icons/soldier.png';
+import soldierImage from '../../assets/icons/soldier.svg';
 import soldierEmerg from '../../assets/icons/soldierEmerg.png';
 import commanderImage from '../../assets/icons/commander.png';
 import commanderEmerg from '../../assets/icons/commanderEmerg.png';
