@@ -12,6 +12,7 @@ class EditSolider extends React.Component{
             name: this.props.name || '',
             meshId: this.props.meshId || -1,
             bloodType: this.props.bloodType || '',
+            forceID:this.props.forceID||0,
             role: this.props.role || ''
         }
     }
@@ -55,6 +56,10 @@ class EditSolider extends React.Component{
         const bloodType = event.target.value;
         this.setState({bloodType})
     }
+    onForceIDChange(event){
+        const forceID = event.target.value;
+        this.setState({forceID})
+    }
     onRoleChange(event){
         const role = event.target.value;
         this.setState({role})
@@ -76,9 +81,9 @@ class EditSolider extends React.Component{
         console.log('edit');
     }
 
-    onCreate({name,meshId,bloodType,role,image}){
-        this.props.addNewSoldier({name,meshId,bloodType,role,image});
-        this.setState({name:'',meshId:'-1',bloodType:'',role:''});
+    onCreate({name,meshId,bloodType,role,image,forceID}){
+        this.props.addNewSoldier({name,meshId,bloodType,role,image,forceID});
+        this.setState({name:'',meshId:'-1',bloodType:'',role:'',forceID:'0'});
         this.props.onAddSoldier();
     }
     render(){
@@ -94,6 +99,11 @@ class EditSolider extends React.Component{
                     <Form.Control type="number" value={this.state.meshId} onChange={this.onMeshIdChange.bind(this)}/>
                 </Form.Group>
 
+                <Form.Group controlId="formGridForceId">
+                    <Form.Label>Force ID: </Form.Label>
+                    <Form.Control type="text" value={this.state.forceID} onChange={this.onForceIDChange.bind(this)}/>
+                </Form.Group>
+
                 <Form.Group controlId="formGridBloodType">
                     <Form.Label>Blood Type: </Form.Label>
                     <Form.Control type="text" value={this.state.bloodType} onChange={this.onBloodTypeChange.bind(this)}/>
@@ -104,7 +114,7 @@ class EditSolider extends React.Component{
                     <Form.Control type="text" value={this.state.role} onChange={this.onRoleChange.bind(this)}/>
                 </Form.Group>
 
-                <Button variant="outline-secondary" block type="button" onClick={this.onSubmitForm.bind(this)}>{this.renderButtonText()}</Button>
+                <Button id="newBtn" variant="outline-secondary" block type="button" onClick={this.onSubmitForm.bind(this)}>{this.renderButtonText()}</Button>
             </Form>
         )
     }

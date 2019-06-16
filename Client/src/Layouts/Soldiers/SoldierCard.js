@@ -21,9 +21,10 @@ export default class SoldierCard extends Component {
         return (
             <div style={{textAlign:"left"}}>
                 <MDBBtn floating id="exitBtn" size="sm" gradient="purple" className="md-toolbar" onClick={this.handleClick}><MDBIcon icon="times" /></MDBBtn>
-                <div ><img id="soldierImage" src={this.props.image!=undefined ? this.props.image : Image} alt={this.props.name} /></div>
+                <div ><img id="soldierImage" src={this.props.image!="" ? this.props.image : Image} alt={this.props.name} /></div>
                 <div className="startCard"><b>Name: </b>{this.props.name}</div>
                 <div ><b>Mesh ID:</b> {this.props.meshID}</div>
+                <div ><b>Force ID:</b> {this.props.forceID}</div>
                 <div style={{ borderBottom :"1px solid black", marginBottom:"10px", paddingBottom:"10px"}}><b>Role: </b>{this.props.role}</div>
                 <div ><b>Blood: </b>{this.props.blood}</div>
                 <div ><b>Pulse: </b>{this.props.pulse}</div>

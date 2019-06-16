@@ -45,7 +45,10 @@ export default class mapMarker extends Component {
     }
 
     SoldiersList(_soldiers) {
-        var soldierJsx = <div></div>,
+        var style = {
+            backgroundColor: "#ff0000"
+        }
+        var soldierJsx = <div ></div>,
             soldiers = _soldiers;
         if(soldiers && soldiers.length > 0){
           soldierJsx = soldiers.map((soldier) =>
@@ -55,7 +58,7 @@ export default class mapMarker extends Component {
                   resolveButton = this.setButton(soldier);
                   
               return (
-                <Marker 
+                <Marker style={style}
                     key={ soldier.meshID }
                     position={ position }
                     icon={ icon }>            

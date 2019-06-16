@@ -27,6 +27,7 @@ class MainNew extends Component{
             soldierCardMeshID:undefined,
             soldierCardRole:undefined,
             soldierCardBlood:undefined,
+            soldierCardForceID:undefined,
             soldierCardPulse:undefined,
             soldierCardImg:undefined,
 
@@ -86,9 +87,13 @@ class MainNew extends Component{
                        soldierCardMeshID: soldier.meshID,
                        soldierCardRole: soldier.role,
                        soldierCardBlood: soldier.bloodType,
+                       soldierCardForceID: soldier.forceID,
                        soldierCardPulse: soldier.pulse,
                        soldierCardImg: soldier.image
         })
+        console.log("---------")
+        
+        console.log( soldier.forceID)
         // if(this.state.soldier){
         //     if (this.state.soldier.acc){
         //         this.setState({soldierCardAccX: soldier.acc.x})
@@ -135,7 +140,8 @@ class MainNew extends Component{
                         name={this.state.soldierCardName} 
                         meshID={this.state.soldierCardMeshID} 
                         role={this.state.soldierCardRole} 
-                        blood={this.state.soldierCardBlood} 
+                        blood={this.state.soldierCardBlood}
+                        forceID={this.state.soldierCardForceID}  
                         pulse={this.state.soldierCardPulse} 
                         image={this.state.soldierCardImg}/>
                         {/* accX={this.state.soldierCardAccX}
