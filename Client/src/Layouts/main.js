@@ -20,6 +20,7 @@ class MainNew extends Component{
     constructor(props){
         super(props);
         this.state = {
+            forcePosition: true,
             setNewPos: false,
             openSoldierCard:false,
             openLeftCard:false,
@@ -73,6 +74,10 @@ class MainNew extends Component{
         if(type == "emergency"){
             this.handleSelectSoldier(soldier);
         }
+        //set force position at start
+        if(type == "position"){
+            this.setState({forcePosition: false})
+        }
     }
 
     handleAddSoldier = () => {
@@ -91,9 +96,6 @@ class MainNew extends Component{
                        soldierCardPulse: soldier.pulse,
                        soldierCardImg: soldier.image
         })
-        console.log("---------")
-        
-        console.log( soldier.forceID)
         // if(this.state.soldier){
         //     if (this.state.soldier.acc){
         //         this.setState({soldierCardAccX: soldier.acc.x})
@@ -134,7 +136,7 @@ class MainNew extends Component{
                 <Card id="FloatingCard" style={{display: this.props.currPage===undefined? "none":this.state.currPage===false ? "none": "block"}}>
                         {this.renderFloatingCard()}
                 </Card>
-                <Map pos={this.state.setNewPos} soldiers={this.props.soldiers} onNewData={this.handleUpdateData} />
+                <Map pos={this.state.setNewPos} forcePos={this.state.forcePosition} soldiers={this.props.soldiers} onNewData={this.handleUpdateData} />
                 <Card id="FloatingCardSoldier" style={{display:this.state.openSoldierCard === undefined ? "none" : this.state.openSoldierCard === false ?"none":"block"}}>
                     < SoldierCard onExitSoldierCard={this.handleExitSoldierCard} 
                         name={this.state.soldierCardName} 

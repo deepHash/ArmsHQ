@@ -25,7 +25,8 @@ class MapView extends Component {
         offsetLan: 0.3304,
         zoom: 15,
         //socket state vars
-        endpoint: "http://127.0.0.1:4000"
+        endpoint: "http://127.0.0.1:4000",
+        boundryRoutes: []
       }
 
     }
@@ -52,15 +53,22 @@ class MapView extends Component {
       map.invalidateSize() //fixes invalid tiles sizes
 
       //set marker for each soldier gps and create map bound for arrayOfMarkers => route
-      if(this.props.pos == false){
+      if(this.props.forcePos == true){
+        this.props.onNewData("", "position")
         var route = Leaflet.featureGroup().addTo(map);
         this.props.soldiers.forEach((soldier) => {
-          if(soldier.gps){
-            let m = Leaflet.marker([soldier.gps.lat+this.state.offsetLat, soldier.gps.lan+this.state.offsetLan])
+          if(soldier.gps && soldier.gps != [0,0]){
+            let m = Leaflet.marker([soldier.gps.lat+this.state.offsetLat, soldier.gps.lan+this.state.offsetLan], 
+                                          {icon: Leaflet.icon({iconUrl:"none", shadowUrl:"none"})})
             route.addLayer(m);
           }
         })
+        //update bounds on the map
         map.fitBounds(route.getBounds());
+        //update the bounds array for all forces - ALL soldiers sits on [0]
+        let arr = this.state.boundryRoutes.slice();
+        arr[0] = route;
+        this.setState({boundryRoutes: arr})
       }
     }
 
@@ -73,11 +81,36 @@ class MapView extends Component {
     //     this.setState({zoom: this.state.zoom-1}) //After 2 second, zoom out
     // }.bind(this), 2000)
     }
+
+    centerForcesPosition(forceID) {
+      var map = this.refs.map.leafletElement;
+      let boundsArray = this.state.boundryRoutes;
+      
+      if(boundsArray[forceID])
+        map.fitBounds(boundsArray[forceID].getBounds());
+
+      else{
+        let route = Leaflet.featureGroup().addTo(map);
+        this.props.soldiers.forEach((soldier) => {
+          if(soldier.gps && soldier.gps != [0,0] && soldier.forceID == forceID){
+            let m = Leaflet.marker([soldier.gps.lat+this.state.offsetLat, soldier.gps.lan+this.state.offsetLan], 
+                                          {icon: Leaflet.icon({iconUrl:"none", shadowUrl:"none"})})
+            route.addLayer(m);
+          }
+        })
+        //update bounds on the map
+        map.fitBounds(route.getBounds());
+        //update the bounds array for #forceID 
+        let arr = this.state.boundryRoutes.slice();
+        arr[forceID] = route;
+        this.setState({boundryRoutes: arr})
+      }
+    }
     
     notifications(soldier, type){
       switch (type) {
         case "emergency":
-            NotificationManager.warning( soldier.name + ' sent help call','Emergency!',10000000000000, () => {});
+            NotificationManager.warning( soldier.name + ' sent help call','Emergency!',10000, () => {});
             break;
         case "disconnect":
             NotificationManager.info( soldier.name + ' has been disconnected from the mesh network','Network Alert!',10000, () => {});
@@ -85,14 +118,12 @@ class MapView extends Component {
         default:
             console.log("Notification route not found")
             break;
-        }          
+        } 
+      //open soldier card           
       this.props.onNewData(soldier, "emergency");
       if(soldier.gps){
          this.centerPosition(soldier.gps.lat, soldier.gps.lan);
       }
-      else
-      //add no gps validation message 
-      ;
     }
 
     updateGPSData = (gps) => {
