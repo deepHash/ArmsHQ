@@ -13,7 +13,8 @@ class EditSolider extends React.Component{
             meshId: this.props.meshId || -1,
             bloodType: this.props.bloodType || '',
             forceID:this.props.forceID||0,
-            role: this.props.role || ''
+            role: this.props.role || '',
+            image:'',
         }
     }
 
@@ -113,7 +114,13 @@ class EditSolider extends React.Component{
                     <Form.Label>Role: </Form.Label>
                     <Form.Control type="text" value={this.state.role} onChange={this.onRoleChange.bind(this)}/>
                 </Form.Group>
-
+                {/* <Form.Group style="display:none">
+                    <Form.Label>Role: </Form.Label>
+                    <Form.Control type="text" value={this.state.image} />
+                </Form.Group>
+                <Form.Group style="display:none">
+                    <Form.Control type="text" value={this.state.gps}/>
+                </Form.Group> */}
                 <Button id="newBtn" variant="outline-secondary" block type="button" onClick={this.onSubmitForm.bind(this)}>{this.renderButtonText()}</Button>
             </Form>
         )

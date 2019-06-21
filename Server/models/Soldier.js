@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
         name: String,
         bloodType: String,
         forceID: String,
-        photo: String,
+        image: String,
         isCommander: Boolean,
         role: String,
         gps: {

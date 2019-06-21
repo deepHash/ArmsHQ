@@ -13,7 +13,8 @@ class SoldierController{
                 forceID: data.forceID,
                 isCommander: false,
                 role: data.role,
-                emerg: false
+                emerg: false,
+                image:'',
             })
             
             soldier.save(
