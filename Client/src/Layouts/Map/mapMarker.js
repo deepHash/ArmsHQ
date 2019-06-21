@@ -3,6 +3,7 @@ import { Marker, Popup } from 'react-leaflet';
 import icons from './mapIcons';
 import Leaflet from 'leaflet';
 import { Button } from 'react-bootstrap';
+import '../../assets/css/markers.css'
 
 export default class mapMarker extends Component {
     
@@ -10,7 +11,7 @@ export default class mapMarker extends Component {
     iconSize = [60, 60];
     iconAnchor = [22, 94];
     popupAnchor = [8, -85];
-
+    
     //regular soldier icon
     soldierIcon = Leaflet.icon({
         iconUrl: icons("soldier").image,
@@ -20,10 +21,11 @@ export default class mapMarker extends Component {
     });
     //emergency soldier icon
     soldierEmergIcon = Leaflet.icon({
-        iconUrl: icons("soldierEmerg").image,
+        iconUrl: icons("soldier").image,
         iconSize: this.iconSize,
         iconAnchor: this.iconAnchor,
-        popupAnchor: this.popupAnchor
+        popupAnchor: this.popupAnchor,
+        className: 'blinking'
     });
     //commander icon
     CommanderIcon = Leaflet.icon({
@@ -34,10 +36,11 @@ export default class mapMarker extends Component {
     });
     //emergency icon
     CommanderEmergIcon = Leaflet.icon({
-        iconUrl: icons("commanderEmerg").image,
+        iconUrl: icons("commander").image,
         iconSize: this.iconSize,
         iconAnchor: this.iconAnchor,
-        popupAnchor: this.popupAnchor
+        popupAnchor: this.popupAnchor,
+        className: 'blinking'
     });
 
     handlePopUpClick(soldier) {

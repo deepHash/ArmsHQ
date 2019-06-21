@@ -41,7 +41,7 @@ class MapView extends Component {
       //emergency data
       socket.on("emergency", this.updateEmergency)
       //disconnected mesh
-      //socket.on("disconnected", this.updateDisconnect)
+      socket.on("disconnected", this.updateDisconnect)
       //acc data
       socket.on("acc", this.updateAcc)
       //pulse data
@@ -72,14 +72,13 @@ class MapView extends Component {
       }
     }
 
-    centerPosition(lat, lan) {
+    centerPosition(soldier) {
       var map = this.refs.map.leafletElement;
-      map.panTo(new Leaflet.LatLng(lat+this.state.offsetLat, lan+this.state.offsetLan));
+      map.panTo(new Leaflet.LatLng(soldier.gps.lat+this.state.offsetLat, soldier.gps.lan+this.state.offsetLan));
       this.setState({state: this.state});
-    //   this.setState({zoom: this.state.zoom+1});
-    //   setTimeout(function() { //Start the timer
-    //     this.setState({zoom: this.state.zoom-1}) //After 2 second, zoom out
-    // }.bind(this), 2000)
+      setTimeout(function() { //Start the timer
+         this.centerForcesPosition(soldier.forceID);
+    }.bind(this), 2500)
     }
 
     centerForcesPosition(forceID) {
@@ -122,7 +121,7 @@ class MapView extends Component {
       //open soldier card           
       this.props.onNewData(soldier, "emergency");
       if(soldier.gps){
-         this.centerPosition(soldier.gps.lat, soldier.gps.lan);
+         this.centerPosition(soldier);
       }
     }
 
