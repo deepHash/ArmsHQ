@@ -1,12 +1,12 @@
-const SerialPort = require('serialport'),
-      EventEmitter = require('events'),
-      portName = process.argv[2],
-      Readline = require('@serialport/parser-readline'),
-      port = new SerialPort(portName, { baudRate: 115200 }),
-      Soldier  = require('../models/Soldier'),
-      staticSet = require('./Updater'),
-      staticData = staticSet(),
-      parser = port.pipe(new Readline()); 
+const SerialPort    = require('serialport'),
+      EventEmitter  = require('events'),
+      portName      = process.argv[2],
+      Readline      = require('@serialport/parser-readline'),
+      port          = new SerialPort(portName, { baudRate: 115200 }),
+      Soldier       = require('../models/Soldier'),
+      staticSet     = require('./Updater'),
+      staticData    = staticSet(),
+      parser        = port.pipe(new Readline()); 
 
 //global shared event emitter
 global.universalEmitter = new EventEmitter();

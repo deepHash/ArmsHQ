@@ -4,4 +4,17 @@
   
   .blinking {
     animation: fade 1s infinite alternate;
+    order: 1;
+    width: 60px;
+    background-color: transparent;
+    border-style: none;
+    white-space: nowrap;
+  }
+
+  .soldier-location {
+    order: 1;
+    width: 60px;
+    background-color: transparent;
+    border-style: none;
+    white-space: nowrap;
   }
