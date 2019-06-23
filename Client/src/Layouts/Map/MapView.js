@@ -37,15 +37,17 @@ class MapView extends Component {
       const socket = socketIoClient(endpoint);
 
       //gps data
-      socket.on("gps", this.updateGPSData)
-      //emergency data
-      socket.on("emergency", this.updateEmergency)
-      //disconnected mesh
-      socket.on("disconnected", this.updateDisconnect)
+      socket.on("gps", this.updateNewData)
       //acc data
-      socket.on("acc", this.updateAcc)
+      socket.on("acc", this.updateNewData)
       //pulse data
-      socket.on("pulse", this.updatePulse)
+      socket.on("pulse", this.updateNewData)
+      //emergency data
+      socket.on("emergency", this.updateAlertData)
+      //disconnected mesh
+      socket.on("disconnected", this.updateAlertData)
+      //reconnected mesh
+      socket.on("reconnected", this.updateAlertData)
     }
 
     componentDidUpdate(){
@@ -59,7 +61,7 @@ class MapView extends Component {
         this.props.soldiers.forEach((soldier) => {
           if(soldier.gps && soldier.gps != [0,0]){
             let m = Leaflet.marker([soldier.gps.lat+this.state.offsetLat, soldier.gps.lan+this.state.offsetLan], 
-                                          {icon: Leaflet.icon({iconUrl:"none", shadowUrl:"none"})})
+                                    {icon: Leaflet.icon({iconUrl:"none", shadowUrl:"none"})})
             route.addLayer(m);
           }
         })
@@ -72,13 +74,52 @@ class MapView extends Component {
       }
     }
 
+    //update soldier data via socket info
+    updateNewData = (socketData) => {
+      var newData = socketData.data;
+      var type = socketData.type;
+      var soldiers = this.props.soldiers;
+      soldiers = soldiers.map((soldier) => {
+        if (soldier.meshID === newData.meshID){
+          switch (type){
+            case "gps":
+                soldier.gps = newData.gps;
+                break;
+            case "pulse":
+                soldier.pulse = newData.pulse;
+                this.props.onNewData(soldier, "pulse");
+                break;
+            case "acc":
+                soldier.acc = newData.acc;
+                this.props.onNewData(soldier, "acc");
+                break;
+          }
+        }
+        return soldier;
+      });
+      this.setState({soldiers});
+    }
+
+    //calling notification and running on soldier 
+    updateAlertData = (socketData) => {
+      var newData = socketData.data;
+      var type = socketData.type;
+      var soldiers = this.props.soldiers;
+      soldiers.forEach((soldier) => {
+        if(soldier.meshID == newData.meshID){
+            soldier.emerg = true;
+            this.notifications(soldier, type);
+        }
+      });
+    }
+
     centerPosition(soldier) {
       var map = this.refs.map.leafletElement;
       map.panTo(new Leaflet.LatLng(soldier.gps.lat+this.state.offsetLat, soldier.gps.lan+this.state.offsetLan));
       this.setState({state: this.state});
       setTimeout(function() { //Start the timer
          this.centerForcesPosition(soldier.forceID);
-    }.bind(this), 2500)
+      }.bind(this), 2500)
     }
 
     centerForcesPosition(forceID) {
@@ -109,80 +150,22 @@ class MapView extends Component {
     notifications(soldier, type){
       switch (type) {
         case "emergency":
-            NotificationManager.warning( soldier.name + ' sent help call','Emergency!',10000, () => {});
+            NotificationManager.warning( soldier.name + ' sent help call','Emergency!',10000);
+            this.props.onNewData(soldier, "emergency"); // open soldier card
+            if(soldier.gps)
+               this.centerPosition(soldier);
             break;
         case "disconnect":
-            NotificationManager.info( soldier.name + ' has been disconnected from the mesh network','Network Alert!',10000, () => {});
+            NotificationManager.info( soldier.name + ' has been disconnected from the mesh network','Network Alert!',10000);
+            this.props.onNewData(soldier, "emergency");
+            break;
+        case "reconnect":
+            NotificationManager.info( soldier.name + ' has been reconnected to the network', 'Network Alert', 10000)
             break;
         default:
             console.log("Notification route not found")
             break;
-        } 
-      //open soldier card           
-      this.props.onNewData(soldier, "emergency");
-      if(soldier.gps){
-         this.centerPosition(soldier);
-      }
-    }
-
-    updateGPSData = (gps) => {
-      var newData = gps.data;
-      var soldiers = this.props.soldiers;
-      soldiers = soldiers.map((soldier) => {
-        if (soldier.meshID === newData.meshID)
-          soldier.gps = newData.gps;
-        return soldier;
-      });
-      this.setState({soldiers});
-    }
-
-    //calling notification and running on soldier 
-    //to change state to emerg: true with positioning 
-    updateEmergency = (emergency) => {
-      var soldiers = this.props.soldiers;
-      soldiers.forEach((soldier) => {
-        if(soldier.meshID == emergency.meshID){
-          soldier.emerg = true;
-          this.notifications(soldier, "emergency");
-        }
-      });
-    }
-
-    updateDisconnect = (disconnect) => {
-      var soldiers = this.props.soldiers;
-      var newData = disconnect.data;
-      soldiers.forEach((soldier) => {
-        if(soldier.meshID == newData.meshID){
-          soldier.emerg = true;
-          console.log(soldier.gps);
-          this.notifications(soldier, "disconnect")
-        }
-      })
-    }
-
-    updatePulse = (pulse) => {
-      var newData = pulse.data;
-      var soldiers = this.props.soldiers;
-      soldiers.forEach((soldier) => {
-        if(soldier.meshID == newData.meshID){
-          soldier.pulse = newData.pulse;
-          this.props.onNewData(soldier, "pulse");
-        return soldier
-        }
-      });
-      this.setState({soldiers});
-    }
-
-    updateAcc = (acc) => {
-      var newData = acc.data;
-      var soldiers = this.props.soldiers;
-      soldiers.forEach((soldier) => {
-        if(soldier.meshID == newData.meshID){
-          soldier.acc = newData.acc;
-        return soldier
-        }
-      });
-      this.setState({soldiers});
+        }           
     }
 
     HandlePopUpClick = (__soldier) => {

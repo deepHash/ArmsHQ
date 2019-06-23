@@ -1,7 +1,6 @@
 'use strict'
 const EventEmitter = require('events');
-
-global.universalEmitter = new EventEmitter();
+global.emitter = new EventEmitter();
 
 class Updater{
     
@@ -12,7 +11,7 @@ class Updater{
     getSoldiers(){
         return this.soldiers;
     }
-    
+
     updateState(soldier, updateData){
 
         //add and update to dynamic current soldier list
@@ -37,14 +36,17 @@ class Updater{
                 }
                 //update message time
                 this.soldiers[i].lastMessage = new Date();
+                
                 //recieved a message after disconnection, setting back to default
-                if(this.soldiers[i].disconnect)
+                if(this.soldiers[i].disconnect){
                     this.soldiers[i].disconnect = undefined;
+                    emitter.emit('RECONNECTED', this.soldiers[i]);
+                }
             }
 
             //if no messages recived for more than 60 seconds, emit to view
             if(new Date() - this.soldiers[i].lastMessage > minute && this.soldiers[i].disconnect == undefined){
-                universalEmitter.emit('DISCONNECTED', this.soldiers[i]);
+                emitter.emit('DISCONNECTED', this.soldiers[i]);
                 this.soldiers[i].disconnect = true;
             }
                     

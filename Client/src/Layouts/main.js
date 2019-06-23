@@ -31,7 +31,6 @@ class MainNew extends Component{
             soldierCardForceID:undefined,
             soldierCardPulse:undefined,
             soldierCardImg:undefined,
-
             // soldierCardAccX:undefined,
             // soldierCardAccY:undefined,
             // soldierCardAccZ:undefined,
@@ -56,7 +55,7 @@ class MainNew extends Component{
                 return(null);
                 
             case 'View All Soldiers':
-                return(<ViewSoldier onSelectSoldier={this.handleSelectSoldier} />)
+                return(< ViewSoldier onSelectSoldier={this.handleSelectSoldier} />)
             
             case 'Add Force':
                 return(< EditSoldier onAddSoldier={this.handleAddSoldier} />);    
@@ -64,19 +63,17 @@ class MainNew extends Component{
     }
 
     handleUpdateData = (soldier, type) => {
-        if(this.state.soldierCardMeshID == soldier.meshID){
-            switch(type){
-                case "pulse":
+        switch(type){
+            case "pulse":
+                if(this.state.soldierCardMeshID == soldier.meshID)
                     this.setState({soldierCardPulse: soldier.pulse});
-            }
-        }
-        //open soldier card that has pass emergency alert
-        if(type == "emergency"){
-            this.handleSelectSoldier(soldier);
-        }
-        //set force position at start
-        if(type == "position"){
-            this.setState({forcePosition: false})
+                break;
+            case "emergency":
+                this.handleSelectSoldier(soldier);
+                break;
+            case "position":
+                this.setState({forcePosition: false});
+                break;
         }
     }
 

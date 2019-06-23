@@ -8,7 +8,9 @@ const express     = require('express'),
       soldierData       = SoldierController(),
       alertData         = AlertController(),
       app         = express(),
-      port        = process.env.PORT || 4000;
+      port        = process.env.PORT || 4000,
+      server      = http.createServer(app),
+      io          = require('socket.io')(server);
 
 
 app.use(bodyParser.json());
@@ -60,13 +62,13 @@ app.post('/addSoldier/', (req, res, next) => {
 /**              TESTING         */
 app.get('/sendhelp/:id', (req, res) => {
     let soldier = {emerg: true, meshID: req.params.id};
-    universalEmitter.emit('Emergency', soldier);
+    emitter.emit('Emergency', soldier);
     res.status(200).json([]);
 });
 
 app.get('/sendDisconnect/:id', (req, res) => {
     let soldier = {emerg: true, meshID: req.params.id};
-    universalEmitter.emit('DISCONNECTED', soldier);
+    emitter.emit('DISCONNECTED', soldier);
     res.status(200).json([]);
 });
 
@@ -76,17 +78,15 @@ app.all('*', (req, res) => {
     res.send(`error: route not found, global handler`);
 });
 
-const server = http.createServer(app),
-      io = require('socket.io')(server);
 
 io.on('connection', socket => {
     console.log("client connected to socket");
     
     //socket emit and DB save for gps
-    universalEmitter.on('GPS', (soldier) =>{
+    emitter.on('GPS', (soldier) =>{
         soldierData.updateGPS(soldier).then((result) => {
             if(result){
-                socket.emit('gps', {data: result});
+                socket.emit('gps', {data: result, type: "gps"});
             }
             // else
             //     //no such MeshID in DB
@@ -95,19 +95,12 @@ io.on('connection', socket => {
             console.log(error);
         })
     });
-
-    universalEmitter.on('Emergency', (soldier) =>{
-        alertData.addNewAlert(soldier).then((error) => {
-            console.log(error);
-        })
-        socket.emit('emergency', {emerg: true, meshID: soldier.meshID, soldierName: soldier.name});
-    });
     
     
-    universalEmitter.on('ACC', (soldier) =>{
+    emitter.on('ACC', (soldier) =>{
         soldierData.updateAcc(soldier).then((result) => {
             if(result){
-                socket.emit('acc', {data: result});
+                socket.emit('acc', {data: result, type: "acc"});
             }
             // else
             // //no such MeshID in DB
@@ -117,25 +110,38 @@ io.on('connection', socket => {
         })
     });
     
-    universalEmitter.on('PULSE', (soldier) =>{
+    emitter.on('PULSE', (soldier) =>{
         soldierData.updatePulse(soldier).then((result) => {
             if(result){
-                socket.emit('pulse', {data: result});
+                socket.emit('pulse', {data: result, type: "pulse"});
             }
             // else
             //     //no such MeshID in DB
             //     console.log(`Error updating pulse for ID: ${soldier.meshID}`);
-            }, (error) => {
-                console.log(error);
-            })
-        });
-    
-    //emits if soldier has not sent a message for more than 60 seconds
-    universalEmitter.on('DISCONNECTED', (soldier) => {
-        console.log("going to emit a disconnect message");
-        socket.emit('disconnected', {data: soldier})
+        }, (error) => {
+            console.log(error);
+        })
     });
     
+    emitter.on('Emergency', (soldier) =>{
+        alertData.addNewAlert(soldier).then((error) => {
+            console.log(error);
+        })
+        socket.emit('emergency', {data: soldier, type: "emergency", emerg: true });
+    });
+    
+    //emits if soldier has not sent a message for more than 60 seconds
+    emitter.on('DISCONNECTED', (soldier) => {
+        console.log(`${soldier.meshID} has been disconnected from the network`);
+        socket.emit('disconnected', {data: soldier, type: "disconnect"});
+    });
+    
+    //emits if soldier has reconnected to the network after being disconnected
+    emitter.on('RECONNECTED', (soldier) => {
+        console.log(`${soldier.meshID} has been reconnected to the network`);
+        socket.emit('reconnected', {data: soldier, type: "reconnect"});
+    });
+
     socket.on('disconnect', () => {
         console.log("client disconnected from socket");
     })
