@@ -9,7 +9,10 @@ class Updater{
         this.soldiers = new Array();
     }
 
-
+    getSoldiers(){
+        return this.soldiers;
+    }
+    
     updateState(soldier, updateData){
 
         //add and update to dynamic current soldier list

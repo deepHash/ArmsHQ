@@ -71,7 +71,6 @@ app.get('/sendDisconnect/:id', (req, res) => {
 });
 
 
-
 //error 404 route
 app.all('*', (req, res) => {
     res.send(`error: route not found, global handler`);

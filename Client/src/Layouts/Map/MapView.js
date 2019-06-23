@@ -21,8 +21,8 @@ class MapView extends Component {
         firstPos: true,
         lat: 32.682400,
         lan: 35.421000,
-        offsetLat: 0.0365,
-        offsetLan: 0.3304,
+        offsetLat: 0.0, //0.0365
+        offsetLan: 0.0, //0.3304
         zoom: 15,
         //socket state vars
         endpoint: "http://127.0.0.1:4000",
@@ -196,18 +196,16 @@ class MapView extends Component {
 
     render() {
       const soldiers  = this.props.soldiers;
-      const pos       = this.props.pos;
       console.log(soldiers);
+      const pos       = this.props.pos;
       var position = [ this.state.lat, this.state.lan ];
-      if(pos){
+      if(pos)
         position = [pos.lat+this.state.offsetLat, pos.lan+this.state.offsetLan];
-      }
       return (
         <div className="Wrapper" >
           <NotificationContainer id="notification"/>
           <Map className="map" center={position} zoom={this.state.zoom} ref="map">
             <TileLayer 
-              attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             <MapMarker soldiers={soldiers} offsetLan={this.state.offsetLan} offsetLat={this.state.offsetLat} onPopUpClick={this.HandlePopUpClick}/>

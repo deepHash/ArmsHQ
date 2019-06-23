@@ -45,7 +45,7 @@ parser.on('data', (data) => {
                     if(row.includes("E:True")){
                         updateData = "emerg";
                         soldier.emerg = true
-                        soldiers.forEach(_soldier => {
+                        staticData.getSoldiers().forEach(_soldier => {
                             if (soldier.meshID == _soldier.meshID){
                                 if(_soldier.emerg == false)
                                     //emit only if its false - emitting once

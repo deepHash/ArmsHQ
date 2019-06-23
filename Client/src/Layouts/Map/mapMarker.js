@@ -3,7 +3,7 @@ import { Marker, Popup } from 'react-leaflet';
 import icons from './mapIcons';
 import Leaflet from 'leaflet';
 import { Button } from 'react-bootstrap';
-import '../../assets/css/markers.css'
+import '../../assets/css/Map.css'
 
 export default class mapMarker extends Component {
     
@@ -17,7 +17,7 @@ export default class mapMarker extends Component {
             iconSize: this.iconSize,
             iconAnchor: this.iconAnchor,
             popupAnchor: this.popupAnchor,
-            className: emergency ? 'blinking' : 'soldier-location',
+            className: emergency ? 'blinking' : 'non-blinking',
             html:   `<svg viewBox="0 0 200.000000 200.000000"> 
             <g transform="translate(0.000000,200.000000) scale(0.100000,-0.100000)"
             fill="#000000" stroke="none">
@@ -46,27 +46,22 @@ export default class mapMarker extends Component {
             iconSize: this.iconSize,
             iconAnchor: this.iconAnchor,
             popupAnchor: this.popupAnchor,
-            className: emergency ? 'blinking' : 'soldier-location',
+            className: emergency ? 'blinking' : 'non-blinking',
             html:   `<svg viewBox="0 0 200.000000 200.000000">
             <g transform="translate(0.000000,200.000000) scale(0.100000,-0.100000)"
             fill="#000000" stroke="none">
             <path fill=${color} d="M883 1745 c-171 -37 -321 -175 -373 -344 -23 -73 -27 -210 -8 -291
             13 -59 458 -930 482 -945 11 -7 21 -7 32 0 24 15 472 893 484 948 13 61 13
-            199 -1 257 -18 79 -71 172 -134 235 -127 129 -302 179 -482 140z m85 -157
-            c-11 -35 -27 -78 -34 -96 -8 -18 -14 -41 -14 -50 0 -10 -7 -28 -16 -40 -14
-            -21 -22 -22 -150 -22 -106 0 -134 3 -134 13 0 25 76 132 116 164 72 56 152 91
-            215 92 l37 1 -20 -62z m196 29 c32 -15 76 -41 98 -59 41 -32 118 -140 118
-            -165 0 -10 -29 -13 -139 -13 l-139 0 -10 28 c-14 36 -51 146 -67 201 l-14 43
-            48 -4 c26 -3 73 -17 105 -31z m242 -338 c16 -164 -78 -325 -235 -402 -61 -30
-            -73 -32 -171 -32 -100 0 -109 2 -175 34 -59 30 -67 36 -51 45 9 6 31 23 48 38
-            17 15 40 30 50 34 10 3 18 10 18 15 0 5 7 9 15 9 8 0 15 5 15 10 0 6 7 10 15
-            10 8 0 15 4 15 8 0 19 49 32 75 20 14 -6 25 -15 25 -20 0 -4 7 -8 15 -8 8 0
-            15 -4 15 -10 0 -5 7 -10 15 -10 8 0 15 -4 15 -8 0 -5 18 -18 40 -31 22 -12 40
-            -26 40 -30 0 -11 48 -32 54 -23 2 4 -15 66 -39 137 l-43 130 32 27 c17 15 46
-            35 64 45 17 10 32 21 32 25 0 5 7 8 15 8 8 0 15 4 15 9 0 14 64 51 73 42 4 -4
-            10 -36 13 -72z m-755 54 c16 -10 29 -21 29 -25 0 -4 6 -8 14 -8 8 0 16 -4 18
-            -8 2 -4 31 -27 66 -51 64 -45 68 -50 54 -67 -7 -7 -41 -109 -78 -232 -5 -19
-            -34 3 -79 59 -39 50 -70 122 -80 192 -9 56 2 157 17 157 5 0 23 -8 39 -17z"/>
+            199 -1 257 -18 79 -71 172 -134 235 -127 129 -302 179 -482 140z m201 -100
+            c226 -48 369 -274 312 -495 -33 -127 -107 -219 -218 -271 -69 -32 -79 -34
+            -179 -34 -101 0 -108 1 -181 37 -151 75 -240 232 -224 398 8 86 8 87 38 145
+            58 112 162 194 279 220 83 17 91 17 173 0z"/>
+            <path d="M929 1528 c-28 -57 -53 -104 -54 -106 -2 -2 -47 -10 -101 -18 -137
+            -20 -144 -22 -144 -43 0 -11 36 -53 85 -98 l84 -78 -19 -105 c-11 -58 -20
+            -113 -20 -122 0 -29 34 -21 140 32 l100 50 100 -50 c106 -53 140 -61 140 -32
+            0 9 -9 64 -20 122 l-19 105 84 78 c49 45 85 87 85 98 0 21 -7 23 -144 43 -54
+            8 -99 16 -101 18 -1 2 -26 49 -54 106 -39 78 -56 102 -71 102 -15 0 -32 -24
+            -71 -102z"/>
             </g>
             </svg>`
         })
@@ -116,16 +111,11 @@ export default class mapMarker extends Component {
       setIcon(soldier){
         let icon;
         const colorArray = ["#a6cee3", "#1f78b4", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#6a3d9a", "#b15928"]
-        if(soldier.emerg)
-            if(soldier.isCommander)
-                icon = this.createCommanderIcon(colorArray[soldier.forceID], true);
-            else
-                icon = this.createSoldierIcon(colorArray[soldier.forceID], true);
+
+        if(soldier.isCommander)
+            icon = this.createCommanderIcon(colorArray[soldier.forceID], soldier.emerg);
         else
-            if(soldier.isCommander)
-                icon = this.createCommanderIcon(colorArray[soldier.forceID], false);
-            else
-                icon = this.createSoldierIcon(colorArray[soldier.forceID], false);
+            icon = this.createSoldierIcon(colorArray[soldier.forceID], soldier.emerg);
         return icon;    
       }
 

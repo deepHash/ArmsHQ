@@ -10,5 +10,26 @@
   overflow: hidden;
 }
 
+@keyframes fade { 
+  from { opacity: 0.3; } 
+}
+
+.blinking {
+  animation: fade 0.5s infinite alternate;
+  order: 1;
+  width: 60px;
+  background-color: transparent;
+  border-style: none;
+  white-space: nowrap;
+}
+
+.non-blinking {
+  order: 1;
+  width: 60px;
+  background-color: transparent;
+  border-style: none;
+  white-space: nowrap;
+}
+
 
   
