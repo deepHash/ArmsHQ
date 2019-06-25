@@ -1,0 +1,91 @@
+.wrapper {
+  background-color: #d8d8ac; background-image: linear-gradient(315deg, #d8d8ac 0%, #c8c85e 74%);
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Login {
+  background: #27282d;
+  height: 340px;
+  width: 520px;
+  margin: 0 auto;
+  border-radius: 5px;
+  box-shadow: 0px 4px 30px -5px rgba(0, 0, 0, 0.65);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-container {
+  color: white;
+  position: relative;
+  margin-bottom: 30px;
+  width: 340px;
+}
+
+h1 {
+  font-size: 5em;
+  font-family:'Special Elite';
+  text-align: center;
+}
+
+
+input{
+  letter-spacing: 1.3px;
+}
+
+input {
+  box-sizing: border-box;
+  background: transparent;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #626571;
+  color: #ccced3;
+  padding: 12px 6px 12px 36px;
+  font-size: 19px;
+  outline: none;
+  caret-color: #e55b8d;
+}
+
+input:focus {
+  border-bottom: 1px solid transparent;
+  border-image: linear-gradient(140deg, #db6241 0%, #e55b8d 100%);
+  border-image-slice: 1;
+}
+
+input:focus + i {
+  color: #ccced3;
+}
+
+::placeholder {
+  color: #ccced3;
+  opacity: 0.4;
+}
+
+i {
+  color: #626571;
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: color 0.3s;
+}
+
+
+@media screen and (max-width: 620px) {
+  .App {
+    min-height: 300px;
+    max-height: 420px;
+    width: 90vw;
+  }
+
+  .input-container {
+    width: 80%;
+    margin-bottom: 40px;
+  }
+
+}
