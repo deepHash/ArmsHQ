@@ -156,7 +156,7 @@ class MapView extends Component {
                this.centerPosition(soldier);
             break;
         case "disconnect":
-            NotificationManager.info( soldier.name + ' has been disconnected from the mesh network','Network Alert!',10000);
+            NotificationManager.info( soldier.name + ' disconnected from the network','Network Alert!',10000);
             this.props.onNewData(soldier, "emergency");
             break;
         case "reconnect":

@@ -7,7 +7,7 @@
   top: 0;
   right: 0;
   z-index: 999999;
-  width: 320px;
+  width: 435px;
   padding: 0px 15px;
   max-height: calc(100% - 10px);
   overflow-x: hidden;
@@ -78,43 +78,53 @@ NotificationManager.notification:before {
   line-height: 28px;
 }
 
-.notification-info {
-  background-color: #2f96b4;
-}
-
-.notification-info:before {
-  content: "";
-}
-
 .notification-success {
   background-color: #51a351;
-}
-
-.notification-success:before {
-  content: "";
 }
 
 .notification-warning {
   background-color: #bd362f;
 }
 
-.notification-warning:before {
-  font-family: 'Font Awesome 5 Free';
-  font-weight: 900;
-  content: "\F06A";
-  font-size: 5em;
-  display: inline-block;
-  margin-right: 25px;
-  margin-bottom: 10px;
+.notification-info {
+  background-color: #2f96b4;
 }
 
 .notification-error {
   background-color: #bd362f;
 }
 
-.notification-error:before {
-  content: "";
+.notification-success:before {
+  content: "";
 }
+
+.notification-warning:before {
+  content: "\F06A";
+  margin-right: 25px;
+  margin-bottom: 10px;
+  position: absolute;
+  left: 17px;
+  top: 36px;
+}
+
+.notification-warning .notification-message{
+  margin-left:80px
+}
+
+.notification-info:before, .notification-warning:before{
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  font-size: 5em;
+  display: inline-block;
+
+}
+.notification-info:before {
+  content: "\F05A";
+  margin-right: 40px;
+  margin-bottom: 10px;
+}
+
+
 .notification-message{
   font-size: 15px;
   display: inline-block;
