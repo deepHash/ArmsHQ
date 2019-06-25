@@ -53,6 +53,14 @@ class MapView extends Component {
     componentDidUpdate(){
       var map = this.refs.map.leafletElement;
       map.invalidateSize() //fixes invalid tiles sizes
+      
+      //focus on specific force
+      if(this.props.focusOnForce!=undefined){
+        console.log("33333333333333333")
+        console.log(this.props.focusOnForce)
+        this.centerForcesPosition(this.props.focusOnForce);
+        // this.props.focusOnForce=false;
+      }
 
       //set marker for each soldier gps and create map bound for arrayOfMarkers => route
       if(this.props.forcePos == true){

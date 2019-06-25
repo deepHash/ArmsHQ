@@ -7,11 +7,15 @@ import EditSoldier from './Soldiers/EditSoldier';
 import { connect } from 'react-redux';
 import { changePage } from '../actions/pagesActions';
 import ViewSoldier from './Soldiers/ViewSoldier';
+// import ViewForce from './ViewForce';
 import SoldierCard from './Soldiers/SoldierCard';
 import SoldiersList from './Soldiers/SoldiersList';
 
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
+import DropdownButton from 'react-bootstrap/DropdownButton'
+import Dropdown from 'react-bootstrap/Dropdown'
+import SplitButton from 'react-bootstrap/SplitButton'
 import Card from 'react-bootstrap/Card'
 
 import '../assets/css/main.css';
@@ -20,6 +24,7 @@ class MainNew extends Component{
     constructor(props){
         super(props);
         this.state = {
+            forceIDSelected: undefined,
             forcePosition: true,
             setNewPos: false,
             openSoldierCard:false,
@@ -38,9 +43,21 @@ class MainNew extends Component{
         }
         this.RemoveFloatingCard = this.RemoveFloatingCard.bind();
     }
-
+    
     componentDidMount(){
         this.props.fetchSoldiers();
+    }
+    
+    GetForces = () => {
+        var forcesList=[]
+        this.props.soldiers.forEach(soldier => {
+            if((soldier.isCommander==true) && (forcesList.includes(soldier.forceID)==false) ){
+                forcesList.push({'id':soldier.forceID,'commander':soldier.name})            
+            }
+           
+        });    
+        console.log(forcesList)
+        return forcesList;
     }
 
     RemoveFloatingCard(){
@@ -52,13 +69,13 @@ class MainNew extends Component{
     renderFloatingCard(){
         switch(this.props.currPage){
             case undefined:
-                return(null);
-                
+                return(null);          
             case 'View All Soldiers':
                 return(< ViewSoldier onSelectSoldier={this.handleSelectSoldier} />)
-            
-            case 'Add Force':
+            case 'Add Soldier':
                 return(< EditSoldier onAddSoldier={this.handleAddSoldier} />);    
+            // case 'View Force':
+            //     return(< ViewForce onSelectForce={this.handleSelectForce} />);    
         }
     }
 
@@ -101,6 +118,9 @@ class MainNew extends Component{
         //     }
         // }
     }
+    handleSelectForce = (forceID) => {
+        this.setState({forceIDSelected: forceID})
+    }
 
     handleExitSoldierCard = () => {
         this.setState({openSoldierCard: false})
@@ -111,6 +131,8 @@ class MainNew extends Component{
     }
 
   render() {
+    var forces=this.GetForces()
+
     return (
         <div>
             <Navbar bg="light" expand="lg">
@@ -119,11 +141,20 @@ class MainNew extends Component{
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
                         <Nav.Link onClick={this.props.changePage.bind(this,undefined)}>Home</Nav.Link>
+                       
                         {Pages.map(({text}, index) => (
                             <Nav.Link onClick={this.props.changePage.bind(this,text)} key={index}>
                                 {text}
                             </Nav.Link>
                         ))}
+                         <DropdownButton id="dropdown-item-button" title="View Force">
+                            {forces.map(( item ) => (
+                                <Dropdown.Item as="button"
+                                    onClick={(e) => this.handleSelectForce(item.id)}>
+                                   Force #{item.id}, Commander {item.commander}
+                                </Dropdown.Item>
+                            ))}
+                        </DropdownButton>
                     </Nav>
                     {/* search bar */}
                     <SoldiersList onSelectSoldier={this.handleSelectSoldier} items={this.props.soldiers}/>
@@ -133,7 +164,7 @@ class MainNew extends Component{
                 <Card id="FloatingCard" style={{display: this.props.currPage===undefined? "none":this.state.currPage===false ? "none": "block"}}>
                         {this.renderFloatingCard()}
                 </Card>
-                <Map pos={this.state.setNewPos} forcePos={this.state.forcePosition} soldiers={this.props.soldiers} onNewData={this.handleUpdateData} />
+                <Map focusOnForce={this.state.forceIDSelected} pos={this.state.setNewPos} forcePos={this.state.forcePosition} soldiers={this.props.soldiers} onNewData={this.handleUpdateData} />
                 <Card id="FloatingCardSoldier" style={{display:this.state.openSoldierCard === undefined ? "none" : this.state.openSoldierCard === false ?"none":"block"}}>
                     < SoldierCard onExitSoldierCard={this.handleExitSoldierCard} 
                         name={this.state.soldierCardName} 
@@ -148,6 +179,19 @@ class MainNew extends Component{
                         accZ={this.state.soldierCardAccZ} */}
                         
                 </Card>
+                <SplitButton
+                    drop="up"
+                    variant="secondary"
+                    title={`Last Alert: `}
+                    id="dropdown-button-drop-up"
+                    key='up'
+                >
+                    <Dropdown.Item eventKey="1">Action</Dropdown.Item>
+                    <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
+                    <Dropdown.Item eventKey="3">Something else here</Dropdown.Item>
+                    <Dropdown.Divider />
+                    <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
+                </SplitButton>
          </div>       
         </div>
     );

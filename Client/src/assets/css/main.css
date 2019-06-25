@@ -24,6 +24,7 @@ div.nav-item, Nav.Link{
     opacity: 0.85;
     overflow-y: auto;
     max-height: 485px;
+    text-align: center;
 }
 #FloatingCard::-webkit-scrollbar-track
 {
@@ -104,4 +105,30 @@ input.inputStyle{
     width: 100px;
     display: block;
     margin: 0 auto;
+}
+.btn-primary,#dropdown-item-button{
+    color:rgba(0,0,0,.5);
+    background-color: transparent;
+    border-color: transparent;
+    border: transparent;
+    box-shadow: none;
+    padding: 7.1%;
+}
+.btn-primary:hover{
+    color:rgba(0,0,0,.7);
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+}
+/* .dropdown-item:hover, .dropdown-item:focus {
+    background-color:transparent;
+} */
+.dropdown-menu{
+    z-index: 10000;
+}
+.dropup {
+    position: absolute;
+    bottom: 4px;
+    z-index: 400;
+    opacity: 0.85;
 }
