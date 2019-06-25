@@ -1,8 +1,12 @@
 import React, { Component } from "react";
+import { userNameChange, userPasswordChange, userLoginSubmit } from "./actions/userActions";
 import { Button, Form, Row, Col } from "react-bootstrap";
+import { connect } from "react-redux";
+import  User from "./services/userService";
+
 import "./assets/css/login.css";
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -10,6 +14,19 @@ export default class Login extends Component {
       username: "",
       password: ""
     };
+  }
+
+  isLogin() {
+    if (User.isLogin()) {
+      this.props.history.push("/main");
+    }
+  }
+
+  componentDidUpdate() {
+    this.isLogin();
+  }
+  componentWillMount() {
+    //this.isLogin();
   }
 
   validateForm() {
@@ -24,41 +41,41 @@ export default class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    this.props.onLoginSubmit(
+      this.state.username,
+      this.state.password
+    );
   }
 
   render() {
     return (
-      <div>
+      <div className="wrapper">
         <Row>
-          <Col md={4}>ARMS</Col>
+          <Col md={12}><h1>ARMS</h1></Col>
         </Row>
         <div className="Login">
           <Form onSubmit={this.handleSubmit}>
-            <Form.Group className="input-container" controlId="username" bsSize="large">
-            <Form.Label>Username</Form.Label>
+            <Form.Group className="input-container" controlId="username">
+            <Form.Label className="label">Username</Form.Label>
               <Form.Control
                 autoFocus
                 type="text"
                 value={this.state.username}
                 onChange={this.handleChange}
               />
-              <i class="zmdi zmdi-account zmdi-hc-lg"></i>
             </Form.Group>
-            <Form.Group className="input-container" controlId="password" bsSize="large">
-            <Form.Label>Password</Form.Label>
+            <Form.Group className="input-container" controlId="password">
+            <Form.Label className="label">Password</Form.Label>
               <Form.Control
                 value={this.state.password}
                 onChange={this.handleChange}
                 type="password"
               />
-              <i class="zmdi zmdi-account zmdi-hc-lg"></i>
             </Form.Group>
-            <Button variant="secondary"
+            <Button variant="success"
               block
-              bsSize="large"
               disabled={!this.validateForm()}
-              type="submit"
-            >
+              type="submit">
               Login
             </Button>
           </Form>
@@ -67,3 +84,14 @@ export default class Login extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return state;
+};
+
+const mapDispatchToProps = {
+  onUserNameChange: userNameChange,
+  onUserPasswordChange: userPasswordChange,
+  onLoginSubmit: userLoginSubmit
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

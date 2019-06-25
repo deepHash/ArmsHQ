@@ -1,7 +1,8 @@
-import { FETCH_SOLDIERS, SET_POSITION, ADD_SOLDIER} from '../actions/types';
+import { FETCH_SOLDIERS, FETCH_ALERTS, SET_POSITION, ADD_SOLDIER} from '../actions/types';
 
 const initialState = {
   items: [],
+  alerts: [],
   item: {}
 };
 
@@ -11,6 +12,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         items: action.payload
+      };
+    case FETCH_ALERTS:
+      return {
+        ...state,
+        alerts: action.payload
       };
     case ADD_SOLDIER:
       return{

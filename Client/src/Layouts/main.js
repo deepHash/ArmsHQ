@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Map from './Map/MapView';
 import { fetchSoldiers } from '../actions/soldierActions';
+import { fetchAlerts } from '../actions/soldierActions';
 import Pages from './Router/pages';
 import EditSoldier from './Soldiers/EditSoldier';
 import { connect } from 'react-redux';
@@ -41,6 +42,7 @@ class MainNew extends Component{
 
     componentDidMount(){
         this.props.fetchSoldiers();
+        this.props.fetchAlerts();
     }
 
     RemoveFloatingCard(){
@@ -157,7 +159,8 @@ class MainNew extends Component{
 
   const mapStateToProps = state => ({
     currPage: state.pages.curr,
-    soldiers: state.soldiers.items
+    soldiers: state.soldiers.items,
+    alerts: state.soldiers.alerts,
   });
   
-  export default connect(mapStateToProps,{changePage,fetchSoldiers})(MainNew)
+  export default connect(mapStateToProps,{changePage,fetchSoldiers,fetchAlerts})(MainNew)

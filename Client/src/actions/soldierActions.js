@@ -1,4 +1,4 @@
-import { FETCH_SOLDIERS, ADD_SOLDIER } from './types';
+import { FETCH_SOLDIERS, FETCH_ALERTS, ADD_SOLDIER } from './types';
 
 export const fetchSoldiers = () => dispatch => {
   fetch('http://localhost:4000/getAllsoldiers')
@@ -10,6 +10,19 @@ export const fetchSoldiers = () => dispatch => {
       })
     );
 };
+
+export const fetchAlerts = () => dispatch => {
+  fetch('http://localhost:4000/getAllAlerts')
+    .then(res => res.json())
+    .then(alerts =>
+      dispatch({
+        type: FETCH_ALERTS,
+        payload: alerts
+      })
+    );
+};
+
+
 
 export const addNewSoldier = soldierData => dispatch => {
   fetch('http://localhost:4000/addSoldier', {
