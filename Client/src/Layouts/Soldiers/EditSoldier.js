@@ -27,7 +27,7 @@ class EditSolider extends React.Component{
             default:
                 title = 'Edit Soldier'
         }
-        return <h2>{title}</h2>
+        return <h4><b>{title}</b></h4>
     }
 
     renderButtonText(){

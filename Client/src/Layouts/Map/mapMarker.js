@@ -89,6 +89,7 @@ export default class mapMarker extends Component {
                     <Popup>
                         ID: { soldier.meshID }<br/>
                         Name: { soldier.name }<br/>
+                        Force ID: { soldier.forceID }<br/>
                         {resolveButton}
                     </Popup>
                 </Marker>
