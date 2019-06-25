@@ -87,6 +87,7 @@ input.inputStyle{
     border:'0px';
     border-Radius: '2px';       
     padding: '3px 5px';
+    font-family:'Roboto', sans-serif;
 }
 
 #hideSearch{
@@ -106,7 +107,7 @@ input.inputStyle{
     display: block;
     margin: 0 auto;
 }
-.btn-primary,#dropdown-item-button{
+#dropdown-item-button{
     color:rgba(0,0,0,.5);
     background-color: transparent;
     border-color: transparent;
@@ -114,7 +115,7 @@ input.inputStyle{
     box-shadow: none;
     padding: 7.1%;
 }
-.btn-primary:hover{
+#dropdown-item-button:hover{
     color:rgba(0,0,0,.7);
     background-color: transparent;
     border-color: transparent;
@@ -129,6 +130,39 @@ input.inputStyle{
 .dropup {
     position: absolute;
     bottom: 4px;
+    right: 25%;
     z-index: 400;
     opacity: 0.85;
 }
+
+.dropup .dropdown-menu{
+    overflow-y: auto;
+    max-height: 300px;
+    left: -100px
+}
+.dropup .dropdown-menu::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+.dropup .dropdown-menu::-webkit-scrollbar
+{
+    width: 12px;
+}
+
+.dropup .dropdown-menu::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
+.btn.btn-secondary:first-of-type{
+    width: 617px
+}
+div.dropdown-menu.show{
+    left: -6px;
+
+}
+

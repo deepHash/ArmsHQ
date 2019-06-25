@@ -44,7 +44,6 @@ class MainNew extends Component{
         }
         this.RemoveFloatingCard = this.RemoveFloatingCard.bind();
     }
-    
     componentDidMount(){
         this.props.fetchSoldiers();
         this.props.fetchAlerts();
@@ -58,8 +57,20 @@ class MainNew extends Component{
             }
            
         });    
-        console.log(forcesList)
         return forcesList;
+    }
+
+    GetAlertsWithSoldiersName = () => {
+        var alertList=[]
+        this.props.alerts.forEach(alert => {
+            this.props.soldiers.forEach(soldier => {
+                if(soldier.meshID==alert.meshID){
+                    alertList.push({'soldierName':soldier.name,'type':alert.type,'date':alert.date})            
+                }
+            });  
+        });    
+        alertList.reverse()
+        return alertList;
     }
 
     RemoveFloatingCard(){
@@ -134,7 +145,7 @@ class MainNew extends Component{
 
   render() {
     var forces=this.GetForces()
-
+    var alerts=this.GetAlertsWithSoldiersName()
     return (
         <div>
             <Navbar bg="light" expand="lg">
@@ -153,7 +164,7 @@ class MainNew extends Component{
                             {forces.map(( item ) => (
                                 <Dropdown.Item as="button"
                                     onClick={(e) => this.handleSelectForce(item.id)}>
-                                   Force #{item.id}, Commander {item.commander}
+                                   Force #{item.id}, Commanding {item.commander}
                                 </Dropdown.Item>
                             ))}
                         </DropdownButton>
@@ -181,19 +192,17 @@ class MainNew extends Component{
                         accZ={this.state.soldierCardAccZ} */}
                         
                 </Card>
-                <SplitButton
+                <DropdownButton
                     drop="up"
                     variant="secondary"
-                    title={`Last Alert: `}
+                    title={`Alerts`}
                     id="dropdown-button-drop-up"
                     key='up'
                 >
-                    <Dropdown.Item eventKey="1">Action</Dropdown.Item>
-                    <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
-                    <Dropdown.Item eventKey="3">Something else here</Dropdown.Item>
-                    <Dropdown.Divider />
-                    <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
-                </SplitButton>
+                    {alerts.map(( alert ) => (
+                        <Dropdown.Item eventKey="1" >Soldier Name: {alert.soldierName}, Alert Type: {alert.type}, Date: {alert.date}</Dropdown.Item>
+                    ))}
+                </DropdownButton>
          </div>       
         </div>
     );
