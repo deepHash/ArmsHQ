@@ -7,7 +7,7 @@ var mongoose    = require('mongoose'),
         meshID: {type: Number, required: true},
         messageID: String,
         type: String,
-        date: {type: String, required: true, default: dateFormat(now, "isoUtcDateTime")}
+        date: {unique:true, type: String, required: true, default: dateFormat(now, "d/m/yy HH:MM:ss")}
     }, {collection: 'Alert'});
 
     var Alert = mongoose.model('Alert', AlertSchema);

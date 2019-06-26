@@ -124,7 +124,7 @@ io.on('connection', socket => {
     });
     
     emitter.on('Emergency', (soldier) =>{
-        alertData.addNewAlert(soldier).then((error) => {
+        alertData.addNewAlert(soldier,"Emergency").then((error) => {
             console.log(error);
         })
         socket.emit('emergency', {data: soldier, type: "emergency", emerg: true });
@@ -133,6 +133,9 @@ io.on('connection', socket => {
     //emits if soldier has not sent a message for more than 60 seconds
     emitter.on('DISCONNECTED', (soldier) => {
         console.log(`${soldier.meshID} has been disconnected from the network`);
+        alertData.addNewAlert(soldier,"Disconnected").then((error) => {
+            console.log(error);
+        })
         socket.emit('disconnected', {data: soldier, type: "disconnect"});
     });
     

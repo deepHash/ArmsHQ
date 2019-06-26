@@ -159,10 +159,10 @@ input.inputStyle{
     background-color: #555;
 }
 .btn.btn-secondary:first-of-type{
-    width: 617px
+    width: 630px
 }
 div.dropdown-menu.show{
-    left: -6px;
+    /* left: -6px !important; */
 
 }
 

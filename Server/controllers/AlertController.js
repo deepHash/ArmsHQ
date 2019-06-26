@@ -1,6 +1,7 @@
 'use strict'
 var Alert  = require('../models/Alert'),
-    Promise  = require('promise');
+    Promise  = require('promise'),
+    dateFormat  = require('dateformat');
 
 class AlertController{
 
@@ -13,20 +14,16 @@ class AlertController{
         })
     }
 
-    addNewAlert(soldier){
+    addNewAlert(soldier,alertType){
+
         return new Promise((resolve, reject) => {
-            let alertType;
 
             //setting type of emergency
-            if(soldier.emerg === true)
-                alertType = "Emergency";
-            else
-                alertType = "Other";
-
             let alert = new Alert({
                 meshID: soldier.meshID,
                 MessageID: soldier.msgID,
-                type: alertType
+                type: alertType,
+                date:dateFormat(new Date(), "d/m/yy HH:MM:ss")
             })
             //save new emergency alert
             alert.save(

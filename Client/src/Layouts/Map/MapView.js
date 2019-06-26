@@ -56,8 +56,6 @@ class MapView extends Component {
       
       //focus on specific force
       if(this.props.focusOnForce!=undefined){
-        console.log("33333333333333333")
-        console.log(this.props.focusOnForce)
         this.centerForcesPosition(this.props.focusOnForce);
         // this.props.focusOnForce=false;
       }
@@ -153,6 +151,7 @@ class MapView extends Component {
         arr[forceID] = route;
         this.setState({boundryRoutes: arr})
       }
+      this.props.onNewData(undefined, "forceID"); // open soldier card
     }
     
     notifications(soldier, type){

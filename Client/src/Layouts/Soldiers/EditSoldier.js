@@ -97,7 +97,7 @@ class EditSolider extends React.Component{
                 </Form.Group>
                 <Form.Group controlId="formGridMeshID">
                     <Form.Label>Mesh ID: </Form.Label>
-                    <Form.Control type="number" value={this.state.meshId} onChange={this.onMeshIdChange.bind(this)}/>
+                    <Form.Control type="text" value={this.state.meshId} onChange={this.onMeshIdChange.bind(this)}/>
                 </Form.Group>
 
                 <Form.Group controlId="formGridForceId">

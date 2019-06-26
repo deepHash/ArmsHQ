@@ -46,9 +46,10 @@ class MainNew extends Component{
     }
     componentDidMount(){
         this.props.fetchSoldiers();
+    }
+    componentDidUpdate(){
         this.props.fetchAlerts();
     }
-    
     GetForces = () => {
         var forcesList=[]
         this.props.soldiers.forEach(soldier => {
@@ -104,12 +105,16 @@ class MainNew extends Component{
             case "position":
                 this.setState({forcePosition: false});
                 break;
+            case "forceID":
+                this.setState({forceIDSelected: undefined});
+
         }
     }
 
     handleAddSoldier = () => {
         //@Todo update the soldiers array after a new soldier was added
         this.props.fetchSoldiers();
+        this.props.changePage.bind(this,undefined);
     }
 
     handleSelectSoldier = (soldier) => {
@@ -139,9 +144,9 @@ class MainNew extends Component{
         this.setState({openSoldierCard: false})
     }
 
-    handleExitLeftCard = () => {
-        this.setState({openLeftCard: true})
-    }
+    // handleExitLeftCard = () => {
+    //     this.setState({openLeftCard: !(this.state.openLeftCard)})
+    // }
 
   render() {
     var forces=this.GetForces()
@@ -198,9 +203,10 @@ class MainNew extends Component{
                     title={`Alerts`}
                     id="dropdown-button-drop-up"
                     key='up'
+                    role='menu'
                 >
                     {alerts.map(( alert ) => (
-                        <Dropdown.Item eventKey="1" >Soldier Name: {alert.soldierName}, Alert Type: {alert.type}, Date: {alert.date}</Dropdown.Item>
+                        <Dropdown.Item role='menueitem' eventKey="1" >Soldier Name: {alert.soldierName}, Alert Type: {alert.type}, Date: {alert.date}</Dropdown.Item>
                     ))}
                 </DropdownButton>
          </div>       

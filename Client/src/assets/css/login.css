@@ -66,15 +66,6 @@ input:focus + i {
   opacity: 0.4;
 }
 
-i {
-  color: #626571;
-  position: absolute;
-  left: 6px;
-  top: 50%;
-  transform: translateY(-50%);
-  transition: color 0.3s;
-}
-
 
 @media screen and (max-width: 620px) {
   .App {
