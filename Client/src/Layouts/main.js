@@ -87,7 +87,7 @@ class MainNew extends Component{
             case 'View All Soldiers':
                 return(< ViewSoldier onSelectSoldier={this.handleSelectSoldier} />)
             case 'Add Soldier':
-                return(< EditSoldier onAddSoldier={this.handleAddSoldier} />);    
+                return(< EditSoldier onAddSoldier={this.handleAddSoldier} soldiers={this.props.soldiers} />);    
             // case 'View Force':
             //     return(< ViewForce onSelectForce={this.handleSelectForce} />);    
         }

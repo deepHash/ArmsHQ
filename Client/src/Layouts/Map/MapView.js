@@ -167,7 +167,7 @@ class MapView extends Component {
             this.props.onNewData(soldier, "emergency");
             break;
         case "reconnect":
-            NotificationManager.info( soldier.name + ' has been reconnected to the network', 'Network Alert', 10000)
+            NotificationManager.info( soldier.name + ' was reconnected to the network', 'Network Alert', 10000)
             break;
         default:
             console.log("Notification route not found")

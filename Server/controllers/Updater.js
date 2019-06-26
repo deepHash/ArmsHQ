@@ -16,7 +16,7 @@ class Updater{
 
         //add and update to dynamic current soldier list
         let found = false;
-        let minute = 60 * 1000;
+        let minute = 60 * 100;
         for(var i = 0; i < this.soldiers.length; i++) {
             if (this.soldiers[i].meshID == soldier.meshID) { 
                 found = true;
