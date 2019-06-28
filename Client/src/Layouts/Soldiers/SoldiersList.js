@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 
-import '../../assets/css/Search.css';
+import '../../assets/css/search.css';
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import { MDBBtn } from "mdbreact";

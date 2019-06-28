@@ -113,7 +113,11 @@ class MapView extends Component {
       var soldiers = this.props.soldiers;
       soldiers.forEach((soldier) => {
         if(soldier.meshID == newData.meshID){
-            soldier.emerg = true;
+          //stop the blinking if reconnected
+            if(type == "reconnect")
+              soldier.emerg = false;
+            else
+              soldier.emerg = true;
             this.notifications(soldier, type);
         }
       });
