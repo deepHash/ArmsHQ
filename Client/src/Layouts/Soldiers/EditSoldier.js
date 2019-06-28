@@ -60,12 +60,12 @@ class EditSolider extends React.Component{
     onMeshIdChange(event){
         const meshId = event.target.value;
         var isUnique = true;
+        this.setState({meshId});
         if(meshId > 0){
-            this.props.soldiers.forEach(soldier => {
-                if(soldier.meshID == this.state.meshId)
-                    isUnique = false;
-            });
-            console.log(isUnique);
+            // this.props.soldiers.forEach(soldier => {
+            //     if(soldier.meshID === this.state.meshId)
+            //         isUnique = false;
+            // });
             this.setState({meshId, isUnique})
         }
     }
@@ -88,8 +88,13 @@ class EditSolider extends React.Component{
     }
     onSubmitForm(event){
         const form = event.currentTarget;
-        if(form.checkValidity() === false){
-            this.setState({validated: true});
+        var isUnique = true;
+        this.props.soldiers.forEach(soldier => {
+            if(soldier.meshID == this.state.meshId)
+                isUnique = false;
+        });
+        if(form.checkValidity() === false || !isUnique){
+            this.setState({validated: true, isUnique});
             event.preventDefault();
             event.stopPropagation();
         }
@@ -129,13 +134,13 @@ class EditSolider extends React.Component{
                 </Form.Group>
                 <Form.Group controlId="formGridMeshID">
                     <Form.Label>Mesh ID: </Form.Label>
-                    <Form.Control type="text" value={this.state.meshId} onChange={this.onMeshIdChange.bind(this)}/>
+                    <Form.Control style={{borderColor:(this.state.isUnique ? "" : "red")}} type="number" value={this.state.meshId} onChange={this.onMeshIdChange.bind(this)}/>
                     <div className="showValidMeshID" style={{display:(this.state.isUnique ? 'none':'block')}}>This mesh ID is in use</div>
                 </Form.Group>
 
                 <Form.Group controlId="formGridForceId">
                     <Form.Label>Force ID: </Form.Label>
-                    <Form.Control required type="text" value={this.state.forceID} onChange={this.onForceIDChange.bind(this)}/>
+                    <Form.Control required type="number" value={this.state.forceID} onChange={this.onForceIDChange.bind(this)}/>
                 </Form.Group>
 
                 <Form.Group controlId="formGridBloodType">
