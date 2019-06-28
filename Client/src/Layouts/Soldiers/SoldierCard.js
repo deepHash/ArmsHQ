@@ -17,7 +17,10 @@ export default class SoldierCard extends Component {
      
       
     render() {
-
+        let pulse;
+        if (this.props.pulse!=undefined){
+            pulse=<div ><b>Pulse: </b>{this.props.pulse}</div>
+        }
         return (
             <div style={{textAlign:"left"}}>
                 <MDBBtn floating id="exitBtn" size="sm" gradient="purple" className="md-toolbar" onClick={this.handleClick}><MDBIcon icon="times" /></MDBBtn>
@@ -27,7 +30,8 @@ export default class SoldierCard extends Component {
                 <div ><b>Force ID:</b> {this.props.forceID}</div>
                 <div style={{ borderBottom :"1px solid black", marginBottom:"10px", paddingBottom:"10px"}}><b>Role: </b>{this.props.role}</div>
                 <div ><b>Blood: </b>{this.props.blood}</div>
-                <div ><b>Pulse: </b>{this.props.pulse}</div>
+                {pulse}
+                
                 {/* <div ><b>Acc X: </b>{this.props.acc.x}</div>
                 <div ><b>Acc Y: </b>{this.props.acc.y}</div>
                 <div ><b>Acc Z: </b>{this.props.acc.z}</div> */}
