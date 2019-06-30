@@ -16,7 +16,7 @@ class Updater{
 
         //add and update to dynamic current soldier list
         let found = false;
-        let minute = 60 * 1000;
+        let tenSec = 10*1000;
         for(var i = 0; i < this.soldiers.length; i++) {
             if (this.soldiers[i].meshID == soldier.meshID) { 
                 found = true;
@@ -45,7 +45,7 @@ class Updater{
             }
 
             //if no messages recived for more than 60 seconds, emit to view
-            if(new Date() - this.soldiers[i].lastMessage > minute && this.soldiers[i].disconnect == undefined){
+            if(new Date() - this.soldiers[i].lastMessage > tenSec && this.soldiers[i].disconnect == undefined){
                 emitter.emit('DISCONNECTED', this.soldiers[i]);
                 this.soldiers[i].disconnect = true;
             }
