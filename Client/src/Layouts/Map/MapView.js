@@ -124,6 +124,7 @@ class MapView extends Component {
     }
 
     centerPosition(soldier) {
+      console.log("99999999999999999999999999999999999999")
       var map = this.refs.map.leafletElement;
       map.panTo(new Leaflet.LatLng(soldier.gps.lat+this.state.offsetLat, soldier.gps.lan+this.state.offsetLan));
       this.setState({state: this.state});
@@ -163,8 +164,8 @@ class MapView extends Component {
         case "emergency":
             NotificationManager.warning( soldier.name + ' sent help call','Emergency!',10000);
             this.props.onNewData(soldier, "emergency"); // open soldier card
-            if(soldier.gps)
-               this.centerPosition(soldier);
+            // if(soldier.gps)
+            //    this.centerPosition(soldier);
             break;
         case "disconnect":
             NotificationManager.info( soldier.name + ' disconnected from the network','Network Alert!',10000);
@@ -190,15 +191,18 @@ class MapView extends Component {
 
     render() {
       const soldiers  = this.props.soldiers;
+      var zoom= this.state.zoom;
       console.log(soldiers);
       const pos       = this.props.pos;
       var position = [ this.state.lat, this.state.lan ];
-      if(pos)
+      if(pos){
         position = [pos.lat+this.state.offsetLat, pos.lan+this.state.offsetLan];
+        zoom=19;
+      }
       return (
         <div className="Wrapper" >
           <NotificationContainer id="notification"/>
-          <Map className="map" center={position} zoom={this.state.zoom} ref="map">
+          <Map className="map" center={position} zoom={zoom} ref="map">
             <TileLayer 
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />

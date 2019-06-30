@@ -143,6 +143,7 @@ class MainNew extends Component{
     handleExitSoldierCard = () => {
         this.setState({openSoldierCard: false})
     }
+    
 
     // handleExitLeftCard = () => {
     //     this.setState({openLeftCard: !(this.state.openLeftCard)})
